@@ -12,8 +12,10 @@
 
 ## Funcionalidades públicas (usuarios logueados):
 * Descargar apuntes en formato original
-* Comprar examenes
+* Descargar capturas de los apuntes
+* Comprar examenes (si tienen fotos incluidas se incluyen en la compra)
 * Publicar apuntes o exámenes
+* Publicar/Añadir capturas de apuntes o imágenes (formato png o jpg)
 * Seguir asignaturas (notificaciones por mail cuando se publique nuevo contenido)
 * Añadir una asignatura (tiene que ser calidad por el administrador)
 
@@ -24,14 +26,17 @@
 * Validar asignaturas creadas por usuarios
 
 ## Entidades
-* Apunte: categoria (teoria, ejercicios), tipo de dato, tamaño, fecha, opiniones, valoraciones, número de descargas, tags
+* Apunte: asignatura, autor, categoria (teoria, ejercicios), tipo de dato, tamaño, fecha, opiniones, valoraciones, número de descargas, tags
 * Examen: asignatura, profesor, tamaño, fecha, opiniones, valoraciones, tags
 * Asignatura: universidad, carrera, profesores
 * Usuario: tipo de usuario, nombre, apellidos, correo electrónico, puntuación, número de descargas
+* Administrador: tipo de usuario, nombre, apellidos, correo electrónico, puntuación, número de descargas
 * Universidad: nombre, campus
 
 ## Servicio interino
-* [TODO]
+* Mandar de forma automática un email cuando se actualice una asignatura
+* Mandar de forma automática un email cuando el documento de ha descargado más de (5) veces
+* Descargar los apuntes/examenes en otros formatos ("pdf", "txt", "docx"...) 
 
 ## Integrantes
 * Guillermo De Azcarate Acosta --> g.deazcarate.2016@alumnos.urjc.es
