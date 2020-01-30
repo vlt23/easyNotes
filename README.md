@@ -11,10 +11,9 @@
 * Búsqueda por universdad, asignatura, carrera o tag
 * Registrarse y loguearse
 
-## Funcionalidades públicas (usuarios logueados):
+## Funcionalidades privadas (usuarios logueados):
 * Funcionalidades públicas de los usuarios guest
 * Descargar apuntes en formato original
-* Descargar capturas de los apuntes
 * Comprar examenes (si tienen fotos incluidas se incluyen en la compra)
 * Publicar apuntes o exámenes
 * Publicar/Añadir capturas de apuntes o imágenes (formato png o jpg)
@@ -28,11 +27,12 @@
 * Validar asignaturas creadas por usuarios
 
 ## Entidades
-* Apunte: asignatura, autor, categoria (teoria, ejercicios), tipo de dato, tamaño, fecha, opiniones, valoraciones, número de descargas, tags
+* Apunte: asignatura, autor, categoria (teoria, ejercicios), tipo de dato, tamaño, fecha, opiniones, valoraciones,
+número de descargas, tags
 * Examen: asignatura, profesor, tamaño, fecha, opiniones, valoraciones, tags
 * Asignatura: universidad, carrera, profesores
-* Usuario: tipo de usuario, nombre, apellidos, correo electrónico, créditos, número de descargas
-* Administrador: tipo de usuario, nombre, apellidos, correo electrónico, créditos, número de descargas
+* Usuario: tipo de usuario (administrador o registrado), nombre, apellidos, correo electrónico, créditos,
+número de descargas, estado de la cuenta (baneado o no)
 * Universidad: nombre, campus
 
 ## Servicio interino
