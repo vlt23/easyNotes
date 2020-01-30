@@ -31,8 +31,8 @@
 * Apunte: asignatura, autor, categoria (teoria, ejercicios), tipo de dato, tamaño, fecha, opiniones, valoraciones, número de descargas, tags
 * Examen: asignatura, profesor, tamaño, fecha, opiniones, valoraciones, tags
 * Asignatura: universidad, carrera, profesores
-* Usuario: tipo de usuario, nombre, apellidos, correo electrónico, puntuación, número de descargas
-* Administrador: tipo de usuario, nombre, apellidos, correo electrónico, puntuación, número de descargas
+* Usuario: tipo de usuario, nombre, apellidos, correo electrónico, créditos, número de descargas
+* Administrador: tipo de usuario, nombre, apellidos, correo electrónico, créditos, número de descargas
 * Universidad: nombre, campus
 
 ## Servicio interino
