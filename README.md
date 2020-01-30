@@ -8,9 +8,11 @@
  
 ## Funcionalidades públicas (los usuarios guest):
 * Leer las primeras páginas (preview) de un documento 
-* Buscar por universdad, asignatura o carrera
+* Búsqueda por universdad, asignatura, carrera o tag
+* Registrarse y loguearse
 
 ## Funcionalidades públicas (usuarios logueados):
+* Funcionalidades públicas de los usuarios guest
 * Descargar apuntes en formato original
 * Descargar capturas de los apuntes
 * Comprar examenes (si tienen fotos incluidas se incluyen en la compra)
@@ -36,9 +38,15 @@
 ## Servicio interino
 * Mandar de forma automática un email cuando se actualice una asignatura
 * Mandar de forma automática un email cuando el documento de ha descargado más de (5) veces
-* Descargar los apuntes/examenes en otros formatos ("pdf", "txt", "docx"...) 
+* Convertir los ficheros en formato PDF
 
 ## Integrantes
-* Guillermo De Azcarate Acosta --> g.deazcarate.2016@alumnos.urjc.es
-* Pablo López Parrilla --> p.lopezpar@alumnos.urjc.es
-* Valentino Lin --> v.lin.2016@alumnos.urjc.es
+* Guillermo De Azcarate Acosta
+    * Correo electrónico: g.deazcarate.2016@alumnos.urjc.es
+    * Github: https://github.com/Guilleazca98
+* Pablo López Parrilla
+    * Correo electrónico: p.lopezpar@alumnos.urjc.es
+    * Github: https://github.com/pavloXd
+* Valentino Lin
+    * Correo electrónico: v.lin.2016@alumnos.urjc.es
+    * Github: https://github.com/vlt23
