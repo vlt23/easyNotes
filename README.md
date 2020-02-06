@@ -5,9 +5,9 @@
  Para poder descargar los apuntes / exámenes en su totalidad es necesario estar logueado.
  Para poder acceder a examenes se creará un sistema de micropagos. Estos se podrán conseguir de varias maneras:
  en el primer registro se regalarán y subiendo apuntes o examenes a la web
- 
+
 ## Funcionalidades públicas (los usuarios guest):
-* Leer las primeras páginas (preview) de un documento 
+* Leer las primeras páginas (preview) de un documento
 * Búsqueda por universdad, asignatura, carrera o tag
 * Registrarse y loguearse
 
@@ -29,8 +29,8 @@
 ## Entidades
 * Apunte: asignatura, autor, categoria (teoria, ejercicios), tipo de dato, tamaño, fecha, opiniones, valoraciones,
 número de descargas, tags
-* Examen: asignatura, profesor, tamaño, fecha, opiniones, valoraciones, tags
-* Asignatura: universidad, carrera, profesores
+* Examen: hereda de Apunte, profesores
+* Asignatura: nombre, universidad, carrera, profesores
 * Usuario: tipo de usuario (administrador o registrado), nombre, apellidos, correo electrónico, créditos,
 número de descargas, estado de la cuenta (baneado o no)
 * Universidad: nombre, campus
