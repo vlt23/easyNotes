@@ -1,4 +1,4 @@
-package objects;
+package es.dad.easynotes.entity;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -10,6 +10,7 @@ import javax.persistence.*;
 @Entity
 
 public class Apunte {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
@@ -18,11 +19,18 @@ public class Apunte {
 	private String carrera;
 	private String universidad;
 	private LocalDateTime fechaSubida;
+	
+	@OneToMany
 	private List<String> tags;
 	private float tamanyo;
+	
+	@OneToMany
 	private List<Integer> valoraciones;
 	private int numeroDescargas;
 	
+	public Apunte() {
+		
+	}
 	public Apunte(String asignatura, String carrera, String universidad, LocalDateTime fechaSubida, 
 			ArrayList<String> tags, float tamanyo) {
 		
@@ -37,6 +45,7 @@ public class Apunte {
 		}else {
 			this.tags = tags;
 		}	
+		//this.tags.addAll("asignatura, carrera, universidad");
 		this.tags.add(asignatura);
 		this.tags.add(carrera);
 		this.tags.add(universidad);
