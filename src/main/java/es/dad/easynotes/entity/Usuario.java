@@ -4,8 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-@Entity
 
+@Entity
 public class Usuario {
 	
 	@Id
@@ -22,7 +22,8 @@ public class Usuario {
 	
 	
 	public Usuario() {}
-	public Usuario(String nombre, String apellidos,int creditos, String correo, boolean adminsitrador) {
+
+	public Usuario(String nombre, String apellidos,int creditos, String correo, boolean administrador) {
 		this.nombre=nombre;
 		this.apellidos=apellidos;
 		this.correo=correo;
