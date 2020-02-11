@@ -43,6 +43,17 @@ public class SaveController {
         model.addAttribute("apunte", apunte);
         return "resultado_guardar";
     }
+    
+    @RequestMapping("/subirApunte")
+    public String subirApunte() {
+    	return "subir_apunte";
+    }
+    
+    @RequestMapping("/apunteSubido")
+    public String apunteSubido(Model model,  @RequestParam String universidad, @RequestParam String asignatura, 
+    		@RequestParam String carrera, @RequestParam String tags, @RequestParam String autor) {
+    	return "index";
+    }
 
     @RequestMapping("/delete/{idApunte}")
     public String deleteApunte(@PathVariable long idApunte) {
