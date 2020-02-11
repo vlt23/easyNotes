@@ -1,9 +1,7 @@
 package es.dad.easynotes.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Usuario {
@@ -18,17 +16,20 @@ public class Usuario {
 	private int creditos;
 	private int numeroDescargas;
 	private boolean baneado;
-	private boolean administrador;
+	private boolean isAdmin;
+
+	@OneToMany(mappedBy = "autor")
+	private List<Apunte> apuntes;
 	
 	
 	public Usuario() {}
 
-	public Usuario(String nombre, String apellidos,int creditos, String correo, boolean administrador) {
+	public Usuario(String nombre, String apellidos,int creditos, String correo, boolean isAdmin) {
 		this.nombre=nombre;
 		this.apellidos=apellidos;
 		this.correo=correo;
 		this.creditos=creditos;
-		this.administrador = administrador;
+		this.isAdmin = isAdmin;
 		this.baneado= false;
 		this.numeroDescargas=0;
 	}
