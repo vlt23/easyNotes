@@ -1,9 +1,7 @@
 package es.dad.easynotes.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Universidad {
@@ -13,6 +11,15 @@ public class Universidad {
 	
 	private String nombre;
 	private String campus;
+
+	@OneToMany(mappedBy = "universidad")
+	private List<Asignatura> asignaturas;
+	
+	@OneToMany
+	private List<Carrera> carreras;
+
+	@OneToMany(mappedBy = "universidad")
+	private List<Apunte> apuntes;
 	
 	public Universidad() {}
 	public Universidad(String nombre, String campus ) {

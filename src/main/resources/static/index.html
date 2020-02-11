@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
 <meta charset="utf-8">
 <title>Easy Notes</title>
@@ -15,13 +15,20 @@ h1, button{
 </head>
 <body>
 	<div class="w3-container">
-		<div class="col">
-			<h1>
-			Hola Mundo!!
-			</h1>
+		<div class="col-md-3">
+			<form method="get" action="/search">
+				<input type="text" name="asignStr">
+				<button type="submit">Buscar</button>
+			</form>
 		</div>
-		<div class="col">
-			<button type="button" class="btn btn-primary">Link</button>
+		<div class="col-md-3">
+			<form method="get" action="/save">
+				<input type="text" name="asignStr">
+				<input type="text" name="carrera">
+				<input type="text" name="uniStr">
+				<input type="file" name="pdf">
+				<button type="submit">Guardar</button>
+			</form>
 		</div>
 	</div>
 </body>
