@@ -17,14 +17,13 @@ public class Apunte {
 	@ManyToOne
 	private Asignatura asignatura;
 
-	@ManyToOne
-	private Carrera carrera;
+	private String carrera;
 
 	@ManyToOne
 	private Universidad universidad;
 	//private LocalDateTime fechaSubida;
 	
-	@ManyToMany(mappedBy = "apuntes")
+	//@OneToMany
 	private ArrayList<String> tags;
 	private long tamanyo;
 
@@ -41,7 +40,7 @@ public class Apunte {
 		this.numeroDescargas = 0;
 	}
 	
-	public Apunte(Asignatura asignatura, Carrera carrera, Universidad universidad,
+	public Apunte(Asignatura asignatura, String carrera, Universidad universidad,
 			ArrayList<String> tags, File file/*, Usuario autor*/) {  // TODO
 		
 		this.asignatura=asignatura;
@@ -56,9 +55,9 @@ public class Apunte {
 			this.tags = tags;
 		}	
 		//this.tags.addAll("asignatura, carrera, universidad");
-		//this.tags.add(asignatura.getNombre());
-		//this.tags.add(carrera);
-		//this.tags.add(universidad.getNombre());
+		this.tags.add(asignatura.getNombre());
+		this.tags.add(carrera);
+		this.tags.add(universidad.getNombre());
 		
 		this.tamanyo = file.length();
 		this.numeroDescargas = 0;
@@ -85,7 +84,13 @@ public class Apunte {
 		this.asignatura = asignatura;
 	}
 
-	
+	public String getCarrera() {
+		return carrera;
+	}
+
+	public void setCarrera(String carrera) {
+		this.carrera = carrera;
+	}
 
 	public Universidad getUniversidad() {
 		return universidad;
