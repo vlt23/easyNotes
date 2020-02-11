@@ -2,6 +2,7 @@ package es.dad.easynotes.controller;
 
 import es.dad.easynotes.entity.Apunte;
 import es.dad.easynotes.entity.Asignatura;
+import es.dad.easynotes.entity.Carrera;
 import es.dad.easynotes.entity.Universidad;
 import es.dad.easynotes.repository.ApunteRepository;
 import es.dad.easynotes.repository.AsignaturaRepository;
@@ -29,7 +30,7 @@ public class SaveController {
     private UniversidadRepository universidadRepo;
 
     @RequestMapping("/save")
-    public String saveApunte(Model model, @RequestParam String asignStr, @RequestParam String carrera,
+    public String saveApunte(Model model, @RequestParam String asignStr, @RequestParam Carrera carrera,
                              @RequestParam String uniStr, @RequestParam File pdf) {
         Asignatura asignatura = asignaturaRepo.findAsignaturaByNombreIgnoreCase(asignStr);
         Universidad universidad = universidadRepo.findUniversidadByNombre(uniStr);

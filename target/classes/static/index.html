@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
 <meta charset="utf-8">
 <title>Easy Notes</title>
@@ -8,21 +8,47 @@
 <script type="text/javascript" href="js/jquery-3.4.1.min.js"></script>
 
 <style>
-h1, button{
-	margin-top:30px
+button{
+	margin: 10px;
+}
+
+.container{
+	margin: 20px;
 }
 </style>
 </head>
 <body>
-	<div class="w3-container">
-		<div class="col">
-			<h1>
-			Hola Mundo!!
-			</h1>
+	<div class="container" align="center">
+		<!-- <div class="form-group">
+		    <label for="exampleInputEmail1">Email address</label>
+		    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+		    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+		 </div>-->
+		 
+		<div>
+			<form method="get" action="/search">
+				<div class="form-group">
+				 	<h3 id="buscarAp">Buscar Apuntes</h3>
+					<input type="text" name="asignStr", placeholder="Buscar Apuntes por TAGS" size="50">
+					<button type="submit" class="btn btn-primary">Buscar</button>
+				</div>
+			</form>
 		</div>
-		<div class="col">
-			<button type="button" class="btn btn-primary">Link</button>
+		<div class="form-group">
+			<input type="text" name="asignStr">
+			<input type="text" name="carrera">
+			<input type="text" name="uniStr">
+			<input type="file" name="pdf">
+			<button type="submit" class="btn btn-primary">Guardar</button>
 		</div>
+		<!--  <div align="center">
+			<form method="get" action="/save">
+				<div class="form-group">
+					
+				</div>
+			</form>
+		</div>-->
+		
 	</div>
 </body>
 </html>

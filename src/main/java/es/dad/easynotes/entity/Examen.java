@@ -8,7 +8,7 @@ public class Examen extends Apunte {
 	
 	public Examen() {super();}
 	public Examen(Asignatura asignatura, String carrera, Universidad universidad,
-			ArrayList<String> tags, float tamanyo, String profesor) {
+			ArrayList<Tag> tags, float tamanyo, String profesor) {
 		
 		//super(asignatura, carrera, universidad, tags, new File("/home/valen/zswap.sh"));
 		this.profesor=profesor;

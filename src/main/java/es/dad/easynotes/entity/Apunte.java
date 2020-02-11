@@ -25,7 +25,7 @@ public class Apunte {
 	//private LocalDateTime fechaSubida;
 	
 	@ManyToMany(mappedBy = "apuntes")
-	private ArrayList<String> tags;
+	private List<Tag> tags;
 	private long tamanyo;
 
 	private File file;
@@ -42,7 +42,7 @@ public class Apunte {
 	}
 	
 	public Apunte(Asignatura asignatura, Carrera carrera, Universidad universidad,
-			ArrayList<String> tags, File file/*, Usuario autor*/) {  // TODO
+			List<Tag> tags, File file/*, Usuario autor*/) {  // TODO
 		
 		this.asignatura=asignatura;
 		this.carrera=carrera;
@@ -95,11 +95,11 @@ public class Apunte {
 		this.universidad = universidad;
 	}
 
-	public List<String> getTags() {
+	public List<Tag> getTags() {
 		return tags;
 	}
 
-	public void setTags(ArrayList<String> tags) {
+	public void setTags(List<Tag> tags) {
 		this.tags = tags;
 	}
 
