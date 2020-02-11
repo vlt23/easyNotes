@@ -11,7 +11,8 @@ public class Asignatura {
 	private long id;
 
 	private String nombre;
-	private String carrera;
+	@ManyToOne
+	private Carrera carrera;
 	@ManyToOne
 	private Universidad universidad;
 	private String profesores;
@@ -21,7 +22,7 @@ public class Asignatura {
 	
 	public Asignatura() {}
 
-	public Asignatura(String nombre, Universidad universidad, String carrera, String profesores) {
+	public Asignatura(String nombre, Universidad universidad, Carrera carrera, String profesores) {
 		this.nombre = nombre;
 		this.carrera=carrera;
 		this.universidad=universidad;

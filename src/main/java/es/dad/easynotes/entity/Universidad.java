@@ -14,6 +14,9 @@ public class Universidad {
 
 	@OneToMany(mappedBy = "universidad")
 	private List<Asignatura> asignaturas;
+	
+	@OneToMany
+	private List<Carrera> carreras;
 
 	@OneToMany(mappedBy = "universidad")
 	private List<Apunte> apuntes;
