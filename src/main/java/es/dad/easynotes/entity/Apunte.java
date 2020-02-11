@@ -1,6 +1,7 @@
 package es.dad.easynotes.entity;
 
-import java.io.File;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,35 +14,24 @@ public class Apunte {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
-
-	@ManyToOne
-	private Asignatura asignatura;
-
+	
+	private String asignatura;
 	private String carrera;
-
-	@ManyToOne
-	private Universidad universidad;
+	private String universidad;
 	//private LocalDateTime fechaSubida;
 	
 	//@OneToMany
 	private ArrayList<String> tags;
-	private long tamanyo;
-
-	private File file;
-
-	@ManyToOne
-	private Usuario autor;
+	private float tamanyo;
 	
 	//@OneToMany
 	//private List<Integer> valoraciones;
 	private int numeroDescargas;
 	
-	public Apunte() {
-		this.numeroDescargas = 0;
-	}
+	public Apunte() {}
 	
-	public Apunte(Asignatura asignatura, String carrera, Universidad universidad,
-			ArrayList<String> tags, File file/*, Usuario autor*/) {  // TODO
+	public Apunte(String asignatura, String carrera, String universidad, 
+			ArrayList<String> tags, float tamanyo) {
 		
 		this.asignatura=asignatura;
 		this.carrera=carrera;
@@ -55,15 +45,14 @@ public class Apunte {
 			this.tags = tags;
 		}	
 		//this.tags.addAll("asignatura, carrera, universidad");
-		this.tags.add(asignatura.getNombre());
+		this.tags.add(asignatura);
 		this.tags.add(carrera);
-		this.tags.add(universidad.getNombre());
+		this.tags.add(universidad);
 		
-		this.tamanyo = file.length();
+		this.tamanyo = tamanyo;
 		this.numeroDescargas = 0;
 		//this.valoraciones = new ArrayList<Integer>();
-		this.file = file;
-		//this.autor = autor;  // TODO
+		
 	}
 
 	
@@ -76,11 +65,11 @@ public class Apunte {
 		this.id = id;
 	}
 
-	public Asignatura getAsignatura() {
+	public String getAsignatura() {
 		return asignatura;
 	}
 
-	public void setAsignatura(Asignatura asignatura) {
+	public void setAsignatura(String asignatura) {
 		this.asignatura = asignatura;
 	}
 
@@ -92,15 +81,15 @@ public class Apunte {
 		this.carrera = carrera;
 	}
 
-	public Universidad getUniversidad() {
+	public String getUniversidad() {
 		return universidad;
 	}
 
-	public void setUniversidad(Universidad universidad) {
+	public void setUniversidad(String universidad) {
 		this.universidad = universidad;
 	}
 
-	public List<String> getTags() {
+	public ArrayList<String> getTags() {
 		return tags;
 	}
 
@@ -112,7 +101,7 @@ public class Apunte {
 		return tamanyo;
 	}
 
-	public void setTamanyo(long tamanyo) {
+	public void setTamanyo(float tamanyo) {
 		this.tamanyo = tamanyo;
 	}
 
@@ -124,12 +113,8 @@ public class Apunte {
 		this.numeroDescargas = numeroDescargas;
 	}
 	
-	public File getFile() {
-		return file;
-	}
 
-	public void setFile(File file) {
-		this.file = file;
-	}
-
+	
+	
+	
 }
