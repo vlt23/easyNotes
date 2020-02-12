@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <title>Easy Notes</title>
-<link rel="stylesheet" type="text/css" href="../static/css/bootstrap.min.css">
-<script type="text/javascript" href="../static/js/bootstrap.min.js"></script>
-<script type="text/javascript" href="../static/js/jquery-3.4.1.min.js"></script>
+<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+<script type="text/javascript" href="js/bootstrap.min.js"></script>
+<script type="text/javascript" href="js/jquery-3.4.1.min.js"></script>
 
 <style>
 button{
@@ -16,7 +16,7 @@ button{
 .container{
 	margin: 20px;
 }
-.form-control{
+.form-control, #file{
 	margin-bottom: 15px;
 }
 </style>
@@ -31,7 +31,7 @@ button{
 						   placeholder="Introduzca la Universidad">-->
 				<select class="form-control" name="uniStr">
 					{{#universidades}}
-					    <option>{{universidad.nombre}}</option>
+					    <option>{{nombre}}</option>
 				    {{/universidades}}
 				</select>
 			</div>
@@ -41,7 +41,7 @@ button{
 						   placeholder="Introduzca la Asignatura">-->
 				<select class="form-control" name="asignStr"">
 					{{#asignaturas}}
-					    <option>{{asignatura.nombre}}</option>
+					    <option>{{nombre}}</option>
 				    {{/asignaturas}}
 				</select>
 			</div>
@@ -51,7 +51,7 @@ button{
 						   placeholder="Introduzca la Titulación">-->
 				<select class="form-control" name="carreraStr"">
 					{{#carreras}}
-					    <option>{{carrera.nombre}}</option>
+					    <option>{{nombre}}</option>
 				    {{/carreras}}
 				</select>
 			</div>
@@ -67,14 +67,11 @@ button{
 				</label>
 			</div> -->
 			<div class="row">
-				<input type="file" class="form-control" id="file" name="file" multiple="multiple">
+				<input type="file" id="file" name="file" multiple="multiple" accept=".pdf">
 			</div>
 			<button type="submit" class="btn btn-primary">Guardar</button>
 		</form>
 	</div>
 	
-	<script type="text/javascript">
-	let asignaturas = element.getAttribute("asignaturas");
-	</script>
 </body>
 </html>
