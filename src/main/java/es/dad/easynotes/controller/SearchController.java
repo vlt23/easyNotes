@@ -41,7 +41,7 @@ public class SearchController {
     public String search(Model model, @RequestParam String buscarAp) {
         //Asignatura asignatura = asignaturaRepo.findAsignaturaByNombreIgnoreCase(buscarAp);
     	Tag tag = new Tag(buscarAp);
-        List<Apunte> apuntes = apunteRepo.findByTag(tag);
+        List<Apunte> apuntes = apunteRepo.findByTags(tag);
         model.addAttribute("apunte", apuntes.get(0));  // TODO
         return "resultado_guardar";
     }

@@ -18,7 +18,7 @@ public interface ApunteRepository extends JpaRepository<Apunte, Long> {
 
 	List<Apunte> findByCarrera(Carrera carrera);
 	
-	List<Apunte> findByTag(Tag tag);
+	List<Apunte> findByTags(Tag tag);
 
 
 }
