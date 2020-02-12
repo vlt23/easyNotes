@@ -17,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -41,13 +42,15 @@ public class SearchController {
     public String search(Model model, @RequestParam String buscarAp) {
         //Asignatura asignatura = asignaturaRepo.findAsignaturaByNombreIgnoreCase(buscarAp);
     	Tag tag = new Tag(buscarAp);
-        List<Apunte> apuntes = apunteRepo.findByTag(tag);
+    	List<Tag> tags = new ArrayList<>();
+    	tags.add(tag);
+        List<Apunte> apuntes = apunteRepo.findByTags(tags);
         model.addAttribute("apunte", apuntes.get(0));  // TODO
         return "resultado_guardar";
     }
     
     @RequestMapping("/searchAsignatura")
-    public String searchAsignatura(Model model, @RequestParam String buscarAp) {
+    public String searchAsignatura(Model model) {
     	List<Asignatura> asignaturas = asignaturaRepo.findAll();
     	model.addAttribute("asignaturas", asignaturas);
         return "buscar_asignatura";
@@ -55,7 +58,7 @@ public class SearchController {
 
    
     @RequestMapping("/searchCarrera")
-    public String searchCarrera(Model model, @RequestParam String buscarAp) {
+    public String searchCarrera(Model model) {
     	List<Carrera> carreras = carreraRepo.findAll();
     	model.addAttribute("carreras", carreras);
         return "buscar_carrera";

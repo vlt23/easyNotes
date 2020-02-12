@@ -2,12 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Resultado</title>
+    <title>Easy Notes</title>
 </head>
 <body>
-<p>Resultado:</p>
-<p>{{apunte.asignatura}}</p>
-<a href="/download/{{apunte.id}}">{{apunte.file}}</a>
-<a href="/delete/{{apunte.id}}">Eliminar: {{apunte.file}}</a>
+	<div class="container">
+		<h1 align="center">Resultado:</h1>
+		<p>{{apunte.asignatura}}</p>
+		<a href="/download/{{apunte.id}}" class="form-control">{{apunte.file}}</a>
+		<a href="/delete/{{apunte.id}}">Eliminar: {{apunte.file}}</a>
+	</div>
 </body>
 </html>
