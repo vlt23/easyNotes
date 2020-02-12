@@ -9,7 +9,11 @@
 <table>
     {{#apuntes}}
     <tr>
-        <td class="col-md-3">{{.}}</td>
+        <td class="col-md-3">{{asignatura.nombre}} {{universidad.nombre}}</td>
+        <td class="col-md-3">
+            <a href="/download/{{id}}">{{file}}</a>
+            <a href="/delete/{{id}}">Eliminar: {{file}}</a>
+        </td>
     </tr>
     {{/apuntes}}
 </table>

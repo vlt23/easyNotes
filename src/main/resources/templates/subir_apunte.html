@@ -24,29 +24,39 @@ button{
 <body>
 	<div class="container">
 		<h1 align="center">Subir Apuntes</h1>
-		<form method="get" action="/apunteSubido">
+		<form method="post" action="/save" enctype="multipart/form-data">
 			<div class="row">
-				<label for="Universidad">Universidad:</label>
-				<input type="text" class="form-control" id="universidad" placeholder="Introduzca la Universidad">
+				<label for="Universidad">Universidad:
+					<input type="text" class="form-control" id="Universidad" name="uniStr"
+						   placeholder="Introduzca la Universidad">
+				</label>
 			</div>
 			<div class="row">
-				<label for="Asignatura">Asignatura:</label>
-				<input type="text" class="form-control" id="asignatura" placeholder="Introduzca la Asignatura">
+				<label for="Asignatura">Asignatura:
+					<input type="text" class="form-control" id="Asignatura" name="asignStr"
+						   placeholder="Introduzca la Asignatura">
+				</label>
 			</div>
 			<div class="row">
-				<label for="Carrera">Titulación:</label>
-				<input type="text" class="form-control" id="carrera" placeholder="Introduzca la Titulación">
+				<label for="Carrera">Titulación:
+					<input type="text" class="form-control" id="Carrera" name="carreraStr"
+						   placeholder="Introduzca la Titulación">
+				</label>
 			</div>
 			<div class="row">
-				<label for="Tags">Tags:</label>
-				<input type="text" class="form-control" id="tags" placeholder="Introduzca los Tags separados por , y encerrados entre []">		
+				<label for="Tags">Tags:
+					<input type="text" class="form-control" id="Tags" name="tags"
+						   placeholder="Introduzca los Tags separados por , y encerrados entre []">
+				</label>
 			</div>
 			<div class="row">
-				<label for="Autor">Autor:</label>
-				<input type="text" class="form-control" id="autor" placeholder="Introduzca el nombre del autor">		
+				<label for="Autor">Autor:
+					<input type="text" class="form-control" id="Autor" name="autorStr"
+						   placeholder="Introduzca el nombre del autor">
+				</label>
 			</div>
 			<div class="row">
-				<input type="file" class="form-control" id="file" name="file"> 
+				<input type="file" class="form-control" id="file" name="file" multiple="multiple">
 			</div>
 			<button type="submit" class="btn btn-primary">Guardar</button>
 		</form>
