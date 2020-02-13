@@ -35,3 +35,6 @@ mvnw.cmd
 EasyNotes.iml
 .idea/
 target/
+
+# Ignorar los apuntes subidos
+/src/main/resources/files/
