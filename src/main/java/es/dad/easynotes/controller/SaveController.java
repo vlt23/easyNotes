@@ -15,9 +15,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
-import java.util.ArrayList;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Controller
@@ -36,8 +42,10 @@ public class SaveController {
     private CarreraRepository carreraRepo;
 
     @RequestMapping("/save")
-    public String saveApunte(Model model, @RequestParam String asignStr, @RequestParam String carreraStr,
-                             @RequestParam String uniStr, @RequestParam String autorStr, @RequestParam List<Tag> tags, @RequestParam File pdf) {
+    public String saveApunte(Model model,
+                             @RequestParam String asignStr, @RequestParam String carreraStr,
+                             @RequestParam String uniStr, /*@RequestParam String autorStr,*/
+                             @RequestParam List<Tag> tags, @RequestParam MultipartFile file) {
     	
         Asignatura asignatura = asignaturaRepo.findAsignaturaByNombreIgnoreCase(asignStr);
         Universidad universidad = universidadRepo.findUniversidadByNombre(uniStr);
@@ -51,7 +59,17 @@ public class SaveController {
             asignatura = new Asignatura(asignStr, universidad, carrera, "TODO");
             asignaturaRepo.save(asignatura);
         }*/
-        Apunte apunteSinId = new Apunte(asignatura, carrera, universidad, tags, pdf);
+
+        // TODO: don't hardcode the path
+        Path filePath = Paths.get("/home/valen/Universidad/4curso/2cuatri/DAD/easyNotes/src/main/resources/files",
+                file.getOriginalFilename() + "_" + file.hashCode() + "_" + LocalDateTime.now().toString());
+        try {
+            OutputStream os = Files.newOutputStream(filePath);
+            os.write(file.getBytes());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Apunte apunteSinId = new Apunte(asignatura, carrera, universidad, tags, filePath.toFile());
         Apunte apunte = apunteRepo.save(apunteSinId);
         model.addAttribute("apunte", apunte);
         return "resultado_guardar";
@@ -81,7 +99,14 @@ public class SaveController {
     public String deleteApunte(@PathVariable long idApunte) {
         Apunte apunte = apunteRepo.getOne(idApunte);
         apunteRepo.delete(apunte);
-        return "borrar_ok";
+
+        // TODO: don't hardcode the path
+        File file = new File("/home/valen/Universidad/4curso/2cuatri/DAD/easyNotes/src/main/resources/files/" +
+                apunte.getNombre());
+        if (file.delete()) {
+            return "borrar_ok";
+        }
+        return "error";
     }
 
 }

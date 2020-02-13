@@ -7,7 +7,6 @@ import java.util.List;
 import javax.persistence.*;
 
 @Entity
-
 public class Apunte {
 	
 	@Id
@@ -28,7 +27,7 @@ public class Apunte {
 	private List<Tag> tags;
 	private long tamanyo;
 
-	private File file;
+	private File filePath;
 
 	@ManyToOne
 	private Usuario autor;
@@ -42,7 +41,7 @@ public class Apunte {
 	}
 	
 	public Apunte(Asignatura asignatura, Carrera carrera, Universidad universidad,
-			List<Tag> tags, File file/*, Usuario autor*/) {  // TODO
+			List<Tag> tags, File filePath/*, Usuario autor*/) {  // TODO
 		
 		this.asignatura=asignatura;
 		this.carrera=carrera;
@@ -60,14 +59,13 @@ public class Apunte {
 		//this.tags.add(carrera);
 		//this.tags.add(universidad.getNombre());
 		
-		this.tamanyo = file.length();
+		this.tamanyo = filePath.length();
 		this.numeroDescargas = 0;
 		//this.valoraciones = new ArrayList<Integer>();
-		this.file = file;
+		this.filePath = filePath;
 		//this.autor = autor;  // TODO
 	}
 
-	
 	
 	public long getId() {
 		return id;
@@ -84,8 +82,6 @@ public class Apunte {
 	public void setAsignatura(Asignatura asignatura) {
 		this.asignatura = asignatura;
 	}
-
-	
 
 	public Universidad getUniversidad() {
 		return universidad;
@@ -119,12 +115,16 @@ public class Apunte {
 		this.numeroDescargas = numeroDescargas;
 	}
 	
-	public File getFile() {
-		return file;
+	public File getFilePath() {
+		return filePath;
 	}
 
-	public void setFile(File file) {
-		this.file = file;
+	public void setFilePath(File filePath) {
+		this.filePath = filePath;
+	}
+
+	public String getNombre() {
+		return filePath.getName();
 	}
 
 }

@@ -21,7 +21,7 @@ public class DownloaderController {
     public void downloadResource(HttpServletResponse response, @PathVariable long idApunte) {
         Apunte apunte = apunteRepo.getOne(idApunte);
         try {
-            Files.copy(apunte.getFile().toPath(), response.getOutputStream());
+            Files.copy(apunte.getFilePath().toPath(), response.getOutputStream());
             response.getOutputStream().flush();
             apunte.setNumeroDescargas(apunte.getNumeroDescargas() + 1);
             apunteRepo.save(apunte);  // Tras incrementar el numero de descarga hay que guardar el objeto en DB
