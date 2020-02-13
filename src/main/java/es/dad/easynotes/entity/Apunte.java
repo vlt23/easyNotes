@@ -24,7 +24,7 @@ public class Apunte {
 	//private LocalDateTime fechaSubida;
 	
 	@ManyToMany(mappedBy = "apuntes")
-	private List<Tag> tags;
+	private List<Tag> tags = new ArrayList<>();;
 	private long tamanyo;
 
 	private File filePath;

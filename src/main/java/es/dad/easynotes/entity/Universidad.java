@@ -14,7 +14,7 @@ public class Universidad {
 	private String nombre;
 	private String campus;
 
-	@OneToMany(mappedBy = "universidad")
+	@OneToMany
 	private List<Asignatura> asignaturas= new ArrayList<>();
 	
 	@OneToMany

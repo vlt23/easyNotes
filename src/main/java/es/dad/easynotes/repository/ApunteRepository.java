@@ -1,4 +1,4 @@
-package es.dad.easynotes.repository;
+  package es.dad.easynotes.repository;
 
 import java.util.List;
 

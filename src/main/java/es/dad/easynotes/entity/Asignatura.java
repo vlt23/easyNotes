@@ -1,6 +1,8 @@
 package es.dad.easynotes.entity;
 
 import javax.persistence.*;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -13,12 +15,14 @@ public class Asignatura {
 	private String nombre;
 	@ManyToOne
 	private Carrera carrera;
+	
 	@ManyToOne
 	private Universidad universidad;
+	
 	private String profesores;
 
 	@OneToMany(mappedBy = "asignatura")
-	private List<Apunte> apuntes;
+	private List<Apunte> apuntes = new ArrayList<>();
 	
 	public Asignatura() {}
 

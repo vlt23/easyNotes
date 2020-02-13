@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import javax.annotation.PostConstruct;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class basicController {
@@ -53,13 +54,34 @@ public class basicController {
     	
         Asignatura DAD = new Asignatura("DAD", URJC, GIC, "Patxi");
         asignaturaRepo.save(DAD);
+        URJC.getAsignaturas().add(DAD);
+        universidadRepo.save(URJC);
+        
         Asignatura POO = new Asignatura("POO", URJC, GII, "el de POO");
         asignaturaRepo.save(POO);
+        URJC.getAsignaturas().add(POO);
+        //universidadRepo.save(URJC);
+        
         Asignatura ED = new Asignatura("ED", UPM, GIC, "Buenaposada");
         asignaturaRepo.save(ED);
+        UPM.getAsignaturas().add(ED);
+        //universidadRepo.save(UPM);
+        
         Asignatura logica = new Asignatura("Logica", URJC, GII, "Alexandra");
         asignaturaRepo.save(logica);
+        URJC.getAsignaturas().add(logica);
+        //universidadRepo.save(URJC);
+        
+        
+        List<Asignatura> GIIasignaturas = new ArrayList<>();
+        GIIasignaturas.add(POO);
+        GIIasignaturas.add(logica);
+        GII.setAsignaturas(GIIasignaturas);
+        //carreraRepo.save(GII);
     	
+        GIC.getAsignaturas().add(DAD);
+        GIC.getAsignaturas().add(ED);
+        carreraRepo.save(GIC);
 
         repositorioApunte.save(new Apunte(DAD, GIC, URJC,
                 /*Arrays.asList("Programacion", "Web", "Java")*/new ArrayList<>(), new File("/home/valen/latitude-e5440-laptop_owners-manual_en-us.pdf")));
