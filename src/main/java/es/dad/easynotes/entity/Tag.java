@@ -1,5 +1,6 @@
 package es.dad.easynotes.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -16,7 +17,7 @@ public class Tag {
 	private String tag;
 	
 	@ManyToMany
-	private List<Apunte> apuntes;
+	private List<Apunte> apuntes = new ArrayList<>();;
 	
 	public Tag() {}
 	public Tag(String tag) {
