@@ -41,14 +41,13 @@ public class SaveController {
     @Autowired
     private CarreraRepository carreraRepo;
 
-    @RequestMapping("/save")
+    @RequestMapping("/saveApunte/{uniStr}/{carreraStr}")
     public String saveApunte(Model model,
-                             @RequestParam String asignStr, @RequestParam String carreraStr,
-                             @RequestParam String uniStr, /*@RequestParam String autorStr,*/
+    		@PathVariable String uniStr, @PathVariable String carreraStr, @RequestParam String asigStr, @RequestParam String autorStr,
                              @RequestParam List<Tag> tags, @RequestParam MultipartFile file) {
     	
-        Asignatura asignatura = asignaturaRepo.findAsignaturaByNombreIgnoreCase(asignStr);
-        Universidad universidad = universidadRepo.findUniversidadByNombre(uniStr);
+        Asignatura asignatura = asignaturaRepo.findAsignaturaByNombreIgnoreCase(asigStr);
+        Universidad universidad = universidadRepo.findUniversidadByNombreIgnoreCase(uniStr);
         Carrera carrera = carreraRepo.findCarreraByNombreIgnoreCase(carreraStr);
         tags.add(new Tag(asignatura.getNombre()));
         tags.add(new Tag(universidad.getNombre()));
@@ -79,20 +78,50 @@ public class SaveController {
     public String subirApunte(Model model) {
     	
     	List<Universidad> universidades = universidadRepo.findAll();
-    	List<Asignatura> asignaturas = asignaturaRepo.findAll();
-    	List<Carrera> carreras = carreraRepo.findAll();
+    	//List<Asignatura> asignaturas = asignaturaRepo.findAll();
+    	//List<Carrera> carreras = carreraRepo.findAll();
     	
     	model.addAttribute("universidades", universidades);
-    	model.addAttribute("asignaturas", asignaturas);
-    	model.addAttribute("carreras", carreras);
+    	//model.addAttribute("asignaturas", asignaturas);
+    	//model.addAttribute("carreras", carreras);
     	
-    	return "subir_apunte";
+    	return "subir_universidad";
     }
     
-    @RequestMapping("/apunteSubido")
-    public String apunteSubido(Model model,  @RequestParam String universidad, @RequestParam String asignatura, 
-    		@RequestParam String carrera, @RequestParam String tags, @RequestParam String autor) {
-    	return "index";
+    @RequestMapping("/subirCarrera")
+    public String subirCarrera(Model model, @RequestParam String uniStr) {
+    	
+    	Universidad universidad = universidadRepo.findUniversidadByNombreIgnoreCase(uniStr);
+    	long idUni = universidad.getId();
+    	List<Carrera> carreras = carreraRepo.findCarreraByUniversidad_Id(idUni);	
+    	//List<Asignatura> asignaturas = asignaturaRepo.findAll();
+    	//List<Carrera> carreras = carreraRepo.findAll();
+    	
+    	model.addAttribute("universidad", universidad);
+    	model.addAttribute("carreras", carreras);
+    	//model.addAttribute("asignaturas", asignaturas);
+    	//model.addAttribute("carreras", carreras);
+    	
+    	return "subir_carrera";
+    }
+    
+    @RequestMapping("/subirAsignatura/{uniStr}")
+    public String subirAsignatura(Model model, @PathVariable String uniStr, @RequestParam String carreraStr) {
+    	
+    	Universidad universidad = universidadRepo.findUniversidadByNombreIgnoreCase(uniStr);
+    	Carrera carrera = carreraRepo.findCarreraByNombreIgnoreCase(carreraStr);
+    	long idCar = carrera.getId();
+    	List<Asignatura> asignaturas = asignaturaRepo.findAsignaturaByCarrera_Id(idCar);	
+    	//List<Asignatura> asignaturas = asignaturaRepo.findAll();
+    	//List<Carrera> carreras = carreraRepo.findAll();
+    	
+    	model.addAttribute("universidad", universidad);
+    	model.addAttribute("carrera", carrera);
+    	model.addAttribute("asignaturas", asignaturas);
+    	//model.addAttribute("asignaturas", asignaturas);
+    	//model.addAttribute("carreras", carreras);
+    	
+    	return "subir_asignatura";
     }
 
     @RequestMapping("/delete/{idApunte}")

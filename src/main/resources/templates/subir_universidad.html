@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Easy Notes</title>
+<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+<script type="text/javascript" href="js/bootstrap.min.js"></script>
+<script type="text/javascript" href="js/jquery-3.4.1.min.js"></script>
+
+<style>
+button{
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.container{
+	margin: 20px;
+}
+.form-control, #file{
+	margin-bottom: 15px;
+}
+
+.siguiente{
+	float: right;
+}
+</style>
+</head>
+<body>
+	<div class="container">
+		<h1 align="center">Subir Apuntes (Universidad)</h1>
+		<form action="/">
+			<button type="submit" class="btn btn-primary">Volver</button>
+		</form>
+		<form method="post" action="/subirCarrera" enctype="multipart/form-data">
+			<div class="col">
+				<div class="row">
+					<label for="Universidad">Universidad:</label>
+						<!--  <input type="text" class="form-control" id="Universidad" name="uniStr"
+							   placeholder="Introduzca la Universidad">-->
+					<select class="form-control" name="uniStr">
+						{{#universidades}}
+						    <option>{{nombre}}</option>
+					    {{/universidades}}
+					</select>
+				</div>
+			</div>
+			<div class="siguiente">
+				<button type="submit" class="btn btn-primary">Siguiente</button>
+			</div>
+		</form>
+	</div>
+	
+</body>
+</html>
