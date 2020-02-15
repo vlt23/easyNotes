@@ -40,6 +40,10 @@ número de descargas, estado de la cuenta (baneado o no)
 * Mandar de forma automática un email cuando el documento de ha descargado más de (5) veces
 * Convertir los ficheros en formato PDF
 
+
+## Diagrama Entidad/Relaccion
+![E/R](src\main\resources\Imagenes\EasyNotes.png)
+
 ## Integrantes
 * Guillermo De Azcarate Acosta
     * Correo electrónico: g.deazcarate.2016@alumnos.urjc.es
