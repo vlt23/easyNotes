@@ -31,7 +31,7 @@ button{
 		<form action="/">
 			<button type="submit" class="btn btn-primary">Volver</button>
 		</form>
-		<form method="get" action="/saveApunte/{{universidad.nombre}}/{{carrera.nombre}}" enctype="multipart/form-data">
+		<form method="post" action="/saveApunte/{{universidad.nombre}}/{{carrera.nombre}}" enctype="multipart/form-data">
 			<div class="col">
 				<div class="row">
 					<h4>Universidad: {{universidad.nombre}}</h4>
