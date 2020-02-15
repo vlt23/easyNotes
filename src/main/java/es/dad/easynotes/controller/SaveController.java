@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -41,7 +42,7 @@ public class SaveController {
     @Autowired
     private CarreraRepository carreraRepo;
 
-    @RequestMapping("/saveApunte/{uniStr}/{carreraStr}")
+    @PostMapping("/saveApunte/{uniStr}/{carreraStr}")
     public String saveApunte(Model model,
     		@PathVariable String uniStr, @PathVariable String carreraStr, @RequestParam String asigStr, @RequestParam String autorStr,
                              @RequestParam List<Tag> tags, @RequestParam MultipartFile file) {
@@ -61,7 +62,7 @@ public class SaveController {
 
         // TODO: don't hardcode the path
         Path filePath = Paths.get("/home/valen/Universidad/4curso/2cuatri/DAD/easyNotes/src/main/resources/files",
-                file.getOriginalFilename() + "_" + file.hashCode() + "_" + LocalDateTime.now().toString());
+                file.hashCode() + "_" + LocalDateTime.now().toString() + "_" + file.getOriginalFilename());
         try {
             OutputStream os = Files.newOutputStream(filePath);
             os.write(file.getBytes());
