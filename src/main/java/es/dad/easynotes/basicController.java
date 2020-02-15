@@ -19,7 +19,7 @@ import java.util.List;
 
 @Controller
 public class basicController {
-
+	final String pathLocal = ("src"+File.separator+"main"+File.separator+"resources"+File.separator+ "files"+ File.separator);
     @Autowired
     private ApunteRepository repositorioApunte;
 
@@ -88,19 +88,22 @@ public class basicController {
         GIC.getAsignaturas().add(ED);
         carreraRepo.save(GIC);
 
-        Apunte manualPortatil=new Apunte("manualPortatil", DAD, GIC, URJC,new File("/home/valen/latitude-e5440-laptop_owners-manual_en-us.pdf"));
+        Apunte manualPortatil=new Apunte("manualPortatil", DAD, GIC, URJC,new File(pathLocal + "manualPortatil.pdf"));
         repositorioApunte.save(manualPortatil);
         
-        Apunte script1 = new Apunte("script", POO, GII, URJC, new File("/home/valen/zswap.sh"));
+        Apunte script1 = new Apunte("script", POO, GII, URJC, new File(pathLocal + "hola.txt"));
         repositorioApunte.save(script1);
-        Apunte script2 = new Apunte("script", ED, GIC, URJC, new File("/home/valen/zswap.sh"));
+        Apunte script2 = new Apunte("script", ED, GIC, URJC, new File(pathLocal + "hola.txt"));
         repositorioApunte.save(script2);
-        Apunte arduino = new Apunte("arduino", logica, GII, UPM, new File("/home/valen/arduinoSN.png"));
+        Apunte arduino = new Apunte("arduino", logica, GII, UPM, new File(pathLocal + "arduino.png"));
         repositorioApunte.save(arduino);
-        Apunte script3 = new Apunte("script", ED, GII, URJC, new File("/home/valen/arduinoSN.png"));
+        Apunte script3 = new Apunte("script", ED, GII, URJC, new File(pathLocal + "arduino.png"));
         repositorioApunte.save(script3);
-        Apunte arduino2 = new Apunte("arduino", POO, GII, URJC, new File("/home/valen/arduinoSN.png"));
+        Apunte arduino2 = new Apunte("arduino", POO, GII, URJC, new File(pathLocal + "arduino.png"));
         repositorioApunte.save(arduino2);
+        
+        Apunte esqui = new Apunte("esqui", DAD, GIC, URJC, new File(pathLocal +"pruebaPablo.pdf"));
+        repositorioApunte.save(esqui);
         
         
     }

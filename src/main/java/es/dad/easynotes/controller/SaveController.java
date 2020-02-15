@@ -45,14 +45,16 @@ public class SaveController {
     @PostMapping("/saveApunte/{uniStr}/{carreraStr}")
     public String saveApunte(Model model,
     		@PathVariable String uniStr, @PathVariable String carreraStr, @RequestParam String asigStr, @RequestParam String autorStr,
-                             @RequestParam List<Tag> tags, @RequestParam MultipartFile file) {
+                             @RequestParam List<Tag> tags, @RequestParam MultipartFile file, @RequestParam String nombre) {
     	
         Asignatura asignatura = asignaturaRepo.findAsignaturaByNombreIgnoreCase(asigStr);
         Universidad universidad = universidadRepo.findUniversidadByNombreIgnoreCase(uniStr);
         Carrera carrera = carreraRepo.findCarreraByNombreIgnoreCase(carreraStr);
-        tags.add(new Tag(asignatura.getNombre()));
-        tags.add(new Tag(universidad.getNombre()));
-        tags.add(new Tag(carrera.getNombre()));
+        
+        //NO necesario al crearse en Apuntes
+        //tags.add(new Tag(asignatura.getNombre()));
+        //tags.add(new Tag(universidad.getNombre()));
+        //tags.add(new Tag(carrera.getNombre()));
         
         //EL USUARIO NO DEBERÍA PODER CREAR ASIGNATURAS, SOLO ELEGIR ENTRE LAS QUE YA HAY
         /*if (asignatura == null) {
@@ -61,6 +63,7 @@ public class SaveController {
         }*/
 
         // TODO: don't hardcode the path
+        //HAY que añadirle el nombre de fichero desde el form
         Path filePath = Paths.get("/home/valen/Universidad/4curso/2cuatri/DAD/easyNotes/src/main/resources/files",
                 file.hashCode() + "_" + LocalDateTime.now().toString() + "_" + file.getOriginalFilename());
         try {
@@ -69,7 +72,10 @@ public class SaveController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        Apunte apunteSinId = new Apunte(asignatura, carrera, universidad, tags, filePath.toFile());
+        //TEMPORAL
+        Apunte apunteSinId = new Apunte(nombre, asignatura, carrera, universidad, filePath.toFile());
+        apunteSinId.getTags().addAll(tags);	//NOSESIFUNCIONA
+        
         Apunte apunte = apunteRepo.save(apunteSinId);
         model.addAttribute("apunte", apunte);
         return "resultado_guardar";
