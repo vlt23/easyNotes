@@ -12,6 +12,7 @@ public class Apunte {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
+	private String nombre;
 
 	@ManyToOne
 	private Asignatura asignatura;
@@ -23,7 +24,7 @@ public class Apunte {
 	private Universidad universidad;
 	//private LocalDateTime fechaSubida;
 	
-	@ManyToMany
+	@ManyToMany(cascade=CascadeType.PERSIST)
 	private List<Tag> tags = new ArrayList<>();;
 	private long tamanyo;
 
@@ -40,33 +41,48 @@ public class Apunte {
 		this.numeroDescargas = 0;
 	}
 	
-	public Apunte(Asignatura asignatura, Carrera carrera, Universidad universidad,
-			List<Tag> tags, File filePath/*, Usuario autor*/) {  // TODO
-		
+	public Apunte(String nombre,Asignatura asignatura, Carrera carrera, Universidad universidad,
+			 File filePath/*, Usuario autor*/) {  // TODO
+		this.nombre=nombre;
 		this.asignatura=asignatura;
 		this.carrera=carrera;
 		this.universidad = universidad;
 		//this.fechaSubida = fechaSubida;
 		
-		
-		if(tags==null) {		//inicializamos la lista de tags
-			this.tags = new ArrayList<>();
-		}else {
-			this.tags = tags;
-		}	
-		//this.tags.addAll("asignatura, carrera, universidad");
-		//this.tags.add(asignatura.getNombre());
-		//this.tags.add(carrera);
-		//this.tags.add(universidad.getNombre());
+		//anyadimos los tags 
+		tags.add(new Tag(this.nombre));
+		tags.add(new Tag(this.asignatura.getNombre()));
+		tags.add(new Tag(this.carrera.getNombre()));
+		tags.add(new Tag(this.universidad.getNombre()));
+
 		
 		this.tamanyo = filePath.length();
 		this.numeroDescargas = 0;
-		//this.valoraciones = new ArrayList<Integer>();
 		this.filePath = filePath;
 		//this.autor = autor;  // TODO
 	}
 
 	
+	public Carrera getCarrera() {
+		return carrera;
+	}
+
+	public void setCarrera(Carrera carrera) {
+		this.carrera = carrera;
+	}
+
+	public Usuario getAutor() {
+		return autor;
+	}
+
+	public void setAutor(Usuario autor) {
+		this.autor = autor;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
 	public long getId() {
 		return id;
 	}

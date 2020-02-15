@@ -7,6 +7,7 @@ import es.dad.easynotes.entity.Universidad;
 import es.dad.easynotes.repository.ApunteRepository;
 import es.dad.easynotes.repository.AsignaturaRepository;
 import es.dad.easynotes.repository.CarreraRepository;
+import es.dad.easynotes.repository.TagRepository;
 import es.dad.easynotes.repository.UniversidadRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,6 +31,9 @@ public class basicController {
     
     @Autowired
     private CarreraRepository carreraRepo;
+    
+    @Autowired
+    private TagRepository tagRepo;
 
     @PostConstruct
     public void init() {
@@ -84,16 +88,21 @@ public class basicController {
         GIC.getAsignaturas().add(ED);
         carreraRepo.save(GIC);
 
-        repositorioApunte.save(new Apunte(DAD, GIC, URJC,
-                /*Arrays.asList("Programacion", "Web", "Java")*/new ArrayList<>(), new File("/home/valen/latitude-e5440-laptop_owners-manual_en-us.pdf")));
-        repositorioApunte.save(new Apunte(POO, GII, URJC,
-                /*Arrays.asList("Programacion", "Java")*/new ArrayList<>(), new File("/home/valen/zswap.sh")));
-        repositorioApunte.save(new Apunte(ED, GIC, URJC,
-                /*Arrays.asList("Programacion", "C++")*/new ArrayList<>(), new File("/home/valen/zswap.sh")));
-        repositorioApunte.save(new Apunte(logica, GII, UPM,
-                /*Arrays.asList("Matematicas", "Primer orden")*/new ArrayList<>(), new File("/home/valen/arduinoSN.png")));
-        repositorioApunte.save(new Apunte(ED, GII, URJC,
-                new ArrayList<>(), new File("/home/valen/zswap.sh")));
+        Apunte manualPortatil=new Apunte("manualPortatil", DAD, GIC, URJC,new File("/home/valen/latitude-e5440-laptop_owners-manual_en-us.pdf"));
+        repositorioApunte.save(manualPortatil);
+        
+        Apunte script1 = new Apunte("script", POO, GII, URJC, new File("/home/valen/zswap.sh"));
+        repositorioApunte.save(script1);
+        Apunte script2 = new Apunte("script", ED, GIC, URJC, new File("/home/valen/zswap.sh"));
+        repositorioApunte.save(script2);
+        Apunte arduino = new Apunte("arduino", logica, GII, UPM, new File("/home/valen/arduinoSN.png"));
+        repositorioApunte.save(arduino);
+        Apunte script3 = new Apunte("script", ED, GII, URJC, new File("/home/valen/arduinoSN.png"));
+        repositorioApunte.save(script3);
+        Apunte arduino2 = new Apunte("arduino", POO, GII, URJC, new File("/home/valen/arduinoSN.png"));
+        repositorioApunte.save(arduino2);
+        
+        
     }
 
 }
