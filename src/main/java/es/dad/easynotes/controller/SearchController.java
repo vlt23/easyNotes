@@ -17,11 +17,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 @Controller
 public class SearchController {
+	final String pathLocal = ("src"+File.separator+"main"+File.separator+"resources"+File.separator+ "files"+ File.separator);
 
     @Autowired
     private ApunteRepository apunteRepo;

@@ -25,10 +25,12 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Controller
 public class SaveController {
+	final String pathLocal = ("src"+File.separator+"main"+File.separator+"resources"+File.separator+ "files"+ File.separator);
 
     @Autowired
     private ApunteRepository apunteRepo;
@@ -64,8 +66,8 @@ public class SaveController {
 
         // TODO: don't hardcode the path
         //HAY que añadirle el nombre de fichero desde el form
-        Path filePath = Paths.get("/home/valen/Universidad/4curso/2cuatri/DAD/easyNotes/src/main/resources/files",
-                file.hashCode() + "_" + LocalDateTime.now().toString() + "_" + file.getOriginalFilename());
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-ddHHmmss"); 	//Poner forma al DATE
+        Path filePath = Paths.get(pathLocal,file.hashCode() + "_" + formatter.format(LocalDateTime.now()) + "_" + file.getOriginalFilename());
         try {
             OutputStream os = Files.newOutputStream(filePath);
             os.write(file.getBytes());
@@ -134,11 +136,10 @@ public class SaveController {
     @RequestMapping("/delete/{idApunte}")
     public String deleteApunte(@PathVariable long idApunte) {
         Apunte apunte = apunteRepo.getOne(idApunte);
+        File file = new File(pathLocal +apunte.getNombre());
         apunteRepo.delete(apunte);
 
         // TODO: don't hardcode the path
-        File file = new File("/home/valen/Universidad/4curso/2cuatri/DAD/easyNotes/src/main/resources/files/" +
-                apunte.getNombre());
         if (file.delete()) {
             return "borrar_ok";
         }
