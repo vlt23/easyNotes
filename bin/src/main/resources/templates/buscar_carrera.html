@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Easy Notes</title>
+<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+<script type="text/javascript" href="js/bootstrap.min.js"></script>
+<script type="text/javascript" href="js/jquery-3.4.1.min.js"></script>
+
+<style>
+button{
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.container{
+	margin: 20px;
+}
+.form-control{
+	margin-bottom: 15px;
+}
+</style>
+</head>
+<body>
+	<div class="container">
+		<h1 align="center">Buscar Apuntes</h1>
+		<form method="post" action="/save" enctype="multipart/form-data">
+			<div class="row">
+				<label for="Universidad">Buscar Apuntes por Carrera:</label>
+				<select class="form-control" name="uniStr">
+					{{#carreras}}
+					    <option>{{nombre}}</option>
+				    {{/carreras}}
+				</select>
+			</div>
+			<button type="submit" class="btn btn-primary">Buscar</button>
+		</form>
+	</div>
+</body>
+</html>

@@ -18,7 +18,7 @@ public class Carrera {
 	private long id;
 
 	private String nombre;
-	@OneToMany
+	@OneToMany(mappedBy = "carrera")
 	private List<Asignatura> asignaturas= new ArrayList<>();
 	
 	@ManyToOne

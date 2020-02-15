@@ -12,21 +12,20 @@ public class Universidad {
 	private long id;
 	
 	private String nombre;
-	private String campus;
 
-	@OneToMany
+	@OneToMany(mappedBy = "universidad")
 	private List<Asignatura> asignaturas= new ArrayList<>();
 	
-	@OneToMany
+	@OneToMany(mappedBy = "universidad")
 	private List<Carrera> carreras= new ArrayList<>();
 
 	@OneToMany(mappedBy = "universidad")
 	private List<Apunte> apuntes= new ArrayList<>();
 	
 	public Universidad() {}
-	public Universidad(String nombre, String campus ) {
+	public Universidad(String nombre ) {
 		this.nombre = nombre;
-		this.campus = campus;
+	
 	}
 	
 	
@@ -62,12 +61,7 @@ public class Universidad {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	public String getCampus() {
-		return campus;
-	}
-	public void setCampus(String campus) {
-		this.campus = campus;
-	}
+
 	
 	
 }

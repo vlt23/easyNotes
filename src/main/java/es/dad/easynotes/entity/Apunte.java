@@ -23,7 +23,7 @@ public class Apunte {
 	private Universidad universidad;
 	//private LocalDateTime fechaSubida;
 	
-	@ManyToMany(mappedBy = "apuntes")
+	@ManyToMany
 	private List<Tag> tags = new ArrayList<>();;
 	private long tamanyo;
 

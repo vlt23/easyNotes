@@ -38,16 +38,17 @@ public class basicController {
     	
     	Carrera GII = new Carrera("GII");
     	
-        Universidad URJC = new Universidad("URJC", "Mostoles");
-        Universidad UPM = new Universidad("UPM", "Boadilla del Monte");
+        Universidad URJC = new Universidad("URJC");
+        Universidad UPM = new Universidad("UPM");
+        universidadRepo.save(URJC);
+        universidadRepo.save(UPM);
         
         GIC.setUniversidad(UPM);
         GII.setUniversidad(URJC);
         
         //URJC.getCarreras().add(GII);
         
-        universidadRepo.save(URJC);
-        universidadRepo.save(UPM);
+       
         
     	carreraRepo.save(GIC);
     	carreraRepo.save(GII);
