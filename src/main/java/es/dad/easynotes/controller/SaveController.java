@@ -62,7 +62,7 @@ public class SaveController {
 
         // TODO: don't hardcode the path
         Path filePath = Paths.get("/home/valen/Universidad/4curso/2cuatri/DAD/easyNotes/src/main/resources/files",
-                file.getOriginalFilename() + "_" + file.hashCode() + "_" + LocalDateTime.now().toString());
+                file.hashCode() + "_" + LocalDateTime.now().toString() + "_" + file.getOriginalFilename());
         try {
             OutputStream os = Files.newOutputStream(filePath);
             os.write(file.getBytes());
