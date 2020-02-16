@@ -131,7 +131,7 @@ public class SaveController {
     @RequestMapping("/delete/{idApunte}")
     public String deleteApunte(@PathVariable long idApunte) {
         Apunte apunte = apunteRepo.getOne(idApunte);
-        File file = new File(pathLocal +apunte.getNombre());
+        File file = new File(pathLocal + apunte.getFilePath().getName());
         apunteRepo.delete(apunte);
 
         if (file.delete()) {
