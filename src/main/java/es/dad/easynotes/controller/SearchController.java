@@ -82,6 +82,26 @@ public class SearchController {
     	model.addAttribute("universidades", universidades);
         return "buscar_universidad";
     }
+    
+    @RequestMapping("/mostrarBusqueda")
+    public String mostrarBusqueda(Model model, @RequestParam String tipo, @RequestParam String uniCarreraAsig) {
+    	
+    	List<Apunte> apuntes = new ArrayList<>();
+    	
+    	if(tipo.equals("universidad")) {
+    		Universidad universidad = universidadRepo.findUniversidadByNombreIgnoreCase(uniCarreraAsig);
+    		apuntes = apunteRepo.findByUniversidad(universidad);
+    	}else if(tipo.equals("carrera")) {
+    		Carrera carrera = carreraRepo.findCarreraByNombreIgnoreCase(uniCarreraAsig);
+    		apuntes = apunteRepo.findByCarrera(carrera);
+    	}else {
+    		Asignatura asignatura = asignaturaRepo.findAsignaturaByNombreIgnoreCase(uniCarreraAsig);
+    		apuntes = apunteRepo.findByAsignatura(asignatura);
+    	}
+    	model.addAttribute("apuntes", apuntes);
+    	
+    	return "resultado_busqueda";
+    }
 
     @RequestMapping("/advancedSearch")
     public String advancedSearch(Model model) {

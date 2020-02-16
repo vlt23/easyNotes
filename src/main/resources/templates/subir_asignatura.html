@@ -29,7 +29,7 @@ button{
 	<div class="container">
 		<h1 align="center">Subir Apuntes (Asignatura)</h1>
 		<form action="/">
-			<button type="submit" class="btn btn-primary">Volver</button>
+			<button type="submit" class="btn btn-danger">Volver</button>
 		</form>
 		<form method="post" action="/saveApunte/{{universidad.nombre}}/{{carrera.nombre}}" enctype="multipart/form-data">
 			<div class="col">
@@ -55,10 +55,9 @@ button{
 							   placeholder="Introduzca los Tags separados por , y encerrados entre []">
 				</div>
 				<div class="row">
-					<label for="Nombre">Nombre:
+					<label for="Nombre">Nombre:</label>
 						<input type="text" class="form-control" id="Nombre" name="nombre"
-							   placeholder="Introduzca el nombre del apunte">
-					</label>
+							   placeholder="Introduzca un nombre para los apuntes">
 				</div>
 				<div class="row">
 					<label for="Autor">Autor:</label>

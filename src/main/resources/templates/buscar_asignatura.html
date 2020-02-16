@@ -24,14 +24,21 @@ button{
 <body>
 	<div class="container">
 		<h1 align="center">Buscar Apuntes</h1>
-		<form method="post" action="/save" enctype="multipart/form-data">
-			<div class="row">
-				<label for="Universidad">Buscar Apuntes por Asignatura:</label>
-				<select class="form-control" name="uniStr">
-					{{#asignaturas}}
-					    <option>{{nombre}}</option>
-				    {{/asignaturas}}
-				</select>
+		<form action="/">
+			<button type="submit" class="btn btn-danger">Volver</button>
+		</form>
+		<form method="post" action="/mostrarBusqueda?tipo=asignatura" enctype="multipart/form-data">
+			<div class="col">
+				<div class="row">
+					<label for="Universidad">Buscar Apuntes por Asignatura:</label>
+				</div>
+				<div class="row">
+					<select class="form-control" name="uniCarreraAsig">
+						{{#asignaturas}}
+						    <option>{{nombre}}</option>
+					    {{/asignaturas}}
+					</select>
+				</div>
 			</div>
 			<button type="submit" class="btn btn-primary">Buscar</button>
 		</form>

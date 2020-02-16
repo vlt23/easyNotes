@@ -25,8 +25,8 @@ button{
 			 <div class="col">
 				<form method="get" action="/search">
 					<div class="form-group"">
-						<input type="text" class="form-control" name="buscarAp" placeholder="Buscar Apuntes por TAGS">
-						<button type="submit" class="btn btn-primary">Buscar</button>
+						<input type="text" id="buscar-input" class="form-control" name="buscarAp" placeholder="Buscar Apuntes por TAGS">
+						<button type="submit" id="buscar-btn" class="btn btn-primary" disabled="true">Buscar</button>
 					</div>
 				</form>
 			</div>
@@ -35,21 +35,21 @@ button{
 			<div class="col">
 				<form method="get" action="/searchAsignatura">
 					<div class="form-group">
-						<button type="submit" class="btn btn-outline-primary">Buscar por Asignatura</button>
+						<button type="submit" class="btn btn-outline-secondary">Buscar por Asignatura</button>
 					</div>
 				</form>
 			</div>
 			<div class="col">
 				<form method="get" action="/searchCarrera">
 					<div class="form-group">
-						<button type="submit" class="btn btn-outline-primary">Buscar por Carrera</button>
+						<button type="submit" class="btn btn-outline-secondary">Buscar por Carrera</button>
 					</div>
 				</form>
 			</div>
 			<div class="col">
 				<form method="get" action="/searchUniversidad">
 					<div class="form-group">
-						<button type="submit" class="btn btn-outline-primary">Buscar por Universidad</button>
+						<button type="submit" class="btn btn-outline-secondary">Buscar por Universidad</button>
 					</div>
 				</form>
 			</div>
@@ -58,26 +58,22 @@ button{
 			<div class="col">
 				<form method="get" action="/subirApunte">
 					<div class="form-group">
-						<button type="submit" class="btn btn-primary">Subir Apuntes</button>
+						<button type="submit" class="btn btn-success">Subir Apuntes</button>
 					</div>
 				</form>
 			</div>
 		</div>
-		<!--<div class="row">
-			<input type="text" name="asignStr">
-			<input type="text" name="carrera">
-			<input type="text" name="uniStr">
-			<input type="file" name="pdf">
-			<button type="submit" class="btn btn-primary">Guardar</button>
-		</div>
-		<!--  <div align="center">
-			<form method="get" action="/save">
-				<div class="form-group">
-					
-				</div>
-			</form>
-		</div>-->
-		
 	</div>
+	<script>
+		let input = document.getElementById("buscar-input");
+		input.addEventListener("change", function(){
+			if (input.value != ""){
+				document.getElementById("buscar-btn").disabled = false;
+			}else{
+				document.getElementById("buscar-btn").disabled = true;
+			}
+		})
+	
+	</script>
 </body>
 </html>
