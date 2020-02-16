@@ -12,6 +12,7 @@ public class Apunte {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
+
 	private String nombre;
 
 	@ManyToOne
@@ -41,8 +42,8 @@ public class Apunte {
 		this.numeroDescargas = 0;
 	}
 	
-	public Apunte(String nombre,Asignatura asignatura, Carrera carrera, Universidad universidad,
-			 File filePath/*, Usuario autor*/) {  // TODO
+	public Apunte(String nombre, Asignatura asignatura, Carrera carrera, Universidad universidad,
+			 File filePath, Usuario autor) {
 		this.nombre=nombre;
 		this.asignatura=asignatura;
 		this.carrera=carrera;
@@ -59,7 +60,7 @@ public class Apunte {
 		this.tamanyo = filePath.length();
 		this.numeroDescargas = 0;
 		this.filePath = filePath;
-		//this.autor = autor;  // TODO
+		this.autor = autor;
 	}
 
 	
@@ -140,7 +141,7 @@ public class Apunte {
 	}
 
 	public String getNombre() {
-		return filePath.getName();
+		return nombre;
 	}
 
 }

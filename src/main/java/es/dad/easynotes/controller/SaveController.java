@@ -5,10 +5,12 @@ import es.dad.easynotes.entity.Asignatura;
 import es.dad.easynotes.entity.Carrera;
 import es.dad.easynotes.entity.Tag;
 import es.dad.easynotes.entity.Universidad;
+import es.dad.easynotes.entity.Usuario;
 import es.dad.easynotes.repository.ApunteRepository;
 import es.dad.easynotes.repository.AsignaturaRepository;
 import es.dad.easynotes.repository.CarreraRepository;
 import es.dad.easynotes.repository.UniversidadRepository;
+import es.dad.easynotes.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -44,26 +46,31 @@ public class SaveController {
     @Autowired
     private CarreraRepository carreraRepo;
 
+    @Autowired
+    private UsuarioRepository usuarioRepo;
+
     @PostMapping("/saveApunte/{uniStr}/{carreraStr}")
     public String saveApunte(Model model,
-    		@PathVariable String uniStr, @PathVariable String carreraStr, @RequestParam String asigStr, @RequestParam String autorStr,
-                             @RequestParam List<Tag> tags, @RequestParam MultipartFile file, @RequestParam String nombre) {
+                             @PathVariable String uniStr, @PathVariable String carreraStr, @RequestParam String asigStr,
+                             /*TODO*/@RequestParam long autorStr, @RequestParam List<Tag> tags,
+                             @RequestParam MultipartFile file, @RequestParam String nombre) {
     	
         Asignatura asignatura = asignaturaRepo.findAsignaturaByNombreIgnoreCase(asigStr);
         Universidad universidad = universidadRepo.findUniversidadByNombreIgnoreCase(uniStr);
         Carrera carrera = carreraRepo.findCarreraByNombreIgnoreCase(carreraStr);
-
+        Usuario autor = usuarioRepo.getOne(autorStr);  // TODO
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-ddHHmmss"); 	//Poner forma al DATE
-        Path filePath = Paths.get(pathLocal,file.hashCode() + "_" + formatter.format(LocalDateTime.now()) + "_" + file.getOriginalFilename());
+        Path filePath = Paths.get(pathLocal,file.hashCode() + "_"
+                + formatter.format(LocalDateTime.now()) + "_" + file.getOriginalFilename());
         try {
             OutputStream os = Files.newOutputStream(filePath);
             os.write(file.getBytes());
         } catch (IOException e) {
             e.printStackTrace();
         }
-        
-        Apunte apunteSinId = new Apunte(nombre, asignatura, carrera, universidad, filePath.toFile());
+
+        Apunte apunteSinId = new Apunte(nombre, asignatura, carrera, universidad, filePath.toFile(), autor);
         apunteSinId.getTags().addAll(tags);	//NOSESIFUNCIONA
         
         Apunte apunte = apunteRepo.save(apunteSinId);
@@ -127,7 +134,6 @@ public class SaveController {
         File file = new File(pathLocal +apunte.getNombre());
         apunteRepo.delete(apunte);
 
-        // TODO: don't hardcode the path
         if (file.delete()) {
             return "borrar_ok";
         }

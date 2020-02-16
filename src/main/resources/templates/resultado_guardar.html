@@ -1,15 +1,60 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <title>Easy Notes</title>
+
+    <link rel="stylesheet" type="text/css" href="http://localhost:8080/css/bootstrap.min.css">
+    <script type="text/javascript" href="http://localhost:8080/js/bootstrap.min.js"></script>
+
+    <style>
+        button {
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        .container {
+            margin: 20px;
+        }
+
+        .row {
+            margin-left: 15px;
+            margin-right: 15px;
+        }
+    </style>
 </head>
+
 <body>
-	<div class="container">
-		<h1 align="center">Resultado:</h1>
-		<p>{{apunte.asignatura}}</p>
-		<a href="/download/{{apunte.id}}" class="form-control">{{apunte.nombre}}</a>
-		<a href="/delete/{{apunte.id}}">Eliminar: {{apunte.nombre}}</a>
-	</div>
+<div class="container">
+    <div class="row">
+        <h4>Se ha guardado correctamente: {{apunte.nombre}}</h4>
+    </div>
+    <div class="dropdown-divider"></div>
+
+    <div class="row">
+        <p class="col-md-2">Asignatura:</p>
+        <p class="col-md-3">{{apunte.asignatura.nombre}}</p>
+    </div>
+    <div class="row">
+        <p class="col-md-2">Titulación:</p>
+        <p class="col-md-3">{{apunte.carrera.nombre}}</p>
+    </div>
+    <div class="row">
+        <p class="col-md-2">Universidad:</p>
+        <p class="col-md-3">{{apunte.universidad.nombre}}</p>
+    </div>
+    <div class="row">
+        <p class="col-md-2">Autor:</p>
+        <p class="col-md-3">{{apunte.autor.nombre}} {{apunte.autor.apellidos}}</p>
+    </div>
+    <div class="dropdown-divider"></div>
+
+    <div class="row">
+        <a href="/download/{{apunte.id}}">Descargar: {{apunte.nombre}}</a>
+    </div>
+    <div class="row">
+        <a href="/delete/{{apunte.id}}">Eliminar: {{apunte.nombre}}</a>
+    </div>
+</div>
 </body>
 </html>
