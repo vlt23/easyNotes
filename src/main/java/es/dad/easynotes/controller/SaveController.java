@@ -52,20 +52,8 @@ public class SaveController {
         Asignatura asignatura = asignaturaRepo.findAsignaturaByNombreIgnoreCase(asigStr);
         Universidad universidad = universidadRepo.findUniversidadByNombreIgnoreCase(uniStr);
         Carrera carrera = carreraRepo.findCarreraByNombreIgnoreCase(carreraStr);
-        
-        //NO necesario al crearse en Apuntes
-        //tags.add(new Tag(asignatura.getNombre()));
-        //tags.add(new Tag(universidad.getNombre()));
-        //tags.add(new Tag(carrera.getNombre()));
-        
-        //EL USUARIO NO DEBERÍA PODER CREAR ASIGNATURAS, SOLO ELEGIR ENTRE LAS QUE YA HAY
-        /*if (asignatura == null) {
-            asignatura = new Asignatura(asignStr, universidad, carrera, "TODO");
-            asignaturaRepo.save(asignatura);
-        }*/
 
-        // TODO: don't hardcode the path
-        //HAY que añadirle el nombre de fichero desde el form
+
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-ddHHmmss"); 	//Poner forma al DATE
         Path filePath = Paths.get(pathLocal,file.hashCode() + "_" + formatter.format(LocalDateTime.now()) + "_" + file.getOriginalFilename());
         try {
@@ -74,7 +62,7 @@ public class SaveController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        //TEMPORAL
+        
         Apunte apunteSinId = new Apunte(nombre, asignatura, carrera, universidad, filePath.toFile());
         apunteSinId.getTags().addAll(tags);	//NOSESIFUNCIONA
         
