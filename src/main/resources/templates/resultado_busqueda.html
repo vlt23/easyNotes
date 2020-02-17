@@ -53,7 +53,10 @@
 		    <div class="dropdown-divider"></div>
 		
 		    <div class="row">
-		        <a href="/download/{{id}}">Descargar: {{nombre}}</a>
+		        <a download="{{nombre}}.pdf" href="/download/{{id}}">Descargar: {{nombre}}</a>
+		    </div>
+		    <div class="row">
+		        <a href="/download/{{id}}" target="_blank">Visualizar: {{nombre}}</a>
 		    </div>
 		    <div class="row">
 		        <a href="/delete/{{id}}">Eliminar: {{nombre}}</a>
