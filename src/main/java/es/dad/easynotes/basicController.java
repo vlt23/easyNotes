@@ -93,7 +93,7 @@ public class basicController {
         GIC.getAsignaturas().add(ED);
         carreraRepo.save(GIC);
 
-        Usuario usuario = new Usuario("root", "toor", 0, "root@toor.org", true);
+        Usuario usuario = new Usuario("admin", "root", 0, "admin@root.org", true);
         Usuario usuarioAdmin = usuarioRepo.save(usuario);
 
         Apunte manualPortatil = new Apunte("manualPortatil", DAD, GIC, URJC,
