@@ -56,9 +56,12 @@ public class SearchController {
         	}
         }
         //buscamos el tag
-        apuntes = tagRepo.findByTag2(buscarAp);
-        model.addAttribute("apunte", apuntes.get(0));  // TODO
-        return "resultado_guardar";
+        //apuntes = tagRepo.findByTag2(buscarAp);
+        model.addAttribute("apuntes", apuntes);
+        if (apuntes.isEmpty()) {
+            model.addAttribute("noResult", true);
+        }
+        return "resultado_busqueda";
     }
     
     @RequestMapping("/searchAsignatura")
