@@ -20,4 +20,10 @@ public interface ApunteRepository extends JpaRepository<Apunte, Long> {
 	
 	List<Apunte> findByTags(Tag tag);
 
+	@Query(
+			value = "SELECT apunte.* FROM TAG JOIN APUNTE_TAGS on (tag.id = apunte_tags.tags_id) JOIN APUNTE on (apunte_tags.apuntes_id = apunte.id) WHERE (tag.tag =?1 )",
+			nativeQuery = true)
+			List<Apunte> findByTag(String tag);
+	
+
 }
