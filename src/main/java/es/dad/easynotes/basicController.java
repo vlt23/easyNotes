@@ -112,7 +112,10 @@ public class basicController {
         repositorioApunte.save(arduino2);
 
         Apunte esqui = new Apunte("esqui", DAD, GIC, URJC, new File(pathLocal + "pruebaPablo.pdf"), usuarioAdmin);
-        repositorioApunte.save(esqui);
+   
+       repositorioApunte.save(esqui);
+    
     }
+
 
 }
