@@ -37,4 +37,4 @@ EasyNotes.iml
 target/
 
 # Ignorar los apuntes subidos
-/src/main/resources/files/
+#/src/main/resources/files/

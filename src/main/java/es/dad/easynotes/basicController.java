@@ -63,25 +63,28 @@ public class basicController {
     	carreraRepo.save(GII);
     	
         Asignatura DAD = new Asignatura("DAD", URJC, GIC, "Patxi");
-        asignaturaRepo.save(DAD);
+        DAD = asignaturaRepo.save(DAD);
         URJC.getAsignaturas().add(DAD);
         universidadRepo.save(URJC);
         
         Asignatura POO = new Asignatura("POO", URJC, GII, "el de POO");
-        asignaturaRepo.save(POO);
+        POO = asignaturaRepo.save(POO);
         URJC.getAsignaturas().add(POO);
         //universidadRepo.save(URJC);
         
         Asignatura ED = new Asignatura("ED", UPM, GIC, "Buenaposada");
-        asignaturaRepo.save(ED);
+        ED = asignaturaRepo.save(ED);
         UPM.getAsignaturas().add(ED);
         //universidadRepo.save(UPM);
         
         Asignatura logica = new Asignatura("Logica", URJC, GII, "Alexandra");
-        asignaturaRepo.save(logica);
+        logica = asignaturaRepo.save(logica);
         URJC.getAsignaturas().add(logica);
         //universidadRepo.save(URJC);
-        
+
+        Asignatura SO = new Asignatura("SO", UPM, GIC, "Alberto");
+        SO = asignaturaRepo.save(SO);
+        UPM.getAsignaturas().add(SO);
         
         List<Asignatura> GIIasignaturas = new ArrayList<>();
         GIIasignaturas.add(POO);
@@ -96,18 +99,21 @@ public class basicController {
         Usuario usuario = new Usuario("admin", "root", 0, "admin@root.org", true);
         Usuario usuarioAdmin = usuarioRepo.save(usuario);
 
-        Apunte manualPortatil = new Apunte("manualPortatil", DAD, GIC, URJC,
-                new File(pathLocal + "manualPortatil.pdf"), usuarioAdmin);
+        Apunte manualPortatil = new Apunte("manualPortatil", DAD, GIC, URJC, new File(pathLocal + "manualPortatil.pdf"), usuarioAdmin);
         repositorioApunte.save(manualPortatil);
 
-        Apunte script1 = new Apunte("script", POO, GII, URJC, new File(pathLocal + "hola.txt"), usuarioAdmin);
+        Apunte script1 = new Apunte("script", SO, GII, URJC, new File(pathLocal + "zswap.sh"), usuarioAdmin);
         repositorioApunte.save(script1);
-        Apunte script2 = new Apunte("script", ED, GIC, URJC, new File(pathLocal + "hola.txt"), usuarioAdmin);
+
+        Apunte script2 = new Apunte("script", ED, GIC, URJC, new File(pathLocal + "zram.txt"), usuarioAdmin);
         repositorioApunte.save(script2);
-        Apunte arduino = new Apunte("arduino", logica, GII, UPM, new File(pathLocal + "arduino.png"), usuarioAdmin);
-        repositorioApunte.save(arduino);
-        Apunte script3 = new Apunte("script", ED, GII, URJC, new File(pathLocal + "arduino.png"), usuarioAdmin);
+
+        Apunte script3 = new Apunte("arduino", logica, GII, UPM, new File(pathLocal + "bateria.sh"), usuarioAdmin);
         repositorioApunte.save(script3);
+
+        Apunte cpp = new Apunte("script", ED, GII, URJC, new File(pathLocal + "prueba_linkedlist.cpp"), usuarioAdmin);
+        repositorioApunte.save(cpp);
+
         Apunte arduino2 = new Apunte("arduino", POO, GII, URJC, new File(pathLocal + "arduino.png"), usuarioAdmin);
         repositorioApunte.save(arduino2);
 
