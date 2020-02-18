@@ -2,10 +2,28 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Borrar ok</title>
+    <title>Borrado correctamente</title>
+
+    <link rel="stylesheet" type="text/css" href="http://localhost:8080/css/bootstrap.min.css">
+    <script type="text/javascript" href="http://localhost:8080/js/bootstrap.min.js"></script>
+    <style>
+        button {
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        .container {
+            margin: 20px;
+        }
+    </style>
 </head>
+
 <body>
-<p>Se ha borrado correctamente</p>
-<a href="/index.html">Inicio</a>
+<div class="container">
+    <h4>Se ha borrado correctamente el apunte</h4>
+    <form action="/">
+        <button type="submit" class="btn btn-danger">Inicio</button>
+    </form>
+</div>
 </body>
 </html>
