@@ -27,16 +27,16 @@ public class SearchController {
 
     @Autowired
     private ApunteRepository apunteRepo;
-    
+
     @Autowired
     private TagRepository tagRepo;
 
     @Autowired
     private AsignaturaRepository asignaturaRepo;
-    
+
     @Autowired
     private UniversidadRepository universidadRepo;
-    
+
     @Autowired
     private CarreraRepository carreraRepo;
 
@@ -45,7 +45,7 @@ public class SearchController {
         //Asignatura asignatura = asignaturaRepo.findAsignaturaByNombreIgnoreCase(buscarAp);
     	//Tag tag = new Tag(buscarAp);//creamos el TAG
         //List<Tag> listaTags = tagRepo.findByTag(buscarAp);
-        
+
         //Recorremos la lista de tags para extraer los apuntes
         //List<Apunte> apuntes = new ArrayList<>();
         //for(Tag aux : listaTags) {
@@ -57,12 +57,15 @@ public class SearchController {
         //}
         //buscamos el tag
         List<Apunte> apuntes = apunteRepo.findByTag(buscarAp);
-        
-        model.addAttribute("apuntes", apuntes);
-    	return "resultado_busqueda";
 
+
+        model.addAttribute("apuntes", apuntes);
+        if (apuntes.isEmpty()) {
+            model.addAttribute("noResult", true);
+        }
+        return "resultado_busqueda";
     }
-    
+
     @RequestMapping("/searchAsignatura")
     public String searchAsignatura(Model model) {
     	List<Asignatura> asignaturas = asignaturaRepo.findAll();
@@ -70,26 +73,26 @@ public class SearchController {
         return "buscar_asignatura";
     }
 
-   
+
     @RequestMapping("/searchCarrera")
     public String searchCarrera(Model model) {
     	List<Carrera> carreras = carreraRepo.findAll();
     	model.addAttribute("carreras", carreras);
         return "buscar_carrera";
     }
-    
+
     @RequestMapping("/searchUniversidad")
     public String searchUniversidad(Model model) {
     	List<Universidad> universidades = universidadRepo.findAll();
     	model.addAttribute("universidades", universidades);
         return "buscar_universidad";
     }
-    
+
     @RequestMapping("/mostrarBusqueda")
     public String mostrarBusqueda(Model model, @RequestParam String tipo, @RequestParam String uniCarreraAsig) {
-    	
+
     	List<Apunte> apuntes = new ArrayList<>();
-    	
+
     	if(tipo.equals("universidad")) {
     		Universidad universidad = universidadRepo.findUniversidadByNombreIgnoreCase(uniCarreraAsig);
     		apuntes = apunteRepo.findByUniversidad(universidad);
@@ -101,7 +104,7 @@ public class SearchController {
     		apuntes = apunteRepo.findByAsignatura(asignatura);
     	}
     	model.addAttribute("apuntes", apuntes);
-    	
+
     	return "resultado_busqueda";
     }
 

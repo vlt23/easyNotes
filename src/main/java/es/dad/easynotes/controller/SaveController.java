@@ -52,15 +52,16 @@ public class SaveController {
     @PostMapping("/saveApunte/{uniStr}/{carreraStr}")
     public String saveApunte(Model model,
                              @PathVariable String uniStr, @PathVariable String carreraStr, @RequestParam String asigStr,
-                             /*TODO*/@RequestParam long autorStr, @RequestParam List<Tag> tags,
-                             @RequestParam MultipartFile file, @RequestParam String nombre) {
+                             @RequestParam List<Tag> tags, @RequestParam MultipartFile file,
+                             @RequestParam String nombre) {
     	
         Asignatura asignatura = asignaturaRepo.findAsignaturaByNombreIgnoreCase(asigStr);
         Universidad universidad = universidadRepo.findUniversidadByNombreIgnoreCase(uniStr);
         Carrera carrera = carreraRepo.findCarreraByNombreIgnoreCase(carreraStr);
-        Usuario autor = usuarioRepo.getOne(autorStr);  // TODO
+        List<Usuario> usuariosTemp = usuarioRepo.findAll();
+        Usuario autor = usuariosTemp.get(0); // TODO
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-ddHHmmss"); 	//Poner forma al DATE
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-ddHHmmss"); 	// Poner forma al DATE
         Path filePath = Paths.get(pathLocal,file.hashCode() + "_"
                 + formatter.format(LocalDateTime.now()) + "_" + file.getOriginalFilename());
         try {

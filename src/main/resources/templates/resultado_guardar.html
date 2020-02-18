@@ -51,9 +51,11 @@
         <p class="col-md-3">{{apunte.autor.nombre}} {{apunte.autor.apellidos}}</p>
     </div>
     <div class="dropdown-divider"></div>
-
+	<div class="row">
+        <a download="{{apunte.nombre}}.pdf" href="/download/{{apunte.id}}">Descargar: {{apunte.nombre}}</a>
+    </div>
     <div class="row">
-        <a href="/download/{{apunte.id}}">Descargar: {{apunte.nombre}}</a>
+        <a href="/download/{{apunte.id}}" target="_self">Visualizar: {{apunte.nombre}}</a>
     </div>
     <div class="row">
         <a href="/delete/{{apunte.id}}">Eliminar: {{apunte.nombre}}</a>
