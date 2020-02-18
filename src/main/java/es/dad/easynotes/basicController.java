@@ -16,6 +16,7 @@ import org.springframework.stereotype.Controller;
 
 import javax.annotation.PostConstruct;
 import java.io.File;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,7 +45,7 @@ public class basicController {
 
     @PostConstruct
     public void init() {
-    	
+    	/*
     	Carrera GIC = new Carrera("GIC");
     	
     	Carrera GII = new Carrera("GII");
@@ -99,28 +100,28 @@ public class basicController {
         Usuario usuario = new Usuario("admin", "root", 0, "admin@root.org", true);
         Usuario usuarioAdmin = usuarioRepo.save(usuario);
 
-        Apunte manualPortatil = new Apunte("manualPortatil", DAD, GIC, URJC, new File(pathLocal + "manualPortatil.pdf"), usuarioAdmin);
+        Apunte manualPortatil = new Apunte("manualPortatil", DAD, GIC, URJC, new File(pathLocal + "manualPortatil.pdf"), usuarioAdmin, LocalDateTime.now());
         repositorioApunte.save(manualPortatil);
 
-        Apunte script1 = new Apunte("script", SO, GII, URJC, new File(pathLocal + "zswap.sh"), usuarioAdmin);
+        Apunte script1 = new Apunte("script", SO, GII, URJC, new File(pathLocal + "zswap.sh"), usuarioAdmin, LocalDateTime.now());
         repositorioApunte.save(script1);
 
-        Apunte script2 = new Apunte("script", ED, GIC, URJC, new File(pathLocal + "zram.txt"), usuarioAdmin);
+        Apunte script2 = new Apunte("script", ED, GIC, URJC, new File(pathLocal + "zram.txt"), usuarioAdmin, LocalDateTime.now());
         repositorioApunte.save(script2);
 
-        Apunte script3 = new Apunte("arduino", logica, GII, UPM, new File(pathLocal + "bateria.sh"), usuarioAdmin);
+        Apunte script3 = new Apunte("arduino", logica, GII, UPM, new File(pathLocal + "bateria.sh"), usuarioAdmin, LocalDateTime.now());
         repositorioApunte.save(script3);
 
-        Apunte cpp = new Apunte("script", ED, GII, URJC, new File(pathLocal + "prueba_linkedlist.cpp"), usuarioAdmin);
+        Apunte cpp = new Apunte("script", ED, GII, URJC, new File(pathLocal + "prueba_linkedlist.cpp"), usuarioAdmin, LocalDateTime.now());
         repositorioApunte.save(cpp);
 
-        Apunte arduino2 = new Apunte("arduino", POO, GII, URJC, new File(pathLocal + "arduino.png"), usuarioAdmin);
+        Apunte arduino2 = new Apunte("arduino", POO, GII, URJC, new File(pathLocal + "arduino.png"), usuarioAdmin, LocalDateTime.now());
         repositorioApunte.save(arduino2);
 
-        Apunte esqui = new Apunte("esqui", DAD, GIC, URJC, new File(pathLocal + "pruebaPablo.pdf"), usuarioAdmin);
+        Apunte esqui = new Apunte("esqui", DAD, GIC, URJC, new File(pathLocal + "pruebaPablo.pdf"), usuarioAdmin, LocalDateTime.now());
    
        repositorioApunte.save(esqui);
-    
+    */
     }
 
 

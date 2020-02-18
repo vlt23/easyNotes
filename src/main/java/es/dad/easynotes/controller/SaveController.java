@@ -73,7 +73,7 @@ public class SaveController {
 
         String [] tag = tags.split(",");
         
-        Apunte apunteSinId = new Apunte(nombre, asignatura, carrera, universidad, filePath.toFile(), autor);
+        Apunte apunteSinId = new Apunte(nombre, asignatura, carrera, universidad, filePath.toFile(), autor, LocalDateTime.now());
         for(String s : tag) {
         	apunteSinId.getTags().add(new Tag(s.trim()));
         }

@@ -1,6 +1,7 @@
 package es.dad.easynotes.entity;
 
 import java.io.File;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +24,8 @@ public class Apunte {
 
 	@ManyToOne
 	private Universidad universidad;
-	//private LocalDateTime fechaSubida;
+	private LocalDateTime fechaSubida;
+	
 	
 	@ManyToMany(cascade=CascadeType.PERSIST)
 	private List<Tag> tags = new ArrayList<>();;
@@ -43,7 +45,7 @@ public class Apunte {
 	}
 	
 	public Apunte(String nombre, Asignatura asignatura, Carrera carrera, Universidad universidad,
-			 File filePath, Usuario autor) {
+			 File filePath, Usuario autor, LocalDateTime fechaSubida) {
 		this.nombre=nombre;
 		this.asignatura=asignatura;
 		this.carrera=carrera;
@@ -61,6 +63,7 @@ public class Apunte {
 		this.numeroDescargas = 0;
 		this.filePath = filePath;
 		this.autor = autor;
+		this.fechaSubida = fechaSubida;
 	}
 
 	
@@ -142,6 +145,14 @@ public class Apunte {
 
 	public String getNombre() {
 		return nombre;
+	}
+
+	public LocalDateTime getFechaSubida() {
+		return fechaSubida;
+	}
+
+	public void setFechaSubida(LocalDateTime fechaSubida) {
+		this.fechaSubida = fechaSubida;
 	}
 
 }
