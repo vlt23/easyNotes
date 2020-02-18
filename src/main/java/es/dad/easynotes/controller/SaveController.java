@@ -52,7 +52,7 @@ public class SaveController {
     @PostMapping("/saveApunte/{uniStr}/{carreraStr}")
     public String saveApunte(Model model,
                              @PathVariable String uniStr, @PathVariable String carreraStr, @RequestParam String asigStr,
-                             @RequestParam List<Tag> tags, @RequestParam MultipartFile file,
+                             @RequestParam String tags, @RequestParam MultipartFile file,
                              @RequestParam String nombre) {
     	
         Asignatura asignatura = asignaturaRepo.findAsignaturaByNombreIgnoreCase(asigStr);
@@ -71,8 +71,12 @@ public class SaveController {
             e.printStackTrace();
         }
 
+        String [] tag = tags.split(",");
+        
         Apunte apunteSinId = new Apunte(nombre, asignatura, carrera, universidad, filePath.toFile(), autor);
-        apunteSinId.getTags().addAll(tags);	//NOSESIFUNCIONA
+        for(String s : tag) {
+        	apunteSinId.getTags().add(new Tag(s.trim()));
+        }
         
         Apunte apunte = apunteRepo.save(apunteSinId);
         model.addAttribute("apunte", apunte);
