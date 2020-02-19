@@ -3,8 +3,8 @@
  Este repositorio contiene una aplicación web que trata sobre un repositorio de apuntes y exámenes.
  Los usuarios guest (invitados), es decir, los que no están logueados, pueden mirar un preview de los apuntes.
  Para poder descargar los apuntes / exámenes en su totalidad es necesario estar logueado.
- Para poder acceder a examenes se creará un sistema de micropagos. Estos se podrán conseguir de varias maneras:
- en el primer registro se regalarán y subiendo apuntes o examenes a la web
+ Para poder acceder a exámenes se creará un sistema de micropagos. Estos se podrán conseguir de varias maneras:
+ en el primer registro se regalarán, y posteriormente subiendo apuntes o exámenes a la web.
 
 ## Funcionalidades públicas (los usuarios guest):
 * Leer las primeras páginas (preview) de un documento
@@ -14,7 +14,7 @@
 ## Funcionalidades privadas (usuarios logueados):
 * Funcionalidades públicas de los usuarios guest
 * Descargar apuntes en formato original
-* Comprar examenes (si tienen fotos incluidas se incluyen en la compra)
+* Comprar exámenes (si tienen fotos incluidas se incluyen en la compra)
 * Publicar apuntes o exámenes
 * Publicar/Añadir capturas de apuntes o imágenes (formato png o jpg)
 * Seguir asignaturas (notificaciones por mail cuando se publique nuevo contenido)
@@ -27,7 +27,7 @@
 * Validar asignaturas creadas por usuarios
 
 ## Entidades
-* Apunte: asignatura, autor, categoria (teoria, ejercicios), tipo de dato, tamaño, fecha, opiniones, valoraciones,
+* Apunte: asignatura, autor, categoría (teoría, ejercicios), tipo de dato, tamaño, fecha, opiniones, valoraciones,
 número de descargas, tags
 * Examen: hereda de Apunte, profesores
 * Asignatura: nombre, universidad, carrera, profesores
@@ -41,8 +41,8 @@ número de descargas, estado de la cuenta (baneado o no)
 * Convertir los ficheros en formato PDF
 
 
-## Diagrama Entidad/Relaccion
-![E/R](src\main\resources\Imagenes\EasyNotes.png)
+## Diagrama Entidad/Relación
+![E/R](src/main/resources/Imagenes/diagramaER.png)
 
 ## Integrantes
 * Guillermo De Azcarate Acosta
