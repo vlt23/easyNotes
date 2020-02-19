@@ -26,9 +26,9 @@
 
 <body>
 	<div class="container">
-	   	<h4>Mostrando Apuntes:</h4>
+	   	<h4>Mostrando Apuntes/Exámenes:</h4>
 		{{#noResult}}
-		<h5>No se han encontrado apuntes</h5>
+		<h5>No se han encontrado apuntes/exámenes</h5>
 		{{/noResult}}
 
 	    {{#apuntes}}
@@ -36,23 +36,25 @@
 		
 			<div class="row">
 		        <p class="col-md-2">Nombre:</p>
-		        <p class="col-md-3">{{nombre}}</p>
+		        <div class="col-md-6">{{nombre}}
+					<b style="color: red">{{#esExamen}}(examen){{/esExamen}}</b>
+				</div>
 		    </div>
 		    <div class="row">
 		        <p class="col-md-2">Asignatura:</p>
-		        <p class="col-md-3">{{asignatura.nombre}}</p>
+		        <p class="col-md-6">{{asignatura.nombre}}</p>
 		    </div>
 		    <div class="row">
 		        <p class="col-md-2">Titulación:</p>
-		        <p class="col-md-3">{{carrera.nombre}}</p>
+		        <p class="col-md-6">{{carrera.nombre}}</p>
 		    </div>
 		    <div class="row">
 		        <p class="col-md-2">Universidad:</p>
-		        <p class="col-md-3">{{universidad.nombre}}</p>
+		        <p class="col-md-6">{{universidad.nombre}}</p>
 		    </div>
 		    <div class="row">
 		        <p class="col-md-2">Autor:</p>
-		        <p class="col-md-3">{{autor.nombre}} {{autor.apellidos}}</p>
+		        <p class="col-md-6">{{autor.nombre}} {{autor.apellidos}}</p>
 		    </div>
 		    <div class="row">
 		        <p class="col-md-2">Fecha Subida:</p>
