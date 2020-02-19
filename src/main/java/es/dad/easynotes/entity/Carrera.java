@@ -31,6 +31,10 @@ public class Carrera {
 	public Carrera(String nombre) {
 		this.nombre = nombre;
 	}
+	public Carrera(String nombre, Universidad universidad) {
+		this.nombre = nombre;
+		this.universidad = universidad;
+	}
 	
 	
 	public long getId() {

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Easy Notes</title>
+<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+<script type="text/javascript" href="js/bootstrap.min.js"></script>
+<script type="text/javascript" href="js/jquery-3.4.1.min.js"></script>
+
+<style>
+button{
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.container{
+	margin: 20px;
+}
+.form-control, #file{
+	margin-bottom: 15px;
+}
+
+.siguiente{
+	float: right;
+}
+</style>
+</head>
+<body>
+	<div class="container">
+		<h1 align="center">Añadir Asignatura</h1>
+		<form action="/">
+			<button type="submit" class="btn btn-danger">Volver</button>
+		</form>
+		<form method="get" action="/anadida_asignatura/{{universidad.nombre}}" enctype="multipart/form-data">
+			<div class="col">
+				<div class="row">
+					<h4>Universidad: {{universidad.nombre}}</h4>
+				</div>
+				<div class="row">
+					<label for="Carrera">Selecciona la Carrera:</label>
+					<select class="form-control" name="carreraStr">
+						{{#carreras}}
+						    <option>{{nombre}}</option>
+					    {{/carreras}}
+					</select>
+				</div>
+			</div>
+			<div class="col">
+				<div class="row">
+					<label for="Asignatura">Asignatura:</label>
+					<input type="text" class="form-control" id="Asignatura" name="asigStr"
+				   		placeholder="Introduzca el nombre de la asignatura que desea añadir">
+				</div>
+			</div>
+			<div class="col">
+				<div class="row">
+					<label for="Profesores">Profesores:</label>
+					<input type="text" class="form-control" id="Asignatura" name="profesores"
+				   		placeholder="Introduzca el nombre de los profesores separados por ,">
+				</div>
+			</div>
+			<button type="submit" id="anadir-btn" class="btn btn-primary" disabled="true">Añadir</button>
+		</form>
+	</div>
+	<script>
+		let input = document.getElementById("Asignatura");
+		input.addEventListener("input", function(){
+			if (input.value != ""){
+				document.getElementById("anadir-btn").disabled = false;
+			}else{
+				document.getElementById("anadir-btn").disabled = true;
+			}
+		})
+	</script>
+	
+</body>
+</html>

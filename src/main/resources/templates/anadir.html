@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Easy Notes</title>
+
+    <link rel="stylesheet" type="text/css" href="http://localhost:8080/css/bootstrap.min.css">
+    <script type="text/javascript" href="http://localhost:8080/js/bootstrap.min.js"></script>
+
+    <style>
+        button {
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        .container {
+            margin: 20px;
+        }
+
+        .row {
+            margin-left: 15px;
+            margin-right: 15px;
+        }
+    </style>
+</head>
+
+<body>
+	<div class="container">
+		{{#error}}
+			<h3>No se ha podido añadir la {{tipo}} {{nombre}} porque ya existe una con ese nombre</h3>
+		{{/error}}
+		{{#exito}}
+   			<h3>{{tipo}} {{nombre}} creada con éxito</h3>
+   		{{/exito}}
+     	<form action="/">
+			<button type="submit" class="btn btn-danger">Volver</button>
+		</form>
+	</div>
+</body>
+</html>

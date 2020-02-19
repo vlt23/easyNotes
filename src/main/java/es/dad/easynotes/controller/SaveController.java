@@ -144,5 +144,106 @@ public class SaveController {
         }
         return "error";
     }
+    
+    @RequestMapping("/anadirUniversidad")
+    public String anadirUniversidad() {
+        
+        return "anadir_universidad";
+    }
+    
+    @RequestMapping("/anadirCarrera")
+    public String anadirCarrera(Model model) {
+    	
+    	List<Universidad> universidades = universidadRepo.findAll();
+    	
+    	model.addAttribute("universidades", universidades);
+        
+        return "anadir_carrera";
+    }
+    
+    @RequestMapping("/anadirAsignatura")
+    public String anadirAsignatura(Model model) {
+    	
+		List<Universidad> universidades = universidadRepo.findAll();
+    	
+    	model.addAttribute("universidades", universidades);
+    	
+        return "anadir_asignatura";
+    }
+    
+    @RequestMapping("/anadirAsignaturaCarrera")
+    public String anadirAsignaturaCarrera(Model model, @RequestParam String uniStr) {
+    	Universidad universidad = universidadRepo.findUniversidadByNombreIgnoreCase(uniStr);
+    	List<Carrera> carreras = carreraRepo.findCarreraByUniversidad_Id(universidad.getId());
+    	
+    	model.addAttribute("universidad", universidad);
+    	model.addAttribute("carreras", carreras);
+    	
+        return "anadir_asignatura_carrera";
+    }
+    
+    @RequestMapping("/anadida_universidad")
+    public String anadirUniversidad(Model model, @RequestParam String uniStr) {
+		Universidad comprobar = universidadRepo.findUniversidadByNombreIgnoreCase(uniStr);
+		if(comprobar != null) {
+			model.addAttribute("error", "error");
+		}else {
+			Universidad universidad = new Universidad(uniStr);
+	    	universidadRepo.save(universidad);
+	    	model.addAttribute("exito", "exito");
+		}
+    	model.addAttribute("nombre", uniStr);
+    	model.addAttribute("tipo", "Universidad");
+      
+        return "anadir";
+    }
+    
+    @RequestMapping("/anadida_carrera")
+    public String anadirCarrera(Model model, @RequestParam String carreraStr, @RequestParam String uniStr) {
+    	Universidad universidad = universidadRepo.findUniversidadByNombreIgnoreCase(uniStr);
+		List<Carrera> comprobar = carreraRepo.findCarreraByUniversidad_Id(universidad.getId());
+		boolean found = false;
+		for (Carrera c : comprobar) {
+			if(c.getNombre().equals(carreraStr)) {
+				found = true;
+			}
+		}
+		if(found) {
+			model.addAttribute("error", "error");
+		}else {
+			Carrera carrera = new Carrera(carreraStr, universidad);
+	    	carreraRepo.save(carrera);
+	    	model.addAttribute("exito", "exito");
+		}
+    	model.addAttribute("nombre", carreraStr);
+    	model.addAttribute("tipo", "Carrera");
+      
+        return "anadir";
+    }
+    
+    @RequestMapping("/anadida_asignatura/{uniStr}")
+    public String anadirAsignatura(Model model, @RequestParam String asigStr, @PathVariable String uniStr, @RequestParam String carreraStr, @RequestParam String profesores) {
+		Universidad universidad = universidadRepo.findUniversidadByNombreIgnoreCase(uniStr);
+		Carrera carrera = carreraRepo.findCarreraByNombreIgnoreCase(carreraStr);
+		List<Asignatura> comprobar = asignaturaRepo.findAsignaturaByCarrera_IdAndUniversidad_Id(carrera.getId(), universidad.getId());
+		boolean found = false;
+		for (Asignatura a : comprobar) {
+			if(a.getNombre().equals(asigStr)) {
+				found = true;
+			}
+		}
+		
+		if(found) {
+			model.addAttribute("error", "error");
+		}else {
+			Asignatura asignatura = new Asignatura(asigStr, universidad, carrera, profesores);
+	    	asignaturaRepo.save(asignatura);
+	    	model.addAttribute("exito", "exito");
+		}
+    	model.addAttribute("nombre", asigStr);
+    	model.addAttribute("tipo", "Asignatura");
+      
+        return "anadir";
+    }
 
 }
