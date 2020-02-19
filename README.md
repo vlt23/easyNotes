@@ -7,18 +7,17 @@
  en el primer registro se regalarán, y posteriormente subiendo apuntes o exámenes a la web.
 
 ## Funcionalidades públicas (los usuarios guest):
-* Leer las primeras páginas (preview) de un documento
+* Leer el documento
 * Búsqueda por universdad, asignatura, carrera o tag
 * Registrarse y loguearse
 
 ## Funcionalidades privadas (usuarios logueados):
 * Funcionalidades públicas de los usuarios guest
-* Descargar apuntes en formato original
-* Comprar exámenes (si tienen fotos incluidas se incluyen en la compra)
-* Publicar apuntes o exámenes
-* Publicar/Añadir capturas de apuntes o imágenes (formato png o jpg)
+* Descargar apuntes
+* Comprar exámenes
+* Publicar apuntes o exámenes en formato PDF
 * Seguir asignaturas (notificaciones por mail cuando se publique nuevo contenido)
-* Añadir una asignatura (tiene que ser calidad por el administrador)
+* Añadir una asignatura (tiene que ser validada por el administrador)(notificacion por mail)
 
 ## Funcionalidades privadas (solo los administradores):
 * El administrador puede eliminar cualquier documento
@@ -27,18 +26,18 @@
 * Validar asignaturas creadas por usuarios
 
 ## Entidades
-* Apunte: asignatura, autor, categoría (teoría, ejercicios), tipo de dato, tamaño, fecha, opiniones, valoraciones,
-número de descargas, tags
-* Examen: hereda de Apunte, profesores
-* Asignatura: nombre, universidad, carrera, profesores
+* Apunte: asignatura, carrera, universidad, autor, tamaño, fecha,  valoraciones,número de descargas, tags, tipo (apunte o examen)
 * Usuario: tipo de usuario (administrador o registrado), nombre, apellidos, correo electrónico, créditos,
 número de descargas, estado de la cuenta (baneado o no)
-* Universidad: nombre, campus
+* Universidad: nombre, carreras, asignaturas
+* Carrera: nombre, universidad, asignaturas
+* Asignatura: nombre, universidad, carrera
+* Tag: nombre, apuntes
 
 ## Servicio interino
 * Mandar de forma automática un email cuando se actualice una asignatura
 * Mandar de forma automática un email cuando el documento de ha descargado más de (5) veces
-* Convertir los ficheros en formato PDF
+
 
 ## Capturas de pantalla
 ![](src/main/resources/Imagenes/pag_inicio.png)
