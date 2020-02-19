@@ -40,6 +40,8 @@ número de descargas, estado de la cuenta (baneado o no)
 * Mandar de forma automática un email cuando el documento de ha descargado más de (5) veces
 * Convertir los ficheros en formato PDF
 
+## Modelo de datos
+![E/R](src/main/resources/Imagenes/modeloDatos.png)
 
 ## Diagrama Entidad/Relación
 ![E/R](src/main/resources/Imagenes/diagramaER.png)
