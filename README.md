@@ -40,8 +40,23 @@ número de descargas, estado de la cuenta (baneado o no)
 * Mandar de forma automática un email cuando el documento de ha descargado más de (5) veces
 * Convertir los ficheros en formato PDF
 
+## Capturas de pantalla
+![](src/main/resources/Imagenes/pag_inicio.png)
+Página de inicio, donde están todas las opciones.
+
+![](src/main/resources/Imagenes/pag_busqueda_resultado.png)
+Página de resultados tras buscar apuntes por tags.
+
+![](src/main/resources/Imagenes/pag_buscar_por_asignatura.png)
+Página para buscar todos los apuntes de un determinado asignatura.
+Los otros dos páginas (Buscar por Carrera y Buscar por Universidad) tienen la misma estructura.
+
+![](src/main/resources/Imagenes/pag_subir_apunte.png)
+Página para subir los apuntes. Se selecciona la universidad, la titulación y la asignatura.
+Se pueden añadir tags si lo desea.
+
 ## Modelo de datos
-![E/R](src/main/resources/Imagenes/modeloDatos.png)
+![](src/main/resources/Imagenes/modeloDatos.png)
 
 ## Diagrama Entidad/Relación
 ![E/R](src/main/resources/Imagenes/diagramaER.png)
