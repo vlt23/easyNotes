@@ -30,11 +30,12 @@ public class Apunte {
 	@ManyToMany(cascade=CascadeType.PERSIST)
 	private List<Tag> tags = new ArrayList<>();;
 	private long tamanyo;
-
+	private boolean esExamen;
 	private File filePath;
 
 	@ManyToOne
 	private Usuario autor;
+	
 	
 	//@OneToMany
 	//private List<Integer> valoraciones;
@@ -45,7 +46,7 @@ public class Apunte {
 	}
 	
 	public Apunte(String nombre, Asignatura asignatura, Carrera carrera, Universidad universidad,
-			 File filePath, Usuario autor, LocalDateTime fechaSubida) {
+			 File filePath, Usuario autor, LocalDateTime fechaSubida, boolean esExamen) {
 		this.nombre=nombre;
 		this.asignatura=asignatura;
 		this.carrera=carrera;
@@ -64,6 +65,7 @@ public class Apunte {
 		this.filePath = filePath;
 		this.autor = autor;
 		this.fechaSubida = fechaSubida;
+		this.esExamen = esExamen;
 	}
 
 	
@@ -153,6 +155,14 @@ public class Apunte {
 
 	public void setFechaSubida(LocalDateTime fechaSubida) {
 		this.fechaSubida = fechaSubida;
+	}
+
+	public boolean isEsExamen() {
+		return esExamen;
+	}
+
+	public void setEsExamen(boolean esExamen) {
+		this.esExamen = esExamen;
 	}
 
 }

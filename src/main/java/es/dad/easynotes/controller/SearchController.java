@@ -42,20 +42,7 @@ public class SearchController {
 
     @RequestMapping("/search")
     public String search(Model model, @RequestParam String buscarAp) {
-        //Asignatura asignatura = asignaturaRepo.findAsignaturaByNombreIgnoreCase(buscarAp);
-    	//Tag tag = new Tag(buscarAp);//creamos el TAG
-        //List<Tag> listaTags = tagRepo.findByTag(buscarAp);
-
-        //Recorremos la lista de tags para extraer los apuntes
-        //List<Apunte> apuntes = new ArrayList<>();
-        //for(Tag aux : listaTags) {
-        //	for(Apunte aux2: aux.getApuntes()) {
-        //		if(!apuntes.contains(aux2)) {	//evitar duplicados
-        //			apuntes.add(aux2);
-        //		}
-        //	}
-        //}
-        //buscamos el tag
+      
         List<Apunte> apuntes = apunteRepo.findByTag(buscarAp);
 
 

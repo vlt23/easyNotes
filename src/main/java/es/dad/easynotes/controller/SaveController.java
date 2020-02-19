@@ -53,14 +53,14 @@ public class SaveController {
     public String saveApunte(Model model,
                              @PathVariable String uniStr, @PathVariable String carreraStr, @RequestParam String asigStr,
                              @RequestParam String tags, @RequestParam MultipartFile file,
-                             @RequestParam String nombre) {
+                             @RequestParam String nombre, @RequestParam (defaultValue = "false") boolean esExamen) {
     	
         Asignatura asignatura = asignaturaRepo.findAsignaturaByNombreIgnoreCase(asigStr);
         Universidad universidad = universidadRepo.findUniversidadByNombreIgnoreCase(uniStr);
         Carrera carrera = carreraRepo.findCarreraByNombreIgnoreCase(carreraStr);
         List<Usuario> usuariosTemp = usuarioRepo.findAll();
         Usuario autor = usuariosTemp.get(0); // TODO
-
+        //boolean esExamen2 =esExamen!= null;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-ddHHmmss"); 	// Poner forma al DATE
         Path filePath = Paths.get(pathLocal,file.hashCode() + "_"
                 + formatter.format(LocalDateTime.now()) + "_" + file.getOriginalFilename());
@@ -73,7 +73,7 @@ public class SaveController {
 
         String [] tag = tags.split(",");
         
-        Apunte apunteSinId = new Apunte(nombre, asignatura, carrera, universidad, filePath.toFile(), autor, LocalDateTime.now());
+        Apunte apunteSinId = new Apunte(nombre, asignatura, carrera, universidad, filePath.toFile(), autor, LocalDateTime.now(), esExamen);
         for(String s : tag) {
         	apunteSinId.getTags().add(new Tag(s.trim()));
         }
