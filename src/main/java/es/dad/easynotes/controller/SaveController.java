@@ -55,9 +55,10 @@ public class SaveController {
                              @RequestParam String tags, @RequestParam MultipartFile file,
                              @RequestParam String nombre, @RequestParam (defaultValue = "false") boolean esExamen) {
     	
-        Asignatura asignatura = asignaturaRepo.findAsignaturaByNombreIgnoreCase(asigStr);
         Universidad universidad = universidadRepo.findUniversidadByNombreIgnoreCase(uniStr);
-        Carrera carrera = carreraRepo.findCarreraByNombreIgnoreCase(carreraStr);
+        Carrera carrera = carreraRepo.findCarreraByNombreAndUniversidad_Id(carreraStr, universidad.getId());
+        Asignatura asignatura = asignaturaRepo.findAsignaturaByNombreAndCarrera_Id(asigStr, carrera.getId());
+
         List<Usuario> usuariosTemp = usuarioRepo.findAll();
         Usuario autor = usuariosTemp.get(0); // TODO
         //boolean esExamen2 =esExamen!= null;
@@ -118,7 +119,7 @@ public class SaveController {
     public String subirAsignatura(Model model, @PathVariable String uniStr, @RequestParam String carreraStr) {
     	
     	Universidad universidad = universidadRepo.findUniversidadByNombreIgnoreCase(uniStr);
-    	Carrera carrera = carreraRepo.findCarreraByNombreIgnoreCase(carreraStr);
+    	Carrera carrera = carreraRepo.findCarreraByNombreAndUniversidad_Id(carreraStr, universidad.getId());
     	long idCar = carrera.getId();
     	List<Asignatura> asignaturas = asignaturaRepo.findAsignaturaByCarrera_Id(idCar);	
     	//List<Asignatura> asignaturas = asignaturaRepo.findAll();
@@ -224,7 +225,7 @@ public class SaveController {
     @RequestMapping("/anadida_asignatura/{uniStr}")
     public String anadirAsignatura(Model model, @RequestParam String asigStr, @PathVariable String uniStr, @RequestParam String carreraStr, @RequestParam String profesores) {
 		Universidad universidad = universidadRepo.findUniversidadByNombreIgnoreCase(uniStr);
-		Carrera carrera = carreraRepo.findCarreraByNombreIgnoreCase(carreraStr);
+		Carrera carrera = carreraRepo.findCarreraByNombreAndUniversidad_Id(carreraStr, universidad.getId());
 		List<Asignatura> comprobar = asignaturaRepo.findAsignaturaByCarrera_IdAndUniversidad_Id(carrera.getId(), universidad.getId());
 		boolean found = false;
 		for (Asignatura a : comprobar) {

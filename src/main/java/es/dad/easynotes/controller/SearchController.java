@@ -19,7 +19,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Controller
 public class SearchController {
@@ -55,15 +57,22 @@ public class SearchController {
 
     @RequestMapping("/searchAsignatura")
     public String searchAsignatura(Model model) {
-    	List<Asignatura> asignaturas = asignaturaRepo.findAll();
+    	List<Asignatura> asignaturasTemp = asignaturaRepo.findAll();
+    	Set<String> asignaturas = new HashSet<>();
+    	for (Asignatura asignatura : asignaturasTemp) {
+    	    asignaturas.add(asignatura.getNombre());
+        }
     	model.addAttribute("asignaturas", asignaturas);
         return "buscar_asignatura";
     }
 
-
     @RequestMapping("/searchCarrera")
     public String searchCarrera(Model model) {
-    	List<Carrera> carreras = carreraRepo.findAll();
+    	List<Carrera> carrerasTemp = carreraRepo.findAll();
+    	Set<String> carreras = new HashSet<>();
+    	for (Carrera carrera : carrerasTemp) {
+    	    carreras.add(carrera.getNombre());
+        }
     	model.addAttribute("carreras", carreras);
         return "buscar_carrera";
     }
@@ -80,24 +89,23 @@ public class SearchController {
 
     	List<Apunte> apuntes = new ArrayList<>();
 
-    	if(tipo.equals("universidad")) {
+    	if (tipo.equals("universidad")) {
     		Universidad universidad = universidadRepo.findUniversidadByNombreIgnoreCase(uniCarreraAsig);
     		apuntes = apunteRepo.findByUniversidad(universidad);
-    	}else if(tipo.equals("carrera")) {
-    		Carrera carrera = carreraRepo.findCarreraByNombreIgnoreCase(uniCarreraAsig);
-    		apuntes = apunteRepo.findByCarrera(carrera);
-    	}else {
-    		Asignatura asignatura = asignaturaRepo.findAsignaturaByNombreIgnoreCase(uniCarreraAsig);
-    		apuntes = apunteRepo.findByAsignatura(asignatura);
+    	} else if (tipo.equals("carrera")) {
+    		List<Carrera> carreras = carreraRepo.findCarrerasByNombreIgnoreCase(uniCarreraAsig);
+    		for (Carrera carrera : carreras) {
+                apuntes.addAll(apunteRepo.findByCarrera(carrera));
+            }
+    	} else {
+    		List<Asignatura> asignaturas = asignaturaRepo.findAsignaturasByNombreIgnoreCase(uniCarreraAsig);
+    		for (Asignatura asignatura : asignaturas) {
+                apuntes.addAll(apunteRepo.findByAsignatura(asignatura));
+            }
     	}
     	model.addAttribute("apuntes", apuntes);
 
     	return "resultado_busqueda";
-    }
-
-    @RequestMapping("/advancedSearch")
-    public String advancedSearch(Model model) {
-        return null;
     }
 
 }

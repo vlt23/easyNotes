@@ -13,4 +13,8 @@ public interface AsignaturaRepository extends JpaRepository<Asignatura, Long> {
     List<Asignatura> findAsignaturaByCarrera_Id(long carrera_id);
     List<Asignatura> findAsignaturaByCarrera_IdAndUniversidad_Id(long carrera_id, long asignatura_id);
 
+    List<Asignatura> findAsignaturasByNombreIgnoreCase(String nombre);
+
+    Asignatura findAsignaturaByNombreAndCarrera_Id(String nombre, long carreraId);
+
 }
