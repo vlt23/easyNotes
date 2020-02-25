@@ -32,7 +32,9 @@ import java.util.List;
 
 @Controller
 public class SaveController {
-	final String pathLocal = ("src"+File.separator+"main"+File.separator+"resources"+File.separator+ "files"+ File.separator);
+
+    final String pathLocal = ("src" + File.separator + "main" + File.separator + "resources"
+            + File.separator + "files" + File.separator);
 
     @Autowired
     private ApunteRepository apunteRepo;
@@ -83,55 +85,41 @@ public class SaveController {
         model.addAttribute("apunte", apunte);
         return "resultado_guardar";
     }
-    
+
     @RequestMapping("/subirApunte")
     public String subirApunte(Model model) {
-    	
-    	List<Universidad> universidades = universidadRepo.findAll();
-    	//List<Asignatura> asignaturas = asignaturaRepo.findAll();
-    	//List<Carrera> carreras = carreraRepo.findAll();
-    	
-    	model.addAttribute("universidades", universidades);
-    	//model.addAttribute("asignaturas", asignaturas);
-    	//model.addAttribute("carreras", carreras);
-    	
-    	return "subir_universidad";
+        List<Universidad> universidades = universidadRepo.findAll();
+
+        model.addAttribute("universidades", universidades);
+
+        return "subir_universidad";
     }
     
     @RequestMapping("/subirCarrera")
     public String subirCarrera(Model model, @RequestParam String uniStr) {
-    	
-    	Universidad universidad = universidadRepo.findUniversidadByNombreIgnoreCase(uniStr);
-    	long idUni = universidad.getId();
-    	List<Carrera> carreras = carreraRepo.findCarreraByUniversidad_Id(idUni);	
-    	//List<Asignatura> asignaturas = asignaturaRepo.findAll();
-    	//List<Carrera> carreras = carreraRepo.findAll();
-    	
-    	model.addAttribute("universidad", universidad);
-    	model.addAttribute("carreras", carreras);
-    	//model.addAttribute("asignaturas", asignaturas);
-    	//model.addAttribute("carreras", carreras);
-    	
-    	return "subir_carrera";
+        Universidad universidad = universidadRepo.findUniversidadByNombreIgnoreCase(uniStr);
+        long idUni = universidad.getId();
+        List<Carrera> carreras = carreraRepo.findCarreraByUniversidad_Id(idUni);
+
+        model.addAttribute("universidad", universidad);
+        model.addAttribute("carreras", carreras);
+
+        return "subir_carrera";
     }
-    
+
     @RequestMapping("/subirAsignatura/{uniStr}")
     public String subirAsignatura(Model model, @PathVariable String uniStr, @RequestParam String carreraStr) {
-    	
-    	Universidad universidad = universidadRepo.findUniversidadByNombreIgnoreCase(uniStr);
-    	Carrera carrera = carreraRepo.findCarreraByNombreAndUniversidad_Id(carreraStr, universidad.getId());
-    	long idCar = carrera.getId();
-    	List<Asignatura> asignaturas = asignaturaRepo.findAsignaturaByCarrera_Id(idCar);	
-    	//List<Asignatura> asignaturas = asignaturaRepo.findAll();
-    	//List<Carrera> carreras = carreraRepo.findAll();
-    	
-    	model.addAttribute("universidad", universidad);
-    	model.addAttribute("carrera", carrera);
-    	model.addAttribute("asignaturas", asignaturas);
-    	//model.addAttribute("asignaturas", asignaturas);
-    	//model.addAttribute("carreras", carreras);
-    	
-    	return "subir_asignatura";
+
+        Universidad universidad = universidadRepo.findUniversidadByNombreIgnoreCase(uniStr);
+        Carrera carrera = carreraRepo.findCarreraByNombreAndUniversidad_Id(carreraStr, universidad.getId());
+        long idCar = carrera.getId();
+        List<Asignatura> asignaturas = asignaturaRepo.findAsignaturaByCarrera_Id(idCar);
+
+        model.addAttribute("universidad", universidad);
+        model.addAttribute("carrera", carrera);
+        model.addAttribute("asignaturas", asignaturas);
+
+        return "subir_asignatura";
     }
 
     @RequestMapping("/delete/{idApunte}")
@@ -205,13 +193,14 @@ public class SaveController {
 		List<Carrera> comprobar = carreraRepo.findCarreraByUniversidad_Id(universidad.getId());
 		boolean found = false;
 		for (Carrera c : comprobar) {
-			if(c.getNombre().equals(carreraStr)) {
-				found = true;
-			}
+            if (c.getNombre().equals(carreraStr)) {
+                found = true;
+                break;
+            }
 		}
-		if(found) {
+		if (found) {
 			model.addAttribute("error", "error");
-		}else {
+		} else {
 			Carrera carrera = new Carrera(carreraStr, universidad);
 	    	carreraRepo.save(carrera);
 	    	model.addAttribute("exito", "exito");
@@ -229,14 +218,15 @@ public class SaveController {
 		List<Asignatura> comprobar = asignaturaRepo.findAsignaturaByCarrera_IdAndUniversidad_Id(carrera.getId(), universidad.getId());
 		boolean found = false;
 		for (Asignatura a : comprobar) {
-			if(a.getNombre().equals(asigStr)) {
-				found = true;
-			}
+            if (a.getNombre().equals(asigStr)) {
+                found = true;
+                break;
+            }
 		}
 		
-		if(found) {
+		if (found) {
 			model.addAttribute("error", "error");
-		}else {
+		} else {
 			Asignatura asignatura = new Asignatura(asigStr, universidad, carrera, profesores);
 	    	asignaturaRepo.save(asignatura);
 	    	model.addAttribute("exito", "exito");

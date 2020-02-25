@@ -25,7 +25,6 @@ import java.util.Set;
 
 @Controller
 public class SearchController {
-	final String pathLocal = ("src"+File.separator+"main"+File.separator+"resources"+File.separator+ "files"+ File.separator);
 
     @Autowired
     private ApunteRepository apunteRepo;
@@ -44,9 +43,7 @@ public class SearchController {
 
     @RequestMapping("/search")
     public String search(Model model, @RequestParam String buscarAp) {
-      
         List<Apunte> apuntes = apunteRepo.findByTag(buscarAp);
-
 
         model.addAttribute("apuntes", apuntes);
         if (apuntes.isEmpty()) {
