@@ -42,9 +42,8 @@
 					<h4>Titulación: {{carrera.nombre}}</h4>
 				</div>
 				<div class="row">
-					<label for="Asignatura">Asignatura:</label>
-						<!--  <input type="text" class="form-control" id="Universidad" name="uniStr"
-							   placeholder="Introduzca la Universidad">-->
+					<label>Asignatura:</label>
+
 					<select class="form-control" name="asigStr" required>
 						{{#asignaturas}}
 						    <option>{{nombre}}</option>
@@ -62,16 +61,15 @@
 							   placeholder="Introduzca un nombre para los apuntes" required>
 				</div>
 				<div class="row">
-					<label for="esexamen"></label>¿Es un examen?   
-						<input type="checkbox"   name="esExamen"
-							    >
+					<label>¿Es un examen?</label>
+					<input type="checkbox" name="esExamen">
 				</div>
 				<div class="row">
 					<input type="file" id="file" name="file"  accept="application/pdf" required>
 				</div>
 			</div>
 			<div class="siguiente">
-				<button type="submit" class="btn btn-primary">Guardar</button>
+				<button type="submit" class="btn btn-success">Guardar</button>
 			</div>
 		</form>
 	</div>

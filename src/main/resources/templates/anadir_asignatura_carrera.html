@@ -8,19 +8,19 @@
 <script type="text/javascript" href="js/jquery-3.4.1.min.js"></script>
 
 <style>
-button{
+button {
 	margin-top: 10px;
 	margin-bottom: 10px;
 }
 
-.container{
+.container {
 	margin: 20px;
 }
-.form-control, #file{
+.form-control {
 	margin-bottom: 15px;
 }
 
-.siguiente{
+.siguiente {
 	float: right;
 }
 </style>
@@ -37,7 +37,7 @@ button{
 					<h4>Universidad: {{universidad.nombre}}</h4>
 				</div>
 				<div class="row">
-					<label for="Carrera">Selecciona la Carrera:</label>
+					<label>Selecciona la Carrera:</label>
 					<select class="form-control" name="carreraStr">
 						{{#carreras}}
 						    <option>{{nombre}}</option>
@@ -55,7 +55,7 @@ button{
 			<div class="col">
 				<div class="row">
 					<label for="Profesores">Profesores:</label>
-					<input type="text" class="form-control" id="Asignatura" name="profesores"
+					<input type="text" class="form-control" id="Profesores" name="profesores"
 				   		placeholder="Introduzca el nombre de los profesores separados por ,">
 				</div>
 			</div>
@@ -65,9 +65,9 @@ button{
 	<script>
 		let input = document.getElementById("Asignatura");
 		input.addEventListener("input", function(){
-			if (input.value != ""){
+			if (input.value !== ""){
 				document.getElementById("anadir-btn").disabled = false;
-			}else{
+			} else{
 				document.getElementById("anadir-btn").disabled = true;
 			}
 		})

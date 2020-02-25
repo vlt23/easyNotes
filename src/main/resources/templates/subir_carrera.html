@@ -8,19 +8,19 @@
 <script type="text/javascript" href="js/jquery-3.4.1.min.js"></script>
 
 <style>
-button{
+button {
 	margin-top: 10px;
 	margin-bottom: 10px;
 }
 
-.container{
+.container {
 	margin: 20px;
 }
-.form-control, #file{
+.form-control {
 	margin-bottom: 15px;
 }
 
-.siguiente{
+.siguiente {
 	float: right;
 }
 </style>
@@ -37,9 +37,8 @@ button{
 					<h4>Universidad: {{universidad.nombre}}</h4>
 				</div>
 				<div class="row">
-					<label for="Carrera">Carrera:</label>
-						<!--  <input type="text" class="form-control" id="Universidad" name="uniStr"
-							   placeholder="Introduzca la Universidad">-->
+					<label>Carrera:</label>
+
 					<select class="form-control" name="carreraStr" required>
 						{{#carreras}}
 						    <option>{{nombre}}</option>

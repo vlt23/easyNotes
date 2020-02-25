@@ -8,19 +8,19 @@
 <script type="text/javascript" href="js/jquery-3.4.1.min.js"></script>
 
 <style>
-button{
+button {
 	margin-top: 10px;
 	margin-bottom: 10px;
 }
 
-.container{
+.container {
 	margin: 20px;
 }
-.form-control, #file{
+.form-control {
 	margin-bottom: 15px;
 }
 
-.siguiente{
+.siguiente {
 	float: right;
 }
 </style>
@@ -34,7 +34,7 @@ button{
 		<form method="post" action="/anadirAsignaturaCarrera" enctype="multipart/form-data">
 			<div class="col">
 				<div class="row">
-					<label for="Universidad">Selecciona la Universidad:</label>
+					<label>Selecciona la Universidad:</label>
 					<select class="form-control" name="uniStr">
 						{{#universidades}}
 						    <option>{{nombre}}</option>
