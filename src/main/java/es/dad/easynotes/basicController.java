@@ -43,9 +43,12 @@ public class basicController {
     @Autowired
     private UsuarioRepository usuarioRepo;
 
+    
     @PostConstruct
     public void init() {
-    	/*
+    	
+    	usuarioRepo.save(new Usuario ("pavlo", "1234", "ROLE_ADMIN"));
+    	
     	Carrera GIC = new Carrera("GIC");
     	
     	Carrera GII = new Carrera("GII");
@@ -122,7 +125,7 @@ public class basicController {
    
        repositorioApunte.save(esqui);
        
-    */
+    
     }
 
 }
