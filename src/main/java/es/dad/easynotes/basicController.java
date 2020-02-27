@@ -43,9 +43,12 @@ public class basicController {
     @Autowired
     private UsuarioRepository usuarioRepo;
 
+    
     @PostConstruct
     public void init() {
-    	/*
+    	
+    	usuarioRepo.save(new Usuario ("pavlo", "1234", "ROLE_ADMIN"));
+    	
     	Carrera GIC = new Carrera("GIC");
     	
     	Carrera GII = new Carrera("GII");
@@ -121,7 +124,7 @@ public class basicController {
         Apunte esqui = new Apunte("esqui", DAD, GIC, URJC, new File(pathLocal + "pruebaPablo.pdf"), usuarioAdmin, LocalDateTime.now(), true);
    
        repositorioApunte.save(esqui);
-       */
+       
     
     }
 

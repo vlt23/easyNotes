@@ -8,15 +8,15 @@
 <script type="text/javascript" href="js/jquery-3.4.1.min.js"></script>
 
 <style>
-button{
+button {
 	margin-top: 10px;
 	margin-bottom: 10px;
 }
 
-.container{
+.container {
 	margin: 20px;
 }
-.form-control, #file{
+.form-control {
 	margin-bottom: 15px;
 }
 
@@ -46,7 +46,7 @@ button{
 	<script>
 		let input = document.getElementById("Universidad");
 		input.addEventListener("input", function(){
-			if (input.value != ""){
+			if (input.value !== ""){
 				document.getElementById("anadir-btn").disabled = false;
 			}else{
 				document.getElementById("anadir-btn").disabled = true;

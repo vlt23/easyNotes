@@ -30,10 +30,10 @@ button{
 		<form method="post" action="/mostrarBusqueda?tipo=carrera">
 			<div class="col">
 				<div class="row">
-					<label for="Universidad">Buscar Apuntes por Carrera:</label>
+					<label>Buscar Apuntes por Carrera:</label>
 				</div>
 				<div class="row">
-					<select class="form-control" name="uniCarreraAsig">
+					<select class="form-control" name="uniCarreraAsig" >
 						{{#carreras}}
 						    <option>{{.}}</option>
 					    {{/carreras}}
