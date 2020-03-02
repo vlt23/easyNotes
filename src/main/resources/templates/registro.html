@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Easy Notes</title>
+<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+<script type="text/javascript" href="js/bootstrap.min.js"></script>
+<script type="text/javascript" href="js/jquery-3.4.1.min.js"></script>
+
+<style>
+button {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+h1 {
+	margin-bottom: 30px;
+}
+.container {
+	margin: 20px;
+}
+
+.form-control, #file {
+	margin-bottom: 15px;
+}
+
+.siguiente {
+	float: right;
+}
+
+.btn btn-link{
+	margin: 20px;
+}
+</style>
+</head>
+<body>
+	<div class="container">
+		 <div class="row">
+			 <div class="col-6">
+			 	<h1 align="center">Registrarse</h1>
+				<form method="get" action="/">
+					<div class="form-group">
+						<input type="text" id="nombre_usuario_input" class="form-control" name="nombreUsuario" placeholder="Introduzca el nombre de usuario">
+						<input type="text" id="password_input" class="form-control" name="password" placeholder="Introduzca la contraseña">
+						<input type="text" id="password_input_repeat" class="form-control" name="password_repeat" placeholder="Repita la contraseña">
+						<button type="submit" id="buscar-btn" class="btn btn-success" disabled="true">Entrar</button>
+					</div>
+				</form>
+			</div>
+		</div>
+		<div class="row">
+			<form method="get" action="/login">
+				<button type="submit" class="btn btn-link" align="center">Iniciar Sesión</button>
+			</form>
+		</div>
+	</div>
+</body>
+</html>
