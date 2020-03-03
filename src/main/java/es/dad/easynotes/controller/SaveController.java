@@ -62,8 +62,8 @@ public class SaveController {
         Asignatura asignatura = asignaturaRepo.findAsignaturaByNombreAndCarrera_Id(asigStr, carrera.getId());
 
         List<Usuario> usuariosTemp = usuarioRepo.findAll();
-        Usuario autor = usuariosTemp.get(0); // TODO
-        //boolean esExamen2 =esExamen!= null;
+        Usuario autor = usuariosTemp.get(1); // TODO
+
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-ddHHmmss"); 	// Poner forma al DATE
         Path filePath = Paths.get(pathLocal,file.hashCode() + "_"
                 + formatter.format(LocalDateTime.now()) + "_" + file.getOriginalFilename());
@@ -82,6 +82,8 @@ public class SaveController {
         }
         
         Apunte apunte = apunteRepo.save(apunteSinId);
+        autor.increaseCreditos();
+        usuarioRepo.save(autor);
         model.addAttribute("apunte", apunte);
         return "resultado_guardar";
     }

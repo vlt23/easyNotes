@@ -43,12 +43,9 @@ public class basicController {
     @Autowired
     private UsuarioRepository usuarioRepo;
 
-    
     @PostConstruct
     public void init() {
-    	
-    	usuarioRepo.save(new Usuario ("pavlo", "1234", "ROLE_ADMIN"));
-    	
+
     	Carrera GIC = new Carrera("GIC");
     	
     	Carrera GII = new Carrera("GII");
@@ -100,8 +97,11 @@ public class basicController {
         GIC.getAsignaturas().add(ED);
         carreraRepo.save(GIC);
 
-        Usuario usuario = new Usuario("admin", "root", 0, "admin@root.org", true);
+        Usuario usuario = new Usuario("admin", "root", 20, "admin@root.org", true);
         Usuario usuarioAdmin = usuarioRepo.save(usuario);
+
+        Usuario usuario1 = new Usuario("test", "test", 10, "test@test.com", false);
+        usuarioRepo.save(usuario1);
 
         Apunte manualPortatil = new Apunte("manualPortatil", DAD, GIC, URJC, new File(pathLocal + "manualPortatil.pdf"), usuarioAdmin, LocalDateTime.now(), false);
         repositorioApunte.save(manualPortatil);
@@ -124,7 +124,6 @@ public class basicController {
         Apunte esqui = new Apunte("esqui", DAD, GIC, URJC, new File(pathLocal + "pruebaPablo.pdf"), usuarioAdmin, LocalDateTime.now(), true);
    
        repositorioApunte.save(esqui);
-       
     
     }
 

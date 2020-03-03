@@ -142,4 +142,36 @@ public class Usuario {
 		return apellidos;
 	}
 
+	/**
+	 * Cuando sube un apunte, se le suman 10 creditos
+	 */
+	public void increaseCreditos() {
+		creditos += 10;
+	}
+
+	/**
+	 * Cuando descarga un apunte, se le restan 10 creditos
+	 */
+	public void decreaseCreditos() {
+		creditos -= 10;
+	}
+
+	public void increaseNumeroDescargas() {
+		numeroDescargas += 1;
+	}
+
+	@Override
+	public int hashCode() {
+		return Long.hashCode(this.id);
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (o.getClass() != null && this.getClass() != o.getClass()) {
+			return false;
+		}
+		Usuario usuario = (Usuario) o;
+		return this.id == usuario.id;
+	}
+
 }

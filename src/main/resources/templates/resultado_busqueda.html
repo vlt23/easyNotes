@@ -61,10 +61,18 @@
 		        <p class="col-md-3">{{fechaSubida.DayOfMonth}}/{{fechaSubida.month}}/{{fechaSubida.year}}	{{fechaSubida.hour}}:{{fechaSubida.minute}} </p>
 		    </div>
 		    <div class="dropdown-divider"></div>
-		
-		    <div class="row">
-		        <a download="{{nombre}}.pdf" href="/download/{{id}}">Descargar: {{nombre}}</a>
-		    </div>
+
+			{{#noDownload}}
+				<div class="row">
+					<p>No tienes suficientes créditos para descargar apuntes</p>
+				</div>
+			{{/noDownload}}
+			{{#yesDownload}}
+				<div class="row">
+					<a download="{{nombre}}.pdf" href="/download/{{id}}">Descargar: {{nombre}}</a>
+				</div>
+			{{/yesDownload}}
+
 		    <div class="row">
 		        <a href="/download/{{id}}" target="_blank">Visualizar: {{nombre}}</a>
 		    </div>

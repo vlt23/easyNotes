@@ -3,13 +3,15 @@ package es.dad.easynotes.controller;
 import es.dad.easynotes.entity.Apunte;
 import es.dad.easynotes.entity.Asignatura;
 import es.dad.easynotes.entity.Carrera;
-import es.dad.easynotes.entity.Tag;
 import es.dad.easynotes.entity.Universidad;
+import es.dad.easynotes.entity.Usuario;
+
 import es.dad.easynotes.repository.ApunteRepository;
 import es.dad.easynotes.repository.AsignaturaRepository;
 import es.dad.easynotes.repository.CarreraRepository;
 import es.dad.easynotes.repository.TagRepository;
 import es.dad.easynotes.repository.UniversidadRepository;
+import es.dad.easynotes.repository.UsuarioRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,7 +19,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -41,13 +42,24 @@ public class SearchController {
     @Autowired
     private CarreraRepository carreraRepo;
 
+    @Autowired
+    private UsuarioRepository usuarioRepo;  // TODO
+
+    private Usuario usuario;  // TODO
+
     @RequestMapping("/search")
     public String search(Model model, @RequestParam String buscarAp) {
+        usuario = usuarioRepo.findAll().get(1);  // TODO
         List<Apunte> apuntes = apunteRepo.findByTag(buscarAp);
 
         model.addAttribute("apuntes", apuntes);
         if (apuntes.isEmpty()) {
             model.addAttribute("noResult", true);
+        }
+        if (usuario.getCreditos() <= 0) {
+            model.addAttribute("noDownload", true);
+        } else {
+            model.addAttribute("yesDownload", true);
         }
         return "resultado_busqueda";
     }
@@ -83,6 +95,7 @@ public class SearchController {
 
     @RequestMapping("/mostrarBusqueda")
     public String mostrarBusqueda(Model model, @RequestParam String tipo, @RequestParam String uniCarreraAsig) {
+        usuario = usuarioRepo.findAll().get(1);  // TODO
 
     	List<Apunte> apuntes = new ArrayList<>();
 
@@ -101,6 +114,11 @@ public class SearchController {
             }
     	}
     	model.addAttribute("apuntes", apuntes);
+    	if (usuario.getCreditos() <= 0) {
+    	    model.addAttribute("noDownload", true);
+        } else {
+    	    model.addAttribute("yesDownload", true);
+        }
 
     	return "resultado_busqueda";
     }
