@@ -38,11 +38,20 @@ h1 {
 		 <div class="row">
 			 <div class="col-6">
 			 	<h1 align="center">Registrarse</h1>
-				<form method="get" action="/">
+				<form method="post" action="/signup">
 					<div class="form-group">
-						<input type="text" id="nombre_usuario_input" class="form-control" name="nombreUsuario" placeholder="Introduzca el nombre de usuario">
-						<input type="password" id="password_input" class="form-control" name="password" placeholder="Introduzca la contraseña">
-						<input type="password" id="password_input_repeat" class="form-control" name="password_repeat" placeholder="Repita la contraseña">
+						<input type="text" id="nombre_usuario_input" class="form-control" name="username"
+							   placeholder="Introduzca el nombre de usuario" required>
+						<input type="password" id="password_input" class="form-control" name="password"
+							   placeholder="Introduzca la contraseña" required>
+						<input type="password" id="password_input_repeat" class="form-control" name="password_repeat"
+							   placeholder="Repita la contraseña" required>
+						<input type="text" class="form-control" name="name"
+							   placeholder="Introduzca su nombre" required>
+						<input type="text" class="form-control" name="surname"
+							   placeholder="Introduzca su apellido" required>
+						<input type="email" class="form-control" name="email"
+							   placeholder="Introduzca su email" required>
 						<button type="submit" id="buscar-btn" class="btn btn-success">Entrar</button>
 					</div>
 				</form>

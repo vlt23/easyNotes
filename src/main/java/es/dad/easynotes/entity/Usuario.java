@@ -36,6 +36,7 @@ public class Usuario {
 		this.passwordHash = passwd;
 		this.roles = new ArrayList<>(Arrays.asList(roles));
 	}
+
 	public Usuario(String nombre, String apellidos, int creditos, String correo, boolean isAdmin) {
 		this.nombre = nombre;
 		this.apellidos = apellidos;
@@ -44,6 +45,26 @@ public class Usuario {
 		this.isAdmin = isAdmin;
 		this.baneado = false;
 		this.numeroDescargas = 0;
+	}
+
+	/**
+	 * Constructor para registrar
+	 * @param nick nick
+	 * @param passwordHash password hashed
+	 * @param nombre name
+	 * @param apellidos surname
+	 * @param correo email
+	 */
+	public Usuario(String nick, String passwordHash, String nombre, String apellidos, String correo) {
+		this.nick = nick;
+		this.passwordHash = passwordHash;
+		this.nombre = nombre;
+		this.apellidos = apellidos;
+		this.correo = correo;
+		this.creditos = 20;
+		this.isAdmin = false;
+		this.numeroDescargas = 0;
+		this.baneado = false;
 	}
 
 	public long getId() {
