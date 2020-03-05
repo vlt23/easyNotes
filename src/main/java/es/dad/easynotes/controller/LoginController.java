@@ -3,11 +3,14 @@ package es.dad.easynotes.controller;
 import es.dad.easynotes.entity.Usuario;
 import es.dad.easynotes.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class LoginController {
@@ -16,12 +19,18 @@ public class LoginController {
     private UsuarioRepository usuarioRepo;
 	
 	@RequestMapping("/login")
-    public String login(Model model) {
+    public String login(Model model, HttpServletRequest request) {
+
 
         return "login";
     }
-	
-	@RequestMapping("/registro")
+    @RequestMapping("/loginerror")
+    public String loginerror() {
+        return "loginerror";
+    }
+
+
+    @RequestMapping("/registro")
     public String registro(Model model) {
 
         return "registro";

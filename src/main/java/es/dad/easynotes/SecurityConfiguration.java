@@ -70,6 +70,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth)
             throws Exception {
         PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
+        // User
+        auth.inMemoryAuthentication().withUser("user").password(encoder.encode("pass")).roles("USER");
 
         // Database authentication provider
         //auth.inMemoryAuthentication().withUser("user").password(encoder.encode("pass")).roles("USER");
