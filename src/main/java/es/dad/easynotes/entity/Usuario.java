@@ -23,7 +23,6 @@ public class Usuario {
 	private String correo;
 	private int creditos;
 	private int numeroDescargas;
-	private boolean baneado;
 	private boolean isAdmin;
 
 	@OneToMany(mappedBy = "autor")
@@ -43,7 +42,6 @@ public class Usuario {
 		this.correo = correo;
 		this.creditos = creditos;
 		this.isAdmin = isAdmin;
-		this.baneado = false;
 		this.numeroDescargas = 0;
 	}
 
@@ -64,7 +62,6 @@ public class Usuario {
 		this.creditos = 20;
 		this.isAdmin = false;
 		this.numeroDescargas = 0;
-		this.baneado = false;
 	}
 
 	public long getId() {
@@ -121,14 +118,6 @@ public class Usuario {
 
 	public void setNumeroDescargas(int numeroDescargas) {
 		this.numeroDescargas = numeroDescargas;
-	}
-
-	public boolean isBaneado() {
-		return baneado;
-	}
-
-	public void setBaneado(boolean baneado) {
-		this.baneado = baneado;
 	}
 
 	public boolean isAdmin() {

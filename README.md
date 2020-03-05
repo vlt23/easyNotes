@@ -21,14 +21,13 @@
 
 ## Funcionalidades privadas (solo los administradores):
 * El administrador puede eliminar cualquier documento
-* El administrador puede banear a cualquier usuario
 * Tiene acceso a todos los datos de contacto de cada usuario
 * Validar asignaturas creadas por usuarios
 
 ## Entidades
 * Apunte: asignatura, carrera, universidad, autor, tamaño, fecha,  valoraciones,número de descargas, tags, tipo (apunte o examen)
 * Usuario: tipo de usuario (administrador o registrado), nombre, apellidos, correo electrónico, créditos,
-número de descargas, estado de la cuenta (baneado o no)
+número de descargas
 * Universidad: nombre, carreras, asignaturas
 * Carrera: nombre, universidad, asignaturas
 * Asignatura: nombre, universidad, carrera
