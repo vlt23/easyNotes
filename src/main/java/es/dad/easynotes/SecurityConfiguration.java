@@ -21,10 +21,22 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-    	// Public pages
+        //Forbiden pages
+        http.authorizeRequests().antMatchers("/download/**").authenticated();
+
+        //Public pages
+        http.authorizeRequests().anyRequest().permitAll();
+
+        //Login
+        http.formLogin().loginPage("/login");
+        http.formLogin().usernameParameter("username");
+        http.formLogin().passwordParameter("password");
+        http.formLogin().defaultSuccessUrl("/");    //que la pagina por defecto sea el index
+
+
+        // Public pages
         //http.authorizeRequests().antMatchers("/").permitAll();
         //http.authorizeRequests().antMatchers("/searchAsignatura").denyAll();
-        http.authorizeRequests().anyRequest().permitAll();
 
 
         //Permit css and files
@@ -33,16 +45,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         //http.authorizeRequests().antMatchers("src/main/resources/**").permitAll().anyRequest().permitAll();
 
 
-        //http.authorizeRequests().antMatchers("/login").permitAll();
-        //http.authorizeRequests().antMatchers("/loginerror").permitAll();
-        //http.authorizeRequests().antMatchers("/logout").permitAll();
-        //http.authorizeRequests().antMatchers("/searchAsignatura").permitAll();
-        //http.authorizeRequests().antMatchers("/searchCarrera").permitAll();
-        //http.authorizeRequests().antMatchers("/searchUniversidad").permitAll();
-        //http.authorizeRequests().antMatchers("/mostrarBusqueda").permitAll();
-        //http.authorizeRequests().antMatchers("/search").permitAll();
 
         // Private pages (all other pages)
+        //http.authorizeRequests().antMatchers("/download").permitAll();
         //http.authorizeRequests().antMatchers("/home").hasAnyRole("USER");
         //http.authorizeRequests().antMatchers("/admin").hasAnyRole("ADMIN");
         //http.authorizeRequests().anyRequest().denyAll();
