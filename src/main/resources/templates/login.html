@@ -38,10 +38,12 @@ h1 {
 		 <div class="row">
 			 <div class="col-6">
 			 	<h1 align="center">Iniciar Sesión</h1>
-				<form method="get" action="/">
+				<form method="post" action="/login">
 					<div class="form-group">
-						<input type="text" id="nombre_usuario_input" class="form-control" name="nombreUsuario" placeholder="Introduzca el nombre de usuario">
-						<input type="password" id="password_input" class="form-control" name="password" placeholder="Introduzca la contraseña">
+						<input type="text" id="nombre_usuario_input" class="form-control" name="username"
+							   placeholder="Introduzca el nombre de usuario">
+						<input type="password" id="password_input" class="form-control" name="password"
+							   placeholder="Introduzca la contraseña">
 						<button type="submit" id="buscar-btn" class="btn btn-success">Entrar</button>
 					</div>
 				</form>

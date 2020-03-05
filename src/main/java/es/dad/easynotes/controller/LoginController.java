@@ -32,9 +32,8 @@ public class LoginController {
                          @RequestParam String password_repeat, @RequestParam String name,
                          @RequestParam String surname, @RequestParam String email) {
 	    if (!password.equals(password_repeat)) {
-	        return "";  // TODO
+	        return "loginerror";
         }
-	    // TODO: primary key -- email or username??? id not good
         usuarioRepo.save(new Usuario(username, password, name, surname, email));
 	    return "login";  // TODO
     }
