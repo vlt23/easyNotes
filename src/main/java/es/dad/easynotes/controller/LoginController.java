@@ -40,7 +40,16 @@ public class LoginController {
     public String signup(Model model, @RequestParam String username, @RequestParam String password,
                          @RequestParam String password_repeat, @RequestParam String name,
                          @RequestParam String surname, @RequestParam String email) {
+	    if (usuarioRepo.findByNick(username) != null) {
+	        model.addAttribute("usernameDup", true);
+	        return "loginerror";
+        }
+	    if (usuarioRepo.findByCorreo(email) != null) {
+	        model.addAttribute("emailDup", true);
+	        return "loginerror";
+        }
 	    if (!password.equals(password_repeat)) {
+	        model.addAttribute("passwordNotEqual", true);
 	        return "loginerror";
         }
         usuarioRepo.save(new Usuario(username, password, name, surname, email));
