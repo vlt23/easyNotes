@@ -16,6 +16,7 @@ import es.dad.easynotes.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -47,6 +48,10 @@ public class SearchController {
 
     private Usuario usuario;  // TODO
 
+    @GetMapping("/")
+    public String index() {
+        return "index";
+    }
     @RequestMapping("/search")
     public String search(Model model, @RequestParam String buscarAp) {
         usuario = usuarioRepo.findAll().get(1);  // TODO

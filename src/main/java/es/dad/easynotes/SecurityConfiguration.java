@@ -15,25 +15,56 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 //@EnableGlobalMethodSecurity(securedEnabled = true)
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-    //@Autowired
-    //public UsuarioRepositoryAuthenticationProvider authenticationProvider;
+    @Autowired
+    public UsuarioRepositoryAuthenticationProvider authenticationProvider;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-        //Forbiden pages
-        http.authorizeRequests().antMatchers("/download/**").authenticated();
+
 
         //Public pages
-        http.authorizeRequests().anyRequest().permitAll();
+        //http.authorizeRequests().anyRequest().permitAll();
 
         //Login
+        //http.formLogin().loginPage("/login");
+        //http.formLogin().usernameParameter("username");
+        //http.formLogin().passwordParameter("password");
+        //http.formLogin().defaultSuccessUrl("/");    //que la pagina por defecto sea el index
+
+
+        // Public pages
+        http.authorizeRequests().antMatchers("/").permitAll();
+        http.authorizeRequests().antMatchers("/login").permitAll();
+        http.authorizeRequests().antMatchers("/loginerror").permitAll();
+        http.authorizeRequests().antMatchers("/logout").permitAll();
+        http.authorizeRequests().antMatchers("/search").permitAll();
+        http.authorizeRequests().antMatchers("/searchAsignatura").permitAll();
+        http.authorizeRequests().antMatchers("/searchCarrera").permitAll();
+        http.authorizeRequests().antMatchers("/searchUniversidad").permitAll();
+        http.authorizeRequests().antMatchers("/mostrarBusqueda").permitAll();
+
+        //IMPORTANTE: que vaya lo ultimo de los permit
+        http.authorizeRequests().antMatchers("/css/**", "/js/**", "/images/**").permitAll();
+        //http.authorizeRequests().antMatchers("/resources/**").permitAll();
+        //http.authorizeRequests().antMatchers("src/main/resources/**").permitAll().anyRequest().permitAll();
+
+
+        // Private pages (all other pages)
+        //Forbiden pages
+        http.authorizeRequests().antMatchers("/download/**").authenticated();
+        http.authorizeRequests().anyRequest().authenticated();
+
+        // Login form
         http.formLogin().loginPage("/login");
         http.formLogin().usernameParameter("username");
         http.formLogin().passwordParameter("password");
-        http.formLogin().defaultSuccessUrl("/");    //que la pagina por defecto sea el index
+        http.formLogin().defaultSuccessUrl("/home");
+        http.formLogin().failureUrl("/loginerror");
 
-
+        // Logout
+        http.logout().logoutUrl("/logout");
+        http.logout().logoutSuccessUrl("/");
         // Public pages
         //http.authorizeRequests().antMatchers("/").permitAll();
         //http.authorizeRequests().antMatchers("/searchAsignatura").denyAll();
@@ -62,20 +93,24 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         // Logout
         //http.logout().logoutUrl("/logout");
         //http.logout().logoutSuccessUrl("/");
-        http.csrf().disable();
+        //http.csrf().disable();
 
     }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth)
             throws Exception {
-        PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
+        //PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
         // User
-        auth.inMemoryAuthentication().withUser("user").password(encoder.encode("pass")).roles("USER");
+        //auth.inMemoryAuthentication().withUser("user").password(encoder.encode("1234")).roles("USER");
+        //auth.inMemoryAuthentication().withUser("admin").password("1234").roles("USER", "ADMIN");
 
         // Database authentication provider
         //auth.inMemoryAuthentication().withUser("user").password(encoder.encode("pass")).roles("USER");
 
         //auth.authenticationProvider(authenticationProvider);
+        // Database authentication provider
+        auth.authenticationProvider(authenticationProvider);
+
     }
 }
