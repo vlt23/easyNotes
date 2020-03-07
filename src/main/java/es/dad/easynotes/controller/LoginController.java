@@ -22,6 +22,8 @@ public class LoginController {
 	@RequestMapping("/login")
     public String login(Model model, HttpServletRequest request) {
 
+        CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
+        model.addAttribute("token", token.getToken());
 
         return "login";
     }
@@ -32,7 +34,9 @@ public class LoginController {
     }
 
     @RequestMapping("/registro")
-    public String registro(Model model) {
+    public String registro(Model model, HttpServletRequest request) {
+        CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
+        model.addAttribute("token", token.getToken());
         return "registro";
     }
 
@@ -61,6 +65,7 @@ public class LoginController {
 
         CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
         model.addAttribute("token", token.getToken());
+
 	    return "index";
     }
 

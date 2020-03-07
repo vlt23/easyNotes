@@ -52,7 +52,7 @@ public class SearchController {
     public String index() {
         return "index";
     }
-    @RequestMapping("/search")
+    @GetMapping("/search")
     public String search(Model model, @RequestParam String buscarAp) {
         usuario = usuarioRepo.findAll().get(1);  // TODO
         List<Apunte> apuntes = apunteRepo.findByTag(buscarAp);
@@ -69,7 +69,7 @@ public class SearchController {
         return "resultado_busqueda";
     }
 
-    @RequestMapping("/searchAsignatura")
+    @GetMapping("/searchAsignatura")
     public String searchAsignatura(Model model) {
     	List<Asignatura> asignaturasTemp = asignaturaRepo.findAll();
     	Set<String> asignaturas = new HashSet<>();
@@ -80,7 +80,7 @@ public class SearchController {
         return "buscar_asignatura";
     }
 
-    @RequestMapping("/searchCarrera")
+    @GetMapping("/searchCarrera")
     public String searchCarrera(Model model) {
     	List<Carrera> carrerasTemp = carreraRepo.findAll();
     	Set<String> carreras = new HashSet<>();
@@ -91,14 +91,14 @@ public class SearchController {
         return "buscar_carrera";
     }
 
-    @RequestMapping("/searchUniversidad")
+    @GetMapping("/searchUniversidad")
     public String searchUniversidad(Model model) {
     	List<Universidad> universidades = universidadRepo.findAll();
     	model.addAttribute("universidades", universidades);
         return "buscar_universidad";
     }
 
-    @RequestMapping("/mostrarBusqueda")
+    @GetMapping("/mostrarBusqueda")
     public String mostrarBusqueda(Model model, @RequestParam String tipo, @RequestParam String uniCarreraAsig) {
         usuario = usuarioRepo.findAll().get(1);  // TODO
 

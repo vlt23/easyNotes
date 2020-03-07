@@ -2,6 +2,7 @@ package es.dad.easynotes;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -32,21 +33,26 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 
         // Public pages
-        http.authorizeRequests().antMatchers("/").permitAll();
-        http.authorizeRequests().antMatchers("/login").permitAll();
-        http.authorizeRequests().antMatchers("/loginerror").permitAll();
-        http.authorizeRequests().antMatchers("/logout").permitAll();
-        http.authorizeRequests().antMatchers("/search").permitAll();
-        http.authorizeRequests().antMatchers("/searchAsignatura").permitAll();
-        http.authorizeRequests().antMatchers("/searchCarrera").permitAll();
-        http.authorizeRequests().antMatchers("/searchUniversidad").permitAll();
-        http.authorizeRequests().antMatchers("/mostrarBusqueda").permitAll();
+        //http.authorizeRequests().antMatchers("/").permitAll();
+        //http.authorizeRequests().antMatchers("/login").permitAll();
+        //http.authorizeRequests().antMatchers("/loginerror").permitAll();
+        //http.authorizeRequests().antMatchers("/logout").permitAll();
+       // http.authorizeRequests().antMatchers("/search").permitAll();
+       // http.authorizeRequests().antMatchers("/searchAsignatura").permitAll();
+        //http.authorizeRequests().antMatchers("/searchCarrera").permitAll();
+        //http.authorizeRequests().antMatchers("/searchUniversidad").permitAll();
+        //http.authorizeRequests().antMatchers("/css/**").permitAll();
+        //http.authorizeRequests().antMatchers("/mostrarBusqueda?tipo=asignatura").permitAll();
+        //http.authorizeRequests().antMatchers("/mostrarBusqueda*").permitAll();
+        //http.authorizeRequests().antMatchers(HttpMethod.GET).permitAll();
+
+
         // Registrar usuario
-        http.authorizeRequests().antMatchers("/registro").permitAll();
-        http.authorizeRequests().antMatchers("/signup").permitAll();
+        //http.authorizeRequests().antMatchers("/registro").permitAll();
+        //http.authorizeRequests().antMatchers("/signup").permitAll();
 
         //IMPORTANTE: que vaya lo ultimo de los permit
-        http.authorizeRequests().antMatchers("/css/**", "/js/**", "/images/**").permitAll();
+        //http.authorizeRequests().antMatchers("/css/**", "/js/**", "/images/**").permitAll();
         //http.authorizeRequests().antMatchers("/resources/**").permitAll();
         //http.authorizeRequests().antMatchers("src/main/resources/**").permitAll().anyRequest().permitAll();
 
@@ -54,18 +60,20 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         // Private pages (all other pages)
         //Forbiden pages
         http.authorizeRequests().antMatchers("/download/**").authenticated();
-        http.authorizeRequests().anyRequest().authenticated();
 
         // Login form
         http.formLogin().loginPage("/login");
         http.formLogin().usernameParameter("username");
         http.formLogin().passwordParameter("password");
-        http.formLogin().defaultSuccessUrl("/home");
+        //http.formLogin().defaultSuccessUrl("/");
         http.formLogin().failureUrl("/loginerror");
 
         // Logout
         http.logout().logoutUrl("/logout");
         http.logout().logoutSuccessUrl("/");
+
+        http.authorizeRequests().anyRequest().permitAll();
+
         // Public pages
         //http.authorizeRequests().antMatchers("/").permitAll();
         //http.authorizeRequests().antMatchers("/searchAsignatura").denyAll();
