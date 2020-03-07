@@ -48,7 +48,7 @@ public class SaveController {
     @Autowired
     private UsuarioRepository usuarioRepo;
 
-    @GetMapping("/saveApunte/{uniStr}/{carreraStr}")
+    @PostMapping("/saveApunte/{uniStr}/{carreraStr}")
     public String saveApunte(Model model,
                              @PathVariable String uniStr, @PathVariable String carreraStr, @RequestParam String asigStr,
                              @RequestParam String tags, @RequestParam MultipartFile file,
@@ -94,7 +94,7 @@ public class SaveController {
         return "subir_universidad";
     }
     
-    @GetMapping("/subirCarrera")
+    @PostMapping("/subirCarrera")
     public String subirCarrera(Model model, @RequestParam String uniStr) {
         Universidad universidad = universidadRepo.findUniversidadByNombreIgnoreCase(uniStr);
         long idUni = universidad.getId();
@@ -106,7 +106,7 @@ public class SaveController {
         return "subir_carrera";
     }
 
-    @GetMapping("/subirAsignatura/{uniStr}")
+    @PostMapping("/subirAsignatura/{uniStr}")
     public String subirAsignatura(Model model, @PathVariable String uniStr, @RequestParam String carreraStr) {
 
         Universidad universidad = universidadRepo.findUniversidadByNombreIgnoreCase(uniStr);
@@ -159,7 +159,7 @@ public class SaveController {
         return "anadir_asignatura";
     }
     
-    @GetMapping("/anadirAsignaturaCarrera")
+    @PostMapping("/anadirAsignaturaCarrera")
     public String anadirAsignaturaCarrera(Model model, @RequestParam String uniStr) {
     	Universidad universidad = universidadRepo.findUniversidadByNombreIgnoreCase(uniStr);
     	List<Carrera> carreras = carreraRepo.findCarreraByUniversidad_Id(universidad.getId());
@@ -170,7 +170,7 @@ public class SaveController {
         return "anadir_asignatura_carrera";
     }
     
-    @GetMapping("/anadida_universidad")
+    @PostMapping("/anadida_universidad")
     public String anadirUniversidad(Model model, @RequestParam String uniStr) {
 		Universidad comprobar = universidadRepo.findUniversidadByNombreIgnoreCase(uniStr);
 		if(comprobar != null) {
@@ -186,7 +186,7 @@ public class SaveController {
         return "anadir";
     }
     
-    @GetMapping("/anadida_carrera")
+    @PostMapping("/anadida_carrera")
     public String anadirCarrera(Model model, @RequestParam String carreraStr, @RequestParam String uniStr) {
     	Universidad universidad = universidadRepo.findUniversidadByNombreIgnoreCase(uniStr);
 		List<Carrera> comprobar = carreraRepo.findCarreraByUniversidad_Id(universidad.getId());
@@ -210,7 +210,7 @@ public class SaveController {
         return "anadir";
     }
     
-    @GetMapping("/anadida_asignatura/{uniStr}")
+    @PostMapping("/anadida_asignatura/{uniStr}")
     public String anadirAsignatura(Model model, @RequestParam String asigStr, @PathVariable String uniStr, @RequestParam String carreraStr, @RequestParam String profesores) {
 		Universidad universidad = universidadRepo.findUniversidadByNombreIgnoreCase(uniStr);
 		Carrera carrera = carreraRepo.findCarreraByNombreAndUniversidad_Id(carreraStr, universidad.getId());

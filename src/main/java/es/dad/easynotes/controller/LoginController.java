@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,24 +20,24 @@ public class LoginController {
     @Autowired
     private UsuarioRepository usuarioRepo;
 	
-	@RequestMapping("/login")
-    public String login(Model model, HttpServletRequest request) {
+	@GetMapping("/login")
+    public String login(Model model) {
 
-        CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
-        model.addAttribute("token", token.getToken());
+        //CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
+        //model.addAttribute("token", token.getToken());
 
         return "login";
     }
 
-    @RequestMapping("/loginerror")
+    @GetMapping("/loginerror")
     public String loginerror() {
         return "loginerror";
     }
 
-    @RequestMapping("/registro")
-    public String registro(Model model, HttpServletRequest request) {
-        CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
-        model.addAttribute("token", token.getToken());
+    @GetMapping("/registro")
+    public String registro(Model model) {
+        //CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
+        //model.addAttribute("token", token.getToken());
         return "registro";
     }
 
@@ -44,7 +45,7 @@ public class LoginController {
     public String signup(Model model, @RequestParam String username, @RequestParam String password,
                          @RequestParam String password_repeat, @RequestParam String name,
                          @RequestParam String surname, @RequestParam String email,
-                         HttpSession userSession, HttpServletRequest request) {
+                         HttpSession userSession) {
 	    if (usuarioRepo.findByNick(username) != null) {
 	        model.addAttribute("usernameDup", true);
 	        return "loginerror";
@@ -63,8 +64,8 @@ public class LoginController {
 	    userSession.setAttribute("registered", true);
         usuarioRepo.save(new Usuario(username, password, name, surname, email));
 
-        CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
-        model.addAttribute("token", token.getToken());
+        //CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
+        //model.addAttribute("token", token.getToken());
 
 	    return "index";
     }

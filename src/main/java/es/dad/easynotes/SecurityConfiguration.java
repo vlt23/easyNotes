@@ -22,14 +22,21 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-        //Public pages
-        //http.authorizeRequests().anyRequest().permitAll();
-
         //Login
-        //http.formLogin().loginPage("/login");
-        //http.formLogin().usernameParameter("username");
-        //http.formLogin().passwordParameter("password");
-        //http.formLogin().defaultSuccessUrl("/");    //que la pagina por defecto sea el index
+        http.formLogin().loginPage("/login");
+        http.formLogin().usernameParameter("username");
+        http.formLogin().passwordParameter("password");
+        http.formLogin().defaultSuccessUrl("/");    //que la pagina por defecto sea el index
+
+        //Public pages
+        http.authorizeRequests().antMatchers("/download/**").authenticated();
+        http.authorizeRequests().antMatchers(HttpMethod.POST).permitAll();
+        http.authorizeRequests().antMatchers(HttpMethod.GET).permitAll();
+
+
+
+
+
 
 
         // Public pages
@@ -48,8 +55,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 
         // Registrar usuario
-        //http.authorizeRequests().antMatchers("/registro").permitAll();
-        //http.authorizeRequests().antMatchers("/signup").permitAll();
+        http.authorizeRequests().antMatchers("/registro").permitAll();
+        http.authorizeRequests().antMatchers("/signup").permitAll();
 
         //IMPORTANTE: que vaya lo ultimo de los permit
         //http.authorizeRequests().antMatchers("/css/**", "/js/**", "/images/**").permitAll();
@@ -59,20 +66,20 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
         // Private pages (all other pages)
         //Forbiden pages
-        http.authorizeRequests().antMatchers("/download/**").authenticated();
-
+        //http.authorizeRequests().antMatchers("/download/**").authenticated();
+        http.authorizeRequests().anyRequest().denyAll();
         // Login form
-        http.formLogin().loginPage("/login");
-        http.formLogin().usernameParameter("username");
-        http.formLogin().passwordParameter("password");
+        //http.formLogin().loginPage("/login");
+       // http.formLogin().usernameParameter("username");
+        //http.formLogin().passwordParameter("password");
         //http.formLogin().defaultSuccessUrl("/");
-        http.formLogin().failureUrl("/loginerror");
+       // http.formLogin().failureUrl("/loginerror");
 
         // Logout
-        http.logout().logoutUrl("/logout");
-        http.logout().logoutSuccessUrl("/");
+       // http.logout().logoutUrl("/logout");
+        //http.logout().logoutSuccessUrl("/");
 
-        http.authorizeRequests().anyRequest().permitAll();
+        //http.authorizeRequests().anyRequest().permitAll();
 
         // Public pages
         //http.authorizeRequests().antMatchers("/").permitAll();
@@ -102,7 +109,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         // Logout
         //http.logout().logoutUrl("/logout");
         //http.logout().logoutSuccessUrl("/");
-        //http.csrf().disable();
+        http.csrf().disable();
 
     }
 

@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -52,7 +53,7 @@ public class SearchController {
     public String index() {
         return "index";
     }
-    @GetMapping("/search")
+    @PostMapping("/search")
     public String search(Model model, @RequestParam String buscarAp) {
         usuario = usuarioRepo.findAll().get(1);  // TODO
         List<Apunte> apuntes = apunteRepo.findByTag(buscarAp);
@@ -98,7 +99,7 @@ public class SearchController {
         return "buscar_universidad";
     }
 
-    @GetMapping("/mostrarBusqueda")
+    @PostMapping("/mostrarBusqueda")
     public String mostrarBusqueda(Model model, @RequestParam String tipo, @RequestParam String uniCarreraAsig) {
         usuario = usuarioRepo.findAll().get(1);  // TODO
 
