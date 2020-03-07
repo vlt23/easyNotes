@@ -21,8 +21,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-
-
         //Public pages
         //http.authorizeRequests().anyRequest().permitAll();
 
@@ -43,6 +41,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers("/searchCarrera").permitAll();
         http.authorizeRequests().antMatchers("/searchUniversidad").permitAll();
         http.authorizeRequests().antMatchers("/mostrarBusqueda").permitAll();
+        // Registrar usuario
+        http.authorizeRequests().antMatchers("/registro").permitAll();
+        http.authorizeRequests().antMatchers("/signup").permitAll();
 
         //IMPORTANTE: que vaya lo ultimo de los permit
         http.authorizeRequests().antMatchers("/css/**", "/js/**", "/images/**").permitAll();
