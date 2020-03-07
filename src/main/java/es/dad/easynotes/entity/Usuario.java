@@ -1,5 +1,7 @@
 package es.dad.easynotes.entity;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 import javax.persistence.*;
 
 import java.util.ArrayList;
@@ -12,12 +14,12 @@ public class Usuario {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
-	
+
 	private String nick;
 	private String passwordHash;
 	@ElementCollection(fetch = FetchType.EAGER)
-	 private List<String> roles;
-	
+	private List<String> roles;
+
 	private String nombre;
 	private String apellidos;
 	private String correo;
@@ -48,19 +50,21 @@ public class Usuario {
 	/**
 	 * Constructor para registrar
 	 * @param nick nick
-	 * @param passwordHash password hashed
+	 * @param password password to hashed
 	 * @param nombre name
 	 * @param apellidos surname
 	 * @param correo email
 	 */
-	public Usuario(String nick, String passwordHash, String nombre, String apellidos, String correo) {
+	public Usuario(String nick, String password, String nombre, String apellidos, String correo) {
 		this.nick = nick;
-		this.passwordHash = passwordHash;
+		this.passwordHash = new BCryptPasswordEncoder().encode(password);
 		this.nombre = nombre;
 		this.apellidos = apellidos;
 		this.correo = correo;
 		this.creditos = 20;
 		this.isAdmin = false;
+		this.roles = new ArrayList<>();
+		this.roles.add("ROLE_USER");
 		this.numeroDescargas = 0;
 	}
 

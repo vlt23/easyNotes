@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 @Controller
 public class LoginController {
@@ -24,22 +25,22 @@ public class LoginController {
 
         return "login";
     }
+
     @RequestMapping("/loginerror")
     public String loginerror() {
         return "loginerror";
     }
 
-
     @RequestMapping("/registro")
     public String registro(Model model) {
-
         return "registro";
     }
 
     @PostMapping("/signup")
     public String signup(Model model, @RequestParam String username, @RequestParam String password,
                          @RequestParam String password_repeat, @RequestParam String name,
-                         @RequestParam String surname, @RequestParam String email) {
+                         @RequestParam String surname, @RequestParam String email,
+                         HttpSession userSession, HttpServletRequest request) {
 	    if (usuarioRepo.findByNick(username) != null) {
 	        model.addAttribute("usernameDup", true);
 	        return "loginerror";
@@ -52,8 +53,15 @@ public class LoginController {
 	        model.addAttribute("passwordNotEqual", true);
 	        return "loginerror";
         }
+	    userSession.setAttribute("nick", username);
+	    userSession.setAttribute("password", password);
+	    userSession.setAttribute("email", email);
+	    userSession.setAttribute("registered", true);
         usuarioRepo.save(new Usuario(username, password, name, surname, email));
-	    return "login";  // TODO
+
+        CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
+        model.addAttribute("token", token.getToken());
+	    return "index";
     }
 
 }
