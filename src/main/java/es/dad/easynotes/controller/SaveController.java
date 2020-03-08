@@ -17,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -49,17 +50,17 @@ public class SaveController {
     private UsuarioRepository usuarioRepo;
 
     @PostMapping("/saveApunte/{uniStr}/{carreraStr}")
-    public String saveApunte(Model model,
-                             @PathVariable String uniStr, @PathVariable String carreraStr, @RequestParam String asigStr,
-                             @RequestParam String tags, @RequestParam MultipartFile file,
-                             @RequestParam String nombre, @RequestParam (defaultValue = "false") boolean esExamen) {
-    	
+    public String saveApunte(Model model, @PathVariable String uniStr, @PathVariable String carreraStr,
+                             @RequestParam String asigStr, @RequestParam String tags,
+                             @RequestParam MultipartFile file, @RequestParam String nombre,
+                             @RequestParam (defaultValue = "false") boolean esExamen,
+                             HttpSession userSession) {
         Universidad universidad = universidadRepo.findUniversidadByNombreIgnoreCase(uniStr);
         Carrera carrera = carreraRepo.findCarreraByNombreAndUniversidad_Id(carreraStr, universidad.getId());
         Asignatura asignatura = asignaturaRepo.findAsignaturaByNombreAndCarrera_Id(asigStr, carrera.getId());
 
-        List<Usuario> usuariosTemp = usuarioRepo.findAll();
-        Usuario autor = usuariosTemp.get(1); // TODO
+        Usuario autor = usuarioRepo.findAll().get(1);  // TODO
+        //Usuario autor = usuarioRepo.findByNick((String) userSession.getAttribute("nick"));
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-ddHHmmss"); 	// Poner forma al DATE
         Path filePath = Paths.get(pathLocal,file.hashCode() + "_"
@@ -94,7 +95,7 @@ public class SaveController {
         return "subir_universidad";
     }
     
-    @PostMapping("/subirCarrera")
+    @GetMapping("/subirCarrera")
     public String subirCarrera(Model model, @RequestParam String uniStr) {
         Universidad universidad = universidadRepo.findUniversidadByNombreIgnoreCase(uniStr);
         long idUni = universidad.getId();
@@ -106,7 +107,7 @@ public class SaveController {
         return "subir_carrera";
     }
 
-    @PostMapping("/subirAsignatura/{uniStr}")
+    @GetMapping("/subirAsignatura/{uniStr}")
     public String subirAsignatura(Model model, @PathVariable String uniStr, @RequestParam String carreraStr) {
 
         Universidad universidad = universidadRepo.findUniversidadByNombreIgnoreCase(uniStr);
