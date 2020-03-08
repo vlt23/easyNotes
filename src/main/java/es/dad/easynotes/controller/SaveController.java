@@ -59,8 +59,7 @@ public class SaveController {
         Carrera carrera = carreraRepo.findCarreraByNombreAndUniversidad_Id(carreraStr, universidad.getId());
         Asignatura asignatura = asignaturaRepo.findAsignaturaByNombreAndCarrera_Id(asigStr, carrera.getId());
 
-        Usuario autor = usuarioRepo.findAll().get(1);  // TODO
-        //Usuario autor = usuarioRepo.findByNick((String) userSession.getAttribute("nick"));
+        Usuario autor = usuarioRepo.findByNick((String) userSession.getAttribute("nick"));
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-ddHHmmss"); 	// Poner forma al DATE
         Path filePath = Paths.get(pathLocal,file.hashCode() + "_"
@@ -87,7 +86,7 @@ public class SaveController {
     }
 
     @GetMapping("/subirApunte")
-    public String subirApunte(Model model) {
+    public String subirApunte(Model model, HttpSession userSession) {
         List<Universidad> universidades = universidadRepo.findAll();
 
         model.addAttribute("universidades", universidades);

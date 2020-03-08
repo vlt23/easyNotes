@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -45,24 +46,26 @@ public class SearchController {
     private CarreraRepository carreraRepo;
 
     @Autowired
-    private UsuarioRepository usuarioRepo;  // TODO
-
-    private Usuario usuario;  // TODO
+    private UsuarioRepository usuarioRepo;
 
     @GetMapping("/")
     public String index() {
         return "index";
     }
-    @PostMapping("/search")
-    public String search(Model model, @RequestParam String buscarAp) {
-        usuario = usuarioRepo.findAll().get(1);  // TODO
+
+    @GetMapping("/search")
+    public String search(Model model, @RequestParam String buscarAp, HttpSession userSession) {
+        Usuario usuario = null;
+        if (userSession.getAttribute("nick") != null) {
+            usuario = usuarioRepo.findByNick((String) userSession.getAttribute("nick"));
+        }
         List<Apunte> apuntes = apunteRepo.findByTag(buscarAp);
 
         model.addAttribute("apuntes", apuntes);
         if (apuntes.isEmpty()) {
             model.addAttribute("noResult", true);
         }
-        if (usuario.getCreditos() <= 0) {
+        if (usuario == null || usuario.getCreditos() <= 0) {
             model.addAttribute("noDownload", true);
         } else {
             model.addAttribute("yesDownload", true);
@@ -100,8 +103,9 @@ public class SearchController {
     }
 
     @PostMapping("/mostrarBusqueda")
-    public String mostrarBusqueda(Model model, @RequestParam String tipo, @RequestParam String uniCarreraAsig) {
-        usuario = usuarioRepo.findAll().get(1);  // TODO
+    public String mostrarBusqueda(Model model, @RequestParam String tipo, @RequestParam String uniCarreraAsig,
+                                  HttpSession userSession) {
+        Usuario usuario = usuarioRepo.findByNick((String) userSession.getAttribute("nick"));
 
     	List<Apunte> apuntes = new ArrayList<>();
 
@@ -120,7 +124,7 @@ public class SearchController {
             }
     	}
     	model.addAttribute("apuntes", apuntes);
-    	if (usuario.getCreditos() <= 0) {
+    	if (usuario == null || usuario.getCreditos() <= 0) {
     	    model.addAttribute("noDownload", true);
         } else {
     	    model.addAttribute("yesDownload", true);

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.nio.file.Files;
 
@@ -23,9 +24,9 @@ public class DownloaderController {
     private UsuarioRepository usuarioRepo;
 
     @RequestMapping("/download/{idApunte}")
-    public void downloadResource(HttpServletResponse response, @PathVariable long idApunte) {
-        Usuario usuario = usuarioRepo.findAll().get(1);  // TODO
-
+    public void downloadResource(HttpServletResponse response, @PathVariable long idApunte,
+                                 HttpSession userSession) {
+        Usuario usuario = usuarioRepo.findByNick((String) userSession.getAttribute("nick"));
         // TODO
         if (usuario.getCreditos() <= 0) {
             return;
