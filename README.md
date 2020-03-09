@@ -39,28 +39,28 @@ número de descargas
 
 
 ## Capturas de pantalla
-![](src/main/resources/Imagenes/pag_inicio.png)
+![](resREADME/pag_inicio.png)
 Página de inicio, donde están todas las opciones.
 
-![](src/main/resources/Imagenes/pag_busqueda_resultado.png)
+![](resREADME/pag_busqueda_resultado.png)
 Página de resultados tras buscar apuntes por tags.
 
-![](src/main/resources/Imagenes/pag_buscar_por_asignatura.png)
+![](resREADME/pag_buscar_por_asignatura.png)
 Página para buscar todos los apuntes de un determinado asignatura.
 Los otros dos páginas (Buscar por Carrera y Buscar por Universidad) tienen la misma estructura.
 
-![](src/main/resources/Imagenes/pag_subir_apunte.png)
+![](resREADME/pag_subir_apunte.png)
 Página para subir los apuntes. Se selecciona la universidad, la titulación y la asignatura.
 Se pueden añadir tags si lo desea.
 
 ## Diagrama de navegación
-![](src/main/resources/Imagenes/diagrama_navegacion.png)
+![](resREADME/diagrama_navegacion.png)
 
 ## Modelo de datos
-![](src/main/resources/Imagenes/modeloDatos.png)
+![](resREADME/modeloDatos.png)
 
 ## Diagrama Entidad/Relación
-![E/R](src/main/resources/Imagenes/diagramaER.png)
+![E/R](resREADME/diagramaER.png)
 
 ## Integrantes
 * Guillermo De Azcarate Acosta
