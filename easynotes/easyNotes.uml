@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>es.dad.easynotes.entity</OriginalElement>
+  <nodes>
+    <node x="59.63533057851231" y="72.0">es.dad.easynotes.entity.Tag</node>
+    <node x="123.37499999999997" y="696.0">es.dad.easynotes.entity.Asignatura</node>
+    <node x="115.92510330578506" y="319.0">es.dad.easynotes.entity.Apunte</node>
+    <node x="0.0" y="933.0">es.dad.easynotes.entity.Carrera</node>
+    <node x="259.6353305785123" y="0.0">es.dad.easynotes.entity.Usuario</node>
+    <node x="439.9375" y="758.0">es.dad.easynotes.entity.Universidad</node>
+  </nodes>
+  <notes />
+  <edges />
+  <settings layout="Hierarchic Group" zoom="0.5316455696202531" x="331.0" y="543.0" />
+  <SelectedNodes>
+    <node>es.dad.easynotes.entity.Universidad</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Fields</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
