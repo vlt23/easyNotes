@@ -38,3 +38,14 @@ target/
 
 # Ignorar los apuntes subidos
 #/src/main/resources/files/
+
+# EasyNotes Intellij config
+easyNotes/.idea/
+easyNotes/target/
+easyNotes/EasyNotes.iml
+easyNotes/easyNotes.iml
+
+# mailRest Intellij config
+mailRest/.idea/
+mailRest/target/
+mailRest/mailRest.iml
