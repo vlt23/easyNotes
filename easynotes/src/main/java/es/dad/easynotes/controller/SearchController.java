@@ -105,7 +105,10 @@ public class SearchController {
     @PostMapping("/mostrarBusqueda")
     public String mostrarBusqueda(Model model, @RequestParam String tipo, @RequestParam String uniCarreraAsig,
                                   HttpSession userSession) {
-        Usuario usuario = usuarioRepo.findByNick((String) userSession.getAttribute("nick"));
+        Usuario usuario = null;
+        if (userSession.getAttribute("nick") != null) {
+            usuario = usuarioRepo.findByNick((String) userSession.getAttribute("nick"));
+        }
 
     	List<Apunte> apuntes = new ArrayList<>();
 
