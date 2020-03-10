@@ -26,9 +26,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.formLogin().loginPage("/login");
         http.formLogin().usernameParameter("username");
         http.formLogin().passwordParameter("password");
-        http.formLogin().defaultSuccessUrl("/");    //que la pagina por defecto sea el index
         http.formLogin().failureUrl("/loginerror");
-
+        http.formLogin().defaultSuccessUrl("/");    //que la pagina por defecto sea el index
 
         //Public pages
         http.authorizeRequests().antMatchers("/").permitAll();
@@ -152,10 +151,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
         //auth.authenticationProvider(authenticationProvider);
         // Database authentication provider
-    	auth.inMemoryAuthentication().withUser("user").password("pass").roles("USER");
+    	//auth.inMemoryAuthentication().withUser("user").password("pass").roles("USER");
 
-    	auth.inMemoryAuthentication().withUser("admin").password("adminpass").roles("USER", "ADMIN");
-        //auth.authenticationProvider(authenticationProvider);
+    	//auth.inMemoryAuthentication().withUser("admin").password("adminpass").roles("USER", "ADMIN");
+        auth.authenticationProvider(authenticationProvider);
 
     }
 }

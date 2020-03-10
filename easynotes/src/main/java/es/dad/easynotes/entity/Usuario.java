@@ -55,16 +55,21 @@ public class Usuario {
 	 * @param apellidos surname
 	 * @param correo email
 	 */
-	public Usuario(String nick, String password, String nombre, String apellidos, String correo) {
+	public Usuario(String nick, String password, String nombre, String apellidos, String correo, boolean isAdmin) {
 		this.nick = nick;
 		this.passwordHash = new BCryptPasswordEncoder().encode(password);
 		this.nombre = nombre;
 		this.apellidos = apellidos;
 		this.correo = correo;
 		this.creditos = 20;
-		this.isAdmin = false;
 		this.roles = new ArrayList<>();
-		this.roles.add("ROLE_USER");
+		this.isAdmin = isAdmin;
+		if (isAdmin) {
+			this.roles.add("ROLE_ADMIN");
+			this.roles.add("ROLE_USER");
+		} else {
+			this.roles.add("ROLE_USER");
+		}
 		this.numeroDescargas = 0;
 	}
 
