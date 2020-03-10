@@ -48,7 +48,7 @@ public class SearchController {
     @Autowired
     private UsuarioRepository usuarioRepo;
 
-    @GetMapping("/")
+    @RequestMapping("/")
     public String index() {
         return "index";
     }
