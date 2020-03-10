@@ -108,7 +108,7 @@ public class basicController {
         Apunte manualPortatil = new Apunte("manualPortatil", DAD, GIC, URJC, new File(pathLocal + "manualPortatil.pdf"), usuarioAdmin, LocalDateTime.now(), false);
         repositorioApunte.save(manualPortatil);
 
-        Apunte script1 = new Apunte("script", SO, GII, URJC, new File(pathLocal + "zswap.pdf"), usuarioAdmin, LocalDateTime.now(), false);
+        Apunte script1 = new Apunte("script", SO, GII, URJC, new File("easynotes/src/main/resources/files/zswap.pdf"), usuarioAdmin, LocalDateTime.now(), false);
         repositorioApunte.save(script1);
 
         Apunte script2 = new Apunte("script", ED, GIC, URJC, new File(pathLocal + "zram.pdf"), usuarioAdmin, LocalDateTime.now(), false);
