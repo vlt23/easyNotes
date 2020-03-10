@@ -30,6 +30,8 @@ button {
 		<h1 align="center">Añadir Asignatura</h1>
 		<form action="/">
 			<button type="submit" class="btn btn-danger">Volver</button>
+			<input type="hidden" name="_csrf" value="{{token}}"/>
+
 		</form>
 		<form method="get" action="/anadida_asignatura/{{universidad.nombre}}" enctype="multipart/form-data">
 			<div class="col">
@@ -61,6 +63,7 @@ button {
 			</div>
 			<button type="submit" id="anadir-btn" class="btn btn-primary" disabled="true">Añadir</button>
 
+			<input type="hidden" name="_csrf" value="{{token}}"/>
 
 		</form>
 	</div>

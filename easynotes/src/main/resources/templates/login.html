@@ -40,6 +40,7 @@ h1 {
 			 	<h1 align="center">Iniciar Sesión</h1>
 
 				 <form action="/">
+					 <input type="hidden" name="_csrf" value="{{token}}"/>
 					 <button type="submit" class="btn btn-danger">Volver</button>
 				 </form>
 
@@ -50,12 +51,16 @@ h1 {
 						<input type="password" id="password_input" class="form-control" name="password"
 							   placeholder="Introduzca la contraseña">
 						<button type="submit" id="buscar-btn" class="btn btn-success">Entrar</button>
+						<input type="hidden" name="_csrf" value="{{token}}"/>
+
 					</div>
 				</form>
 			</div>
 		</div>
 		<div class="row">
 			<form method="get" action="/registro">
+				<input type="hidden" name="_csrf" value="{{token}}"/>
+
 				<button type="submit" class="btn btn-link" align="center">Registrarse</button>
 			</form>
 		</div>

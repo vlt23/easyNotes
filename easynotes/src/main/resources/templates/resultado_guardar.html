@@ -31,7 +31,9 @@
     </div>
     <form action="/">
 		<button type="submit" class="btn btn-danger">Volver</button>
-	</form>
+        <input type="hidden" name="_csrf" value="{{token}}"/>
+
+    </form>
     <div class="dropdown-divider"></div>
 
     <div class="row">

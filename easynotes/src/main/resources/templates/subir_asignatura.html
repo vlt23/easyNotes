@@ -32,6 +32,8 @@
 		<h1 align="center">Subir Apuntes (Asignatura)</h1>
 		<form action="/">
 			<button type="submit" class="btn btn-danger">Volver</button>
+			<input type="hidden" name="_csrf" value="{{token}}"/>
+
 		</form>
 		<form method="post" action="/saveApunte/{{universidad.nombre}}/{{carrera.nombre}}"
 			  enctype="multipart/form-data">
@@ -72,6 +74,7 @@
 			<div class="siguiente">
 				<button type="submit" class="btn btn-success">Guardar</button>
 			</div>
+			<input type="hidden" name="_csrf" value="{{token}}"/>
 
 		</form>
 	</div>

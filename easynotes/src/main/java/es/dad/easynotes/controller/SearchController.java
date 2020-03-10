@@ -14,6 +14,7 @@ import es.dad.easynotes.repository.UniversidadRepository;
 import es.dad.easynotes.repository.UsuarioRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -48,8 +50,10 @@ public class SearchController {
     @Autowired
     private UsuarioRepository usuarioRepo;
 
-    @RequestMapping("/")
-    public String index() {
+    @GetMapping("/")
+    public String index(Model model, HttpServletRequest request) {
+        //CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
+        //model.addObject("token", token.getToken());
         return "index";
     }
 
