@@ -97,10 +97,12 @@ public class basicController {
         GIC.getAsignaturas().add(ED);
         carreraRepo.save(GIC);
 
-        Usuario usuario = new Usuario("admin", "root", 20, "admin@root.org", true);
+        Usuario usuario = new Usuario("admin", "admin", "admin", "admin",
+                "easynotes.dad.2020@gmail.com", true);
         Usuario usuarioAdmin = usuarioRepo.save(usuario);
 
-        Usuario usuario1 = new Usuario("test", "test", 10, "test@test.com", false);
+        Usuario usuario1 = new Usuario("test", "test", "test", "test",
+                "easynotes.dad.2020@gmail.com", false);
         usuarioRepo.save(usuario1);
 
         Apunte manualPortatil = new Apunte("manualPortatil", DAD, GIC, URJC, new File(pathLocal + "manualPortatil.pdf"), usuarioAdmin, LocalDateTime.now(), false);
