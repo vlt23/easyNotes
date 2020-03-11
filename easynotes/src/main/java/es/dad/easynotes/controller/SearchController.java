@@ -1,5 +1,6 @@
 package es.dad.easynotes.controller;
 
+import es.dad.easynotes.SecurityConfiguration;
 import es.dad.easynotes.entity.Apunte;
 import es.dad.easynotes.entity.Asignatura;
 import es.dad.easynotes.entity.Carrera;
@@ -14,6 +15,8 @@ import es.dad.easynotes.repository.UniversidadRepository;
 import es.dad.easynotes.repository.UsuarioRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,6 +27,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.security.Security;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -51,10 +55,18 @@ public class SearchController {
     private UsuarioRepository usuarioRepo;
 
     @GetMapping("/")
-    public String index(Model model, HttpServletRequest request) {
-        //CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
-        //model.addObject("token", token.getToken());
-        return "index";
+    public String index(Model model) {
+        //Si hay un usuario logeado, mostramos el usuario
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+        if (false){
+            System.out.println("Usuario logeado");
+            model.addAttribute("yesLogged", true);
+            model.addAttribute("noLogged", false);
+        }else{
+            model.addAttribute("noLogged", true);
+        }
+            return "index";
     }
 
     @GetMapping("/search")
@@ -112,6 +124,7 @@ public class SearchController {
         Usuario usuario = null;
         if (userSession.getAttribute("nick") != null) {
             usuario = usuarioRepo.findByNick((String) userSession.getAttribute("nick"));
+            System.out.println("Entra por ser usuario en mostrar busqueda");
         }
 
     	List<Apunte> apuntes = new ArrayList<>();
