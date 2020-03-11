@@ -22,12 +22,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-        //Login
-        http.formLogin().loginPage("/login");
-        http.formLogin().usernameParameter("username");
-        http.formLogin().passwordParameter("password");
-        http.formLogin().failureUrl("/loginerror");
-        http.formLogin().defaultSuccessUrl("/");    //que la pagina por defecto sea el index
 
         //Public pages
         http.authorizeRequests().antMatchers("/").permitAll();
@@ -39,19 +33,34 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers("/searchCarrera").permitAll();
         http.authorizeRequests().antMatchers("/searchUniversidad").permitAll();
         http.authorizeRequests().antMatchers("/mostrarBusqueda").permitAll();
+        http.authorizeRequests().antMatchers("/h2console").permitAll();
 
         http.authorizeRequests().antMatchers("/css/**", "/js/**", "/images/**").permitAll();
         http.authorizeRequests().antMatchers("/resources/**").permitAll();
         http.authorizeRequests().antMatchers("src/main/resources/**").permitAll();
         //http.authorizeRequests().antMatchers(HttpMethod.POST).permitAll();
         //http.authorizeRequests().antMatchers(HttpMethod.GET).permitAll();
-        
-     // Registrar usuario
+        http.authorizeRequests().antMatchers("/h2console").permitAll();
+        http.authorizeRequests().antMatchers("/h2console/**").permitAll();
+
+
+        //Login
+        http.formLogin().loginPage("/login");
+        http.formLogin().usernameParameter("username");
+        http.formLogin().passwordParameter("password");
+        http.formLogin().failureUrl("/loginerror");
+        http.formLogin().defaultSuccessUrl("/");    //que la pagina por defecto sea el index
+
+
+        // Registrar usuario
         http.authorizeRequests().antMatchers("/registro").permitAll();
         http.authorizeRequests().antMatchers("/signup").permitAll();
         
         http.authorizeRequests().anyRequest().authenticated();
 
+        // Logout
+        http.logout().logoutUrl("/logout");
+        http.logout().logoutSuccessUrl("/");
 
         //Private pages
         /*http.authorizeRequests().antMatchers("/download/**").authenticated();
@@ -141,19 +150,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth)
             throws Exception {
-        //PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
-        // User
-        //auth.inMemoryAuthentication().withUser("user").password(encoder.encode("1234")).roles("USER");
-        //auth.inMemoryAuthentication().withUser("admin").password("1234").roles("USER", "ADMIN");
 
-        // Database authentication provider
-        //auth.inMemoryAuthentication().withUser("user").password(encoder.encode("pass")).roles("USER");
-
-        //auth.authenticationProvider(authenticationProvider);
-        // Database authentication provider
-    	//auth.inMemoryAuthentication().withUser("user").password("pass").roles("USER");
-
-    	//auth.inMemoryAuthentication().withUser("admin").password("adminpass").roles("USER", "ADMIN");
         auth.authenticationProvider(authenticationProvider);
 
     }

@@ -15,7 +15,9 @@ public class Usuario {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 
+	@Column(unique=true)
 	private String nick;
+
 	private String passwordHash;
 	@ElementCollection(fetch = FetchType.EAGER)
 	private List<String> roles;
@@ -36,6 +38,8 @@ public class Usuario {
 		this.nick = nick;
 		this.passwordHash = passwd;
 		this.roles = new ArrayList<>(Arrays.asList(roles));
+		this.creditos = 10;
+		this.numeroDescargas = 0;
 	}
 
 	public Usuario(String nombre, String apellidos, int creditos, String correo, boolean isAdmin) {

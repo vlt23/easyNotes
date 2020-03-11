@@ -19,10 +19,6 @@ public class LoginController {
 	
 	@GetMapping("/login")
     public String login(Model model) {
-
-        //CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
-        //model.addAttribute("token", token.getToken());
-
         return "login_template";
     }
 
@@ -33,8 +29,7 @@ public class LoginController {
 
     @GetMapping("/registro")
     public String registro(Model model) {
-        //CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
-        //model.addAttribute("token", token.getToken());
+
         return "registro";
     }
 
@@ -61,8 +56,6 @@ public class LoginController {
 	    userSession.setAttribute("registered", true);
         usuarioRepo.save(new Usuario(username, password, name, surname, email, false));
 
-        //CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
-        //model.addAttribute("token", token.getToken());
 
 	    return "index";
     }
