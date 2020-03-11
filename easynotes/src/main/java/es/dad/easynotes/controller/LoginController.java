@@ -23,7 +23,8 @@ public class LoginController {
     }
 
     @GetMapping("/loginerror")
-    public String loginerror() {
+    public String loginerror(Model model) {
+    	model.addAttribute("error", true);
         return "loginerror";
     }
 
@@ -42,6 +43,10 @@ public class LoginController {
 	        model.addAttribute("usernameDup", true);
 	        return "loginerror";
         }
+	    if (!password.equals(password_repeat)) {
+	    	model.addAttribute("passwordsNotEquals", true);
+	        return "loginerror";
+	    }
 	    if (usuarioRepo.findByCorreo(email) != null) {
 	        model.addAttribute("emailDup", true);
 	        return "loginerror";
