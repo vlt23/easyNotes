@@ -59,10 +59,11 @@ public class SearchController {
         //Si hay un usuario logeado, mostramos el usuario
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
-        if (false){
-            System.out.println("Usuario logeado");
+        //Si esta registrado se pone el nombre y añade la opcion de logout
+        if (!auth.getName().equals("anonymousUser")){
+            System.out.println("Usuario logeado"+auth.getName());
             model.addAttribute("yesLogged", true);
-            model.addAttribute("noLogged", false);
+            model.addAttribute("nombreUsuario", auth.getName());
         }else{
             model.addAttribute("noLogged", true);
         }
