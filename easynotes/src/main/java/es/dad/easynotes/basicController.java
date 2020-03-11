@@ -104,11 +104,11 @@ public class basicController {
         //userRepository.save(new Usuario("user", "1234", "ROLE_USER"));
         //userRepository.save(new Usuario("admin", "1234", "ROLE_USER", "ROLE_ADMIN"));
 
-        Usuario usuario = new Usuario("admin", "1234", "admin", "admin",
+        Usuario usuario = new Usuario("admin", "1234", "user", "admin",
                 "easynotes.dad.2020@gmail.com", true);
         Usuario usuarioAdmin = usuarioRepo.save(usuario);
 
-        Usuario usuario1 = new Usuario("user", "1234", "user", "user",
+        Usuario usuario1 = new Usuario("user", "1234", "user","user",
                 "easynotes.dad.2020@gmail.com", false);
         usuarioRepo.save(usuario1);
 

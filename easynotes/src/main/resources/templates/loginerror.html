@@ -28,6 +28,12 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8">
+        	{{#error}}
+        		<h4>Error al iniciar sesión. Comprueba que las credenciales sean correctas</h4>
+       		{{/error}}
+            {{#passwordsNotEquals}}
+                <h4>Las contraseñas no coinciden.</h4>
+            {{/passwordsNotEquals}}
             {{#usernameDup}}
                 <h4>Ya existe un usuario con este nick.</h4>
             {{/usernameDup}}
