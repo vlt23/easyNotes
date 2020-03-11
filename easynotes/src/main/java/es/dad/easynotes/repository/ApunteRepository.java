@@ -17,8 +17,9 @@ public interface ApunteRepository extends JpaRepository<Apunte, Long> {
 
 	List<Apunte> findByCarrera(Carrera carrera);
 
-	@Query(value = "SELECT apunte.* FROM tag JOIN apunte_tags on (tag.id = apunte_tags.tags_id) JOIN apunte on (apunte_tags.apuntes_id = apunte.id) WHERE (tag.tag =?1 )",
+	@Query(value = "SELECT apunte.* FROM tag JOIN apunte_tags on (UPPER(tag.id) = UPPER(apunte_tags.tags_id)) JOIN apunte on (UPPER(apunte_tags.apuntes_id) = UPPER(apunte.id)) WHERE (UPPER(tag.tag) = UPPER(?1) )",
 			nativeQuery = true)
 	List<Apunte> findByTag(String tag);
+	//List<Apunte> findByTagIgnoreCase(String tag);
 
 }

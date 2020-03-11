@@ -59,7 +59,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
         // Logout
         http.logout().logoutUrl("/logout");
-        http.logout().logoutSuccessUrl("/");
+        http.logout().logoutSuccessUrl("/login");
 
         //Private pages
         /*http.authorizeRequests().antMatchers("/download/**").authenticated();

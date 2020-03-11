@@ -38,7 +38,7 @@ public class Usuario {
 		this.nick = nick;
 		this.passwordHash = passwd;
 		this.roles = new ArrayList<>(Arrays.asList(roles));
-		this.creditos = 10;
+		this.creditos = 20;
 		this.numeroDescargas = 0;
 	}
 

@@ -16,6 +16,10 @@ button{
 .container{
 	margin: 20px;
 }
+
+.logout {
+	float: right;
+}
 </style>
 </head>
 <body>
@@ -30,11 +34,17 @@ button{
 
 		{{#yesLogged}}
 		<div class="row">
-			<h3>{{nombreUsuario}}</h3>
-			<form action="/logout" method="post">
-				<input type="submit" value="Sign Out" />
-				<input type="hidden" name="_csrf" value="{{token}}"/>
-			</form>
+			<div class="col">
+				<h5>{{nombreUsuario}}  ({{creditos}} creditos)</h5>
+			</div>
+			<div class="col">
+				<div class="logout">
+					<form action="/logout" method="post">
+						<input type="submit" value="Sign Out" class="btn btn-danger"/>
+						<input type="hidden" name="_csrf" value="{{token}}"/>
+					</form>
+				</div>
+			</div>
 		</div>
 		{{/yesLogged}}
 

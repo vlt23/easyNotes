@@ -55,15 +55,18 @@ public class SearchController {
     private UsuarioRepository usuarioRepo;
 
     @GetMapping("/")
-    public String index(Model model) {
+    public String index(Model model, HttpSession userSession) {
+    	Usuario usuario = null;
         //Si hay un usuario logeado, mostramos el usuario
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-
         //Si esta registrado se pone el nombre y añade la opcion de logout
         if (!auth.getName().equals("anonymousUser")){
+        	usuario = usuarioRepo.findByNick(auth.getName());
+        	
             System.out.println("Usuario logeado"+auth.getName());
             model.addAttribute("yesLogged", true);
             model.addAttribute("nombreUsuario", auth.getName());
+            model.addAttribute("creditos", usuario.getCreditos());
         }else{
             model.addAttribute("noLogged", true);
         }
@@ -73,8 +76,13 @@ public class SearchController {
     @GetMapping("/search")
     public String search(Model model, @RequestParam String buscarAp, HttpSession userSession) {
         Usuario usuario = null;
-        if (userSession.getAttribute("nick") != null) {
-            usuario = usuarioRepo.findByNick((String) userSession.getAttribute("nick"));
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (!auth.getName().equals("anonymousUser")) {
+        	List<Usuario> usuarios = usuarioRepo.findAll();
+            usuario = usuarioRepo.findByNick(auth.getName());
+            model.addAttribute("creditos", usuario.getCreditos());
+        } else {
+        	model.addAttribute("creditos", 0);
         }
         List<Apunte> apuntes = apunteRepo.findByTag(buscarAp);
 
@@ -92,6 +100,7 @@ public class SearchController {
 
     @GetMapping("/searchAsignatura")
     public String searchAsignatura(Model model) {
+    	
     	List<Asignatura> asignaturasTemp = asignaturaRepo.findAll();
     	Set<String> asignaturas = new HashSet<>();
     	for (Asignatura asignatura : asignaturasTemp) {
@@ -103,6 +112,7 @@ public class SearchController {
 
     @GetMapping("/searchCarrera")
     public String searchCarrera(Model model) {
+    	
     	List<Carrera> carrerasTemp = carreraRepo.findAll();
     	Set<String> carreras = new HashSet<>();
     	for (Carrera carrera : carrerasTemp) {
@@ -114,6 +124,7 @@ public class SearchController {
 
     @GetMapping("/searchUniversidad")
     public String searchUniversidad(Model model) {
+    	
     	List<Universidad> universidades = universidadRepo.findAll();
     	model.addAttribute("universidades", universidades);
         return "buscar_universidad";
@@ -122,10 +133,14 @@ public class SearchController {
     @PostMapping("/mostrarBusqueda")
     public String mostrarBusqueda(Model model, @RequestParam String tipo, @RequestParam String uniCarreraAsig,
                                   HttpSession userSession) {
-        Usuario usuario = null;
-        if (userSession.getAttribute("nick") != null) {
-            usuario = usuarioRepo.findByNick((String) userSession.getAttribute("nick"));
-            System.out.println("Entra por ser usuario en mostrar busqueda");
+    	Usuario usuario = null;
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (!auth.getName().equals("anonymousUser")) {
+        	List<Usuario> usuarios = usuarioRepo.findAll();
+            usuario = usuarioRepo.findByNick(auth.getName());
+            model.addAttribute("creditos", usuario.getCreditos());
+        } else {
+        	model.addAttribute("creditos", 0);
         }
 
     	List<Apunte> apuntes = new ArrayList<>();
