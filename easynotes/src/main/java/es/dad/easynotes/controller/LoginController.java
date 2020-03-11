@@ -51,10 +51,6 @@ public class LoginController {
 	        model.addAttribute("emailDup", true);
 	        return "loginerror";
         }
-	    if (!password.equals(password_repeat)) {
-	        model.addAttribute("passwordNotEqual", true);
-	        return "loginerror";
-        }
 	    userSession.setAttribute("nick", username);
 	    userSession.setAttribute("password", password);
 	    userSession.setAttribute("email", email);
@@ -62,7 +58,7 @@ public class LoginController {
         usuarioRepo.save(new Usuario(username, password, name, surname, email, false));
 
 
-	    return "index";
+	    return "login_template";
     }
 
 }
