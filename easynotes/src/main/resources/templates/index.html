@@ -103,6 +103,8 @@ button{
 
 				</form>
 			</div>
+
+			{{#isAdmin}}
 			<div class="col">
 				<form method="get" action="/anadirUniversidad">
 					<button type="submit" class="btn btn-link">Añadir Universidad</button>
@@ -124,6 +126,7 @@ button{
 
 				</form>
 			</div>
+			{{/isAdmin}}
 		</div>
 	</div>
 	<script>

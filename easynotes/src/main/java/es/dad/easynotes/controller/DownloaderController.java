@@ -45,6 +45,7 @@ public class DownloaderController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         Usuario user = usuarioRepo.findByNick(auth.getName());
 
+
         Apunte apunte = apunteRepo.getOne(idApunte);
         try {
             Files.copy(apunte.getFilePath().toPath(), response.getOutputStream());

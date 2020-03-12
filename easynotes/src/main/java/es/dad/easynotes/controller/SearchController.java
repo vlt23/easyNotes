@@ -63,8 +63,11 @@ public class SearchController {
         if (!auth.getName().equals("anonymousUser")){
         	usuario = usuarioRepo.findByNick(auth.getName());
         	
-            System.out.println("Usuario logeado"+auth.getName());
             model.addAttribute("yesLogged", true);
+
+            if(usuario.isAdmin()){
+                model.addAttribute("isAdmin", true);
+            }
             model.addAttribute("nombreUsuario", auth.getName());
             model.addAttribute("creditos", usuario.getCreditos());
         }else{
@@ -80,10 +83,15 @@ public class SearchController {
         if (!auth.getName().equals("anonymousUser")) {
         	List<Usuario> usuarios = usuarioRepo.findAll();
             usuario = usuarioRepo.findByNick(auth.getName());
+            if(usuario.isAdmin()){
+                model.addAttribute("isAdmin", true);
+            }
+            //Se pasan los creditos que tiene
             model.addAttribute("creditos", usuario.getCreditos());
         } else {
         	model.addAttribute("creditos", 0);
         }
+
         List<Apunte> apuntes = apunteRepo.findByTag(buscarAp);
 
         model.addAttribute("apuntes", apuntes);

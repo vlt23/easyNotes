@@ -78,11 +78,15 @@
 		    <div class="row">
 		        <a href="/show/{{id}}" target="_blank">Visualizar: {{nombre}}</a>
 		    </div>
+		
+			{{#isAdmin}}
 		    <div class="row">
 		        <a href="/delete/{{id}}">Eliminar: {{nombre}}</a>
 		        <br>
 		        <br>
 		    </div>
+			{{/isAdmin}}
+
 	    {{/apuntes}}
 	     <form action="/">
 			<button type="submit" class="btn btn-danger">Volver</button>
