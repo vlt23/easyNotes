@@ -5,13 +5,17 @@ import es.dad.easynotes.entity.Usuario;
 import es.dad.easynotes.repository.ApunteRepository;
 import es.dad.easynotes.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Files;
 
 @Controller
@@ -23,24 +27,25 @@ public class DownloaderController {
     @Autowired
     private UsuarioRepository usuarioRepo;
 
-    @RequestMapping("/download/{idApunte}")
-    public void downloadResource(HttpServletResponse response, @PathVariable long idApunte,
-                                 HttpSession userSession) {
-        Usuario usuario = usuarioRepo.findByNick((String) userSession.getAttribute("nick"));
-        // TODO
-        if (usuario.getCreditos() <= 0) {
-            return;
+    @GetMapping("/show/{idApunte}")
+    public void showResource(HttpServletResponse response, @PathVariable long idApunte) throws IOException {
+        Apunte apunte = apunteRepo.getOne(idApunte);
+        response.setContentType("application/pdf");
+        InputStream inputStream = new FileInputStream(new File(apunte.getFilePath().getPath()));
+
+        int nRead;
+        while ((nRead = inputStream.read()) != -1) {
+            response.getWriter().write(nRead);
         }
+
+    }
+
+    @GetMapping("/download/{idApunte}")
+    public void downloadResource(HttpServletResponse response, @PathVariable long idApunte) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Usuario user = usuarioRepo.findByNick(auth.getName());
 
         Apunte apunte = apunteRepo.getOne(idApunte);
-        Usuario autor = apunte.getAutor();
-        if (!usuario.equals(autor)) {
-            autor.increaseNumeroDescargas();
-            usuarioRepo.save(autor);
-            usuario.decreaseCreditos();
-            usuarioRepo.save(usuario);
-        }
-
         try {
             Files.copy(apunte.getFilePath().toPath(), response.getOutputStream());
             response.getOutputStream().flush();

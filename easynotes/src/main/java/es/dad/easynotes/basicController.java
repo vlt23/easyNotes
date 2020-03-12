@@ -112,25 +112,25 @@ public class basicController {
                 "easynotes.dad.2020@gmail.com", false);
         usuarioRepo.save(usuario1);
 
-        Apunte manualPortatil = new Apunte("manualPortatil", DAD, GIC, URJC, new File(pathLocal + "manualPortatil.pdf"), usuarioAdmin, LocalDateTime.now(), false);
+        Apunte manualPortatil = new Apunte("manualPortatil", DAD, GIC, URJC, new File("Files/pruebaPablo.pdf"), usuarioAdmin, LocalDateTime.now(), false);
         repositorioApunte.save(manualPortatil);
 
-        Apunte script1 = new Apunte("script", SO, GII, URJC, new File("easynotes/src/main/resources/files/zswap.pdf"), usuarioAdmin, LocalDateTime.now(), false);
+        Apunte script1 = new Apunte("script", SO, GII, URJC, new File("Files/zswap.pdf"), usuarioAdmin, LocalDateTime.now(), false);
         repositorioApunte.save(script1);
 
-        Apunte script2 = new Apunte("script", ED, GIC, URJC, new File(pathLocal + "zram.pdf"), usuarioAdmin, LocalDateTime.now(), false);
+        Apunte script2 = new Apunte("script", ED, GIC, URJC, new File("Files/zram.pdf"), usuarioAdmin, LocalDateTime.now(), false);
         repositorioApunte.save(script2);
 
-        Apunte script3 = new Apunte("arduino", logica, GII, UPM, new File(pathLocal + "bateria.pdf"), usuarioAdmin, LocalDateTime.now(), false);
+        Apunte script3 = new Apunte("arduino", logica, GII, UPM, new File("Files/bateria.pdf"), usuarioAdmin, LocalDateTime.now(), false);
         repositorioApunte.save(script3);
 
-        Apunte cpp = new Apunte("script", ED, GII, URJC, new File(pathLocal + "prueba_linkedlist.pdf"), usuarioAdmin, LocalDateTime.now(), false);
+        Apunte cpp = new Apunte("script", ED, GII, URJC, new File("Files/prueba_linkedlist.pdf"), usuarioAdmin, LocalDateTime.now(), false);
         repositorioApunte.save(cpp);
 
-        Apunte arduino2 = new Apunte("arduino", POO, GII, URJC, new File(pathLocal + "arduino.pdf"), usuarioAdmin, LocalDateTime.now(), false);
+        Apunte arduino2 = new Apunte("arduino", POO, GII, URJC, new File("Files/arduino.pdf"), usuarioAdmin, LocalDateTime.now(), false);
         repositorioApunte.save(arduino2);
 
-        Apunte esqui = new Apunte("esqui", DAD, GIC, URJC, new File(pathLocal + "pruebaPablo.pdf"), usuarioAdmin, LocalDateTime.now(), true);
+        Apunte esqui = new Apunte("esqui", DAD, GIC, URJC, new File("Files/esqui.pdf"), usuarioAdmin, LocalDateTime.now(), true);
    
        repositorioApunte.save(esqui);
     

@@ -33,6 +33,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers("/searchCarrera").permitAll();
         http.authorizeRequests().antMatchers("/searchUniversidad").permitAll();
         http.authorizeRequests().antMatchers("/mostrarBusqueda").permitAll();
+        http.authorizeRequests().antMatchers("/show/{**}").permitAll();
+
         http.authorizeRequests().antMatchers("/h2console").permitAll();
 
         http.authorizeRequests().antMatchers("/css/**", "/js/**", "/images/**").permitAll();

@@ -31,8 +31,7 @@ import java.util.List;
 @Controller
 public class SaveController {
 
-    final String pathLocal = ("src" + File.separator + "main" + File.separator + "resources"
-            + File.separator + "files" + File.separator);
+
 
     @Autowired
     private ApunteRepository apunteRepo;
@@ -62,7 +61,7 @@ public class SaveController {
         Usuario autor = usuarioRepo.findByNick((String) userSession.getAttribute("nick"));
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-ddHHmmss"); 	// Poner forma al DATE
-        Path filePath = Paths.get(pathLocal,file.hashCode() + "_"
+        Path filePath = Paths.get("Files/",file.hashCode() + "_"
                 + formatter.format(LocalDateTime.now()) + "_" + file.getOriginalFilename());
         try {
             OutputStream os = Files.newOutputStream(filePath);
@@ -124,7 +123,7 @@ public class SaveController {
     @GetMapping("/delete/{idApunte}")
     public String deleteApunte(@PathVariable long idApunte) {
         Apunte apunte = apunteRepo.getOne(idApunte);
-        File file = new File(pathLocal + apunte.getFilePath().getName());
+        File file = new File("Files" + apunte.getFilePath().getName());
         apunteRepo.delete(apunte);
 
         if (file.delete()) {
