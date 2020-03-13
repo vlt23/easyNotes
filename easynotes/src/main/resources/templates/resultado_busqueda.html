@@ -71,7 +71,7 @@
 			{{/noDownload}}
 			{{#yesDownload}}
 				<div class="row">
-					<a href="/download/{{id}}" download="{{nombre}}.pdf" >Descargar: {{nombre}}</a>
+					<a id="descargar" href="/download/{{id}}" download="{{nombre}}.pdf" >Descargar: {{nombre}}</a>
 				</div>
 			{{/yesDownload}}
 
@@ -92,8 +92,8 @@
 			<button type="submit" class="btn btn-danger">Volver</button>
 			 <input type="hidden" name="_csrf" value="{{token}}"/>
 
-
 		 </form>
 	</div>
+	
 </body>
 </html>

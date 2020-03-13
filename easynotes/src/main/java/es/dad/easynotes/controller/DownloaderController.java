@@ -41,7 +41,7 @@ public class DownloaderController {
     }
 
     @GetMapping("/download/{idApunte}")
-    public void downloadResource(HttpServletResponse response, @PathVariable long idApunte) {
+    public String downloadResource(HttpServletResponse response, @PathVariable long idApunte) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         Usuario user = usuarioRepo.findByNick(auth.getName());
 
@@ -50,11 +50,17 @@ public class DownloaderController {
         try {
             Files.copy(apunte.getFilePath().toPath(), response.getOutputStream());
             response.getOutputStream().flush();
+            if (!user.isAdmin())
+            	user.decreaseCreditos();
+            user.increaseNumeroDescargas();
+            usuarioRepo.save(user);
             apunte.setNumeroDescargas(apunte.getNumeroDescargas() + 1);
             apunteRepo.save(apunte);  // Tras incrementar el numero de descarga hay que guardar el objeto en DB
         } catch (IOException e) {
             e.printStackTrace();
         }
+        
+        return "resultado_busqueda";
     }
 
 }

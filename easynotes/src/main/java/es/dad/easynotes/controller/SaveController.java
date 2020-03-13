@@ -12,6 +12,8 @@ import es.dad.easynotes.repository.CarreraRepository;
 import es.dad.easynotes.repository.UniversidadRepository;
 import es.dad.easynotes.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -54,11 +56,14 @@ public class SaveController {
                              @RequestParam MultipartFile file, @RequestParam String nombre,
                              @RequestParam (defaultValue = "false") boolean esExamen,
                              HttpSession userSession) {
+    	
         Universidad universidad = universidadRepo.findUniversidadByNombreIgnoreCase(uniStr);
         Carrera carrera = carreraRepo.findCarreraByNombreAndUniversidad_Id(carreraStr, universidad.getId());
         Asignatura asignatura = asignaturaRepo.findAsignaturaByNombreAndCarrera_Id(asigStr, carrera.getId());
+        
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
-        Usuario autor = usuarioRepo.findByNick((String) userSession.getAttribute("nick"));
+        Usuario autor = usuarioRepo.findByNick(auth.getName());
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-ddHHmmss"); 	// Poner forma al DATE
         Path filePath = Paths.get("Files/",file.hashCode() + "_"
