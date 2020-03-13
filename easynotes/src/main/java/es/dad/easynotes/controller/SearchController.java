@@ -55,7 +55,7 @@ public class SearchController {
     private UsuarioRepository usuarioRepo;
 
     @GetMapping("/")
-    public String index(Model model, HttpSession userSession) {
+    public String index(Model model) {
     	Usuario usuario = null;
         //Si hay un usuario logeado, mostramos el usuario
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -77,7 +77,7 @@ public class SearchController {
     }
 
     @GetMapping("/search")
-    public String search(Model model, @RequestParam String buscarAp, HttpSession userSession) {
+    public String search(Model model, @RequestParam String buscarAp) {
         Usuario usuario = null;
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (!auth.getName().equals("anonymousUser")) {
@@ -139,8 +139,7 @@ public class SearchController {
     }
 
     @PostMapping("/mostrarBusqueda")
-    public String mostrarBusqueda(Model model, @RequestParam String tipo, @RequestParam String uniCarreraAsig,
-                                  HttpSession userSession) {
+    public String mostrarBusqueda(Model model, @RequestParam String tipo, @RequestParam String uniCarreraAsig) {
     	Usuario usuario = null;
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (!auth.getName().equals("anonymousUser")) {
