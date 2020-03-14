@@ -1,4 +1,4 @@
-package es.dad.easynotes;
+package es.dad.easynotes.entity;
 
 public class Email {
 
@@ -32,8 +32,7 @@ public class Email {
     @Override
     public String toString() {
         return "{email: {username:" + this.username + "}, "
-                + "{userMail:" + this.userMail + "}"
-                + "{topic:" + this.topic + "}";
+                + "{userMail:" + this.userMail + "}}";
     }
 
 }

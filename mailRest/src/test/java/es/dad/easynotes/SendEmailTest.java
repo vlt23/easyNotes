@@ -22,7 +22,7 @@ public class SendEmailTest {
 
     @Test
     public void sendEmail() {
-        Email email = new Email("dad", "easynotes.dad.2020@gmail.com");
+        Email email = new Email("dad", "easynotes.dad.2020@gmail.com", Email.Topic.WELCOME);
         rest.postForEntity("http://127.0.0.1:8025/email", email, String.class);
     }
 

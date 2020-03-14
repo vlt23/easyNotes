@@ -51,8 +51,19 @@ public class EmailController {
             MimeMessage message = new MimeMessage(session);
             message.setFrom(new InternetAddress(username));
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email.getUserMail(), false));
-            message.setSubject("Test");  // TODO
-            message.setText("Hello " + email.getUsername() + ". This is a test");  // TODO
+
+            if (email.getTopic() == Email.Topic.WELCOME) {
+                message.setSubject("Bienvenido a EasyNotes!");
+                message.setText("Hola " + email.getUsername() + ".\n"
+                        + "Ahora puedes empezar a disfrutar del mejor servicio de apuntes ;)");
+            }
+
+            if (email.getTopic() == Email.Topic.DOWNLOAD) {
+                message.setSubject("Felicidades! Acabas de conseguir más créditos!");
+                message.setText("Hola " + email.getUsername() + ".\n"
+                        + "Uno de tus apuntes fue descargado muchas veces por otros usuarios. "
+                        + "Como recompensa le hemos dado más créditos ;)");
+            }
 
             SMTPTransport t = (SMTPTransport) session.getTransport("smtps");
             t.connect("smtp.gmail.com", username);

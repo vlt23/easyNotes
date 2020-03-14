@@ -1,5 +1,6 @@
 package es.dad.easynotes.controller;
 
+import es.dad.easynotes.entity.Email;
 import es.dad.easynotes.entity.Usuario;
 import es.dad.easynotes.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,16 +9,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import javax.servlet.http.HttpSession;
+import org.springframework.web.client.RestTemplate;
 
 @Controller
 public class LoginController {
 
     @Autowired
     private UsuarioRepository usuarioRepo;
-	
-	@GetMapping("/login")
+
+    @GetMapping("/login")
     public String login(Model model) {
         return "login_template";
     }
@@ -56,6 +56,9 @@ public class LoginController {
 	    //userSession.setAttribute("registered", true);
         usuarioRepo.save(new Usuario(username, password, name, surname, email, false));
 
+        Email welcomeEmail = new Email(username, email, Email.Topic.WELCOME);
+        RestTemplate rest = new RestTemplate();
+        rest.postForEntity("http://127.0.0.1:8025/email", welcomeEmail, String.class);
 
 	    return "login_template";
     }
