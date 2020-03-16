@@ -65,14 +65,15 @@ public class Usuario {
 		this.nombre = nombre;
 		this.apellidos = apellidos;
 		this.correo = correo;
-		this.creditos = 20;
 		this.roles = new ArrayList<>();
 		this.isAdmin = isAdmin;
 		if (isAdmin) {
 			this.roles.add("ROLE_ADMIN");
 			this.roles.add("ROLE_USER");
+			this.creditos = Integer.MAX_VALUE / 2;
 		} else {
 			this.roles.add("ROLE_USER");
+			this.creditos = 20;
 		}
 		this.numeroDescargas = 0;
 	}

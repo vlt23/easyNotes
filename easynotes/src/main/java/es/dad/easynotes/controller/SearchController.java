@@ -70,7 +70,7 @@ public class SearchController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (!auth.getName().equals("anonymousUser")) {
             usuario = usuarioRepo.findByNick(auth.getName());
-            if (usuario.isAdmin()){
+            if (usuario.isAdmin()) {
                 model.addAttribute("isAdmin", true);
             }
             // Se pasan los creditos que tiene
@@ -85,7 +85,7 @@ public class SearchController {
         if (apuntes.isEmpty()) {
             model.addAttribute("noResult", true);
         }
-        if (usuario == null || usuario.getCreditos() <= 0) {
+        if (usuario == null || (!usuario.isAdmin() && usuario.getCreditos() <= 0)) {
             model.addAttribute("noDownload", true);
         } else {
             model.addAttribute("yesDownload", true);
@@ -151,7 +151,7 @@ public class SearchController {
             }
     	}
     	model.addAttribute("apuntes", apuntes);
-    	if (usuario == null || usuario.getCreditos() <= 0) {
+    	if (usuario == null || (!usuario.isAdmin() && usuario.getCreditos() <= 0)) {
     	    model.addAttribute("noDownload", true);
         } else {
     	    model.addAttribute("yesDownload", true);
