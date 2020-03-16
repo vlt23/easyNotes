@@ -1,33 +1,24 @@
 package es.dad.easynotes.controller;
 
-import es.dad.easynotes.SecurityConfiguration;
 import es.dad.easynotes.entity.Apunte;
 import es.dad.easynotes.entity.Asignatura;
 import es.dad.easynotes.entity.Carrera;
 import es.dad.easynotes.entity.Universidad;
 import es.dad.easynotes.entity.Usuario;
-
 import es.dad.easynotes.repository.ApunteRepository;
 import es.dad.easynotes.repository.AsignaturaRepository;
 import es.dad.easynotes.repository.CarreraRepository;
-import es.dad.easynotes.repository.TagRepository;
 import es.dad.easynotes.repository.UniversidadRepository;
 import es.dad.easynotes.repository.UsuarioRepository;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-import java.security.Security;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -38,9 +29,6 @@ public class SearchController {
 
     @Autowired
     private ApunteRepository apunteRepo;
-
-    @Autowired
-    private TagRepository tagRepo;
 
     @Autowired
     private AsignaturaRepository asignaturaRepo;
@@ -56,24 +44,24 @@ public class SearchController {
 
     @GetMapping("/")
     public String index(Model model) {
-    	Usuario usuario = null;
-        //Si hay un usuario logeado, mostramos el usuario
+    	Usuario usuario;
+        // Si hay un usuario logeado, mostramos el usuario
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        //Si esta registrado se pone el nombre y añade la opcion de logout
-        if (!auth.getName().equals("anonymousUser")){
+        // Si esta registrado se pone el nombre y añade la opcion de logout
+        if (!auth.getName().equals("anonymousUser")) {
         	usuario = usuarioRepo.findByNick(auth.getName());
-        	
             model.addAttribute("yesLogged", true);
 
-            if(usuario.isAdmin()){
+            if (usuario.isAdmin()) {
                 model.addAttribute("isAdmin", true);
             }
             model.addAttribute("nombreUsuario", auth.getName());
             model.addAttribute("creditos", usuario.getCreditos());
-        }else{
+        } else {
             model.addAttribute("noLogged", true);
         }
-            return "index";
+
+        return "index";
     }
 
     @GetMapping("/search")
@@ -81,12 +69,11 @@ public class SearchController {
         Usuario usuario = null;
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (!auth.getName().equals("anonymousUser")) {
-        	List<Usuario> usuarios = usuarioRepo.findAll();
             usuario = usuarioRepo.findByNick(auth.getName());
-            if(usuario.isAdmin()){
+            if (usuario.isAdmin()){
                 model.addAttribute("isAdmin", true);
             }
-            //Se pasan los creditos que tiene
+            // Se pasan los creditos que tiene
             model.addAttribute("creditos", usuario.getCreditos());
         } else {
         	model.addAttribute("creditos", 0);
@@ -103,12 +90,12 @@ public class SearchController {
         } else {
             model.addAttribute("yesDownload", true);
         }
+
         return "resultado_busqueda";
     }
 
     @GetMapping("/searchAsignatura")
     public String searchAsignatura(Model model) {
-    	
     	List<Asignatura> asignaturasTemp = asignaturaRepo.findAll();
     	Set<String> asignaturas = new HashSet<>();
     	for (Asignatura asignatura : asignaturasTemp) {
@@ -120,7 +107,6 @@ public class SearchController {
 
     @GetMapping("/searchCarrera")
     public String searchCarrera(Model model) {
-    	
     	List<Carrera> carrerasTemp = carreraRepo.findAll();
     	Set<String> carreras = new HashSet<>();
     	for (Carrera carrera : carrerasTemp) {
@@ -132,7 +118,6 @@ public class SearchController {
 
     @GetMapping("/searchUniversidad")
     public String searchUniversidad(Model model) {
-    	
     	List<Universidad> universidades = universidadRepo.findAll();
     	model.addAttribute("universidades", universidades);
         return "buscar_universidad";
@@ -143,7 +128,6 @@ public class SearchController {
     	Usuario usuario = null;
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (!auth.getName().equals("anonymousUser")) {
-        	List<Usuario> usuarios = usuarioRepo.findAll();
             usuario = usuarioRepo.findByNick(auth.getName());
             model.addAttribute("creditos", usuario.getCreditos());
         } else {
