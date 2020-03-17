@@ -124,18 +124,6 @@ public class SaveController {
 
         return "subir_asignatura";
     }
-
-    @GetMapping("/delete/{idApunte}")
-    public String deleteApunte(@PathVariable long idApunte) {
-        Apunte apunte = apunteRepo.getOne(idApunte);
-        File file = new File("Files" + apunte.getFilePath().getName());
-        apunteRepo.delete(apunte);
-
-        if (file.delete()) {
-            return "borrar_ok";
-        }
-        return "error";
-    }
     
     @GetMapping("/anadirUniversidad")
     public String anadirUniversidad() {

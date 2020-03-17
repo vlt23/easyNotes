@@ -55,11 +55,13 @@ public class SearchController {
             if (usuario.isAdmin()) {
                 model.addAttribute("isAdmin", true);
             }
+            model.addAttribute("borrar", true);
             model.addAttribute("nombreUsuario", auth.getName());
             model.addAttribute("creditos", usuario.getCreditos());
         } else {
             model.addAttribute("noLogged", true);
         }
+        
 
         return "index";
     }

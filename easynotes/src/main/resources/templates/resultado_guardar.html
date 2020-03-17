@@ -25,43 +25,43 @@
 </head>
 
 <body>
-<div class="container">
-    <div class="row">
-        <h4>Se ha guardado correctamente: {{apunte.nombre}}</h4>
-    </div>
-    <form action="/">
-		<button type="submit" class="btn btn-danger">Volver</button>
-        <input type="hidden" name="_csrf" value="{{token}}"/>
-
-    </form>
-    <div class="dropdown-divider"></div>
-
-    <div class="row">
-        <p class="col-md-2">Asignatura:</p>
-        <p class="col-md-3">{{apunte.asignatura.nombre}}</p>
-    </div>
-    <div class="row">
-        <p class="col-md-2">Titulación:</p>
-        <p class="col-md-3">{{apunte.carrera.nombre}}</p>
-    </div>
-    <div class="row">
-        <p class="col-md-2">Universidad:</p>
-        <p class="col-md-3">{{apunte.universidad.nombre}}</p>
-    </div>
-    <div class="row">
-        <p class="col-md-2">Autor:</p>
-        <p class="col-md-3">{{apunte.autor.nombre}} {{apunte.autor.apellidos}}</p>
-    </div>
-    <div class="dropdown-divider"></div>
-	<div class="row">
-        <a download="{{apunte.nombre}}.pdf" href="/download/{{apunte.id}}">Descargar: {{apunte.nombre}}</a>
-    </div>
-    <div class="row">
-        <a href="" target="_self">Visualizar: {{apunte.nombre}}</a>
-    </div>
-    <div class="row">
-        <a href="/delete/{{apunte.id}}">Eliminar: {{apunte.nombre}}</a>
-    </div>
-</div>
-</body>
+	<div class="container">
+	    <div class="row">
+	        <h4>Se ha guardado correctamente: {{apunte.nombre}}</h4>
+	    </div>
+	    <form action="/">
+			<button type="submit" class="btn btn-danger">Volver</button>
+	        <input type="hidden" name="_csrf" value="{{token}}"/>
+	
+	    </form>
+	    <div class="dropdown-divider"></div>
+	
+	    <div class="row">
+	        <p class="col-md-2">Asignatura:</p>
+	        <p class="col-md-3">{{apunte.asignatura.nombre}}</p>
+	    </div>
+	    <div class="row">
+	        <p class="col-md-2">Titulación:</p>
+	        <p class="col-md-3">{{apunte.carrera.nombre}}</p>
+	    </div>
+	    <div class="row">
+	        <p class="col-md-2">Universidad:</p>
+	        <p class="col-md-3">{{apunte.universidad.nombre}}</p>
+	    </div>
+	    <div class="row">
+	        <p class="col-md-2">Autor:</p>
+	        <p class="col-md-3">{{apunte.autor.nombre}} {{apunte.autor.apellidos}}</p>
+	    </div>
+	    <div class="dropdown-divider"></div>
+		<div class="row">
+	        <a download="{{apunte.nombre}}.pdf" href="/download/{{apunte.id}}">Descargar: {{apunte.nombre}}</a>
+	    </div>
+	    <div class="row">
+	        <a href="" target="_self">Visualizar: {{apunte.nombre}}</a>
+	    </div>
+	    <div class="row">
+	        <a href="/delete/{{apunte.id}}">Eliminar: {{apunte.nombre}}</a>
+	    </div>
+	</div>
+	</body>
 </html>

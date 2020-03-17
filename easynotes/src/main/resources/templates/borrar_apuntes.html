@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Easy Notes</title>
+
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+    <script type="text/javascript" href="/js/bootstrap.min.js"></script>
+
+    <style>
+        button {
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        .container {
+            margin: 20px;
+        }
+
+        .row {
+            margin-left: 15px;
+            margin-right: 15px;
+        }
+    </style>
+</head>
+
+<body>
+	<div class="container">
+	    
+	     {{#noApuntes}}
+	     <h5>No se han encontrado apuntes/exámenes del usuario {{user}}</h5>
+		{{/noApuntes}}
+	    
+	    <form action="/">
+			<button type="submit" class="btn btn-danger">Volver</button>
+	        <input type="hidden" name="_csrf" value="{{token}}"/>
+	
+	    </form>
+	    
+	    {{#apuntes}}
+	    <div class="row">
+		        <p class="col-md-2">Nombre:</p>
+		        <div class="col-md-6">{{nombre}}
+					<b style="color: red">{{#esExamen}}(examen){{/esExamen}}</b>
+				</div>
+		    </div>
+		    <div class="row">
+		        <p class="col-md-2">Asignatura:</p>
+		        <p class="col-md-6">{{asignatura.nombre}}</p>
+		    </div>
+		    <div class="row">
+		        <p class="col-md-2">Titulación:</p>
+		        <p class="col-md-6">{{carrera.nombre}}</p>
+		    </div>
+		    <div class="row">
+		        <p class="col-md-2">Universidad:</p>
+		        <p class="col-md-6">{{universidad.nombre}}</p>
+		    </div>
+		    <div class="row">
+		        <p class="col-md-2">Autor:</p>
+		        <p class="col-md-6">{{autor.nombre}} {{autor.apellidos}}</p>
+		    </div>
+		    <div class="row">
+		        <p class="col-md-2">Fecha Subida:</p>
+		        <p class="col-md-3">{{fechaSubida.DayOfMonth}}/{{fechaSubida.month}}/{{fechaSubida.year}}	{{fechaSubida.hour}}:{{fechaSubida.minute}} </p>
+		    </div>
+		    <div class="dropdown-divider"></div>
+
+		    <div class="row">
+		        <a href="/delete/{{id}}">Eliminar: {{nombre}}</a>
+		        <br>
+		        <br>
+		    </div>
+
+	    {{/apuntes}}
+	</div>
+</body>
+</html>
