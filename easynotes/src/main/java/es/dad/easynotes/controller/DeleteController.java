@@ -11,7 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import es.dad.easynotes.entity.Apunte;
 import es.dad.easynotes.entity.Usuario;
@@ -30,7 +29,7 @@ public class DeleteController {
 	@GetMapping("/delete/{idApunte}")
     public String deleteApunte(@PathVariable long idApunte) {
         Apunte apunte = apunteRepo.getOne(idApunte);
-        File file = new File("Files" + apunte.getFilePath().getName());
+        File file = new File("Files/" + apunte.getFilePath().getName());
         apunteRepo.delete(apunte);
 
         if (file.delete()) {
@@ -44,7 +43,7 @@ public class DeleteController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         Usuario usuario = usuarioRepo.findByNick(auth.getName());
         
-        List<Apunte> apuntes = null;
+        List<Apunte> apuntes;
         
         if (usuario.isAdmin()) {
         	apuntes = apunteRepo.findAll();
