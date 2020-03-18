@@ -25,6 +25,7 @@
 </head>
 
 <body>
+
 	<div class="container">
 		{{#creditos}}
 	   		<h4>Mostrando Apuntes/Exámenes:  ({{creditos}} creditos)</h4>
@@ -71,7 +72,7 @@
 			{{/noDownload}}
 			{{#yesDownload}}
 				<div class="row">
-					<a id="descargar" href="/download/{{id}}" download="{{nombre}}.pdf" >Descargar: {{nombre}}</a>
+					<a id="descargar" href="/download/{{id}}" download="{{nombre}}.pdf" onclick="refreshPage()" >Descargar: {{nombre}}</a>
 				</div>
 			{{/yesDownload}}
 
@@ -94,6 +95,16 @@
 
 		 </form>
 	</div>
-	
+	<script>
+		function sleep(ms) {
+			return new Promise(resolve => setTimeout(resolve, ms));
+		}
+		async function refreshPage() {
+			await sleep(100);
+			window.location.reload();
+
+
+		}
+	</script>
 </body>
 </html>
