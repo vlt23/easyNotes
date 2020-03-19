@@ -42,7 +42,7 @@ public class DownloaderController {
     }
 
     @GetMapping("/download/{idApunte}")
-    public String downloadResource(HttpServletResponse response, @PathVariable long idApunte) {
+    public void downloadResource(HttpServletResponse response, @PathVariable long idApunte) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         Usuario user = usuarioRepo.findByNick(auth.getName());
 
@@ -58,7 +58,6 @@ public class DownloaderController {
             apunteRepo.save(apunte);  // Tras incrementar el numero de descarga hay que guardar el objeto en DB
         } catch (IOException e) {
             e.printStackTrace();
-            return "error";
         }
 
         // Incrementar los creditos al autor del apunte y enviar un correo para felicitarle
@@ -72,8 +71,6 @@ public class DownloaderController {
             RestTemplate rest = new RestTemplate();
             rest.postForEntity("http://127.0.0.1:8025/email", email, String.class);
         }
-        
-        return "resultado_busqueda";
     }
 
 }
