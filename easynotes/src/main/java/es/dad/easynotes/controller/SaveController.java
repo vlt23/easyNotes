@@ -16,11 +16,12 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpSession;
-import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.file.Files;
@@ -32,8 +33,6 @@ import java.util.List;
 
 @Controller
 public class SaveController {
-
-
 
     @Autowired
     private ApunteRepository apunteRepo;
@@ -54,8 +53,7 @@ public class SaveController {
     public String saveApunte(Model model, @PathVariable String uniStr, @PathVariable String carreraStr,
                              @RequestParam String asigStr, @RequestParam String tags,
                              @RequestParam MultipartFile file, @RequestParam String nombre,
-                             @RequestParam (defaultValue = "false") boolean esExamen,
-                             HttpSession userSession) {
+                             @RequestParam (defaultValue = "false") boolean esExamen) {
     	
         Universidad universidad = universidadRepo.findUniversidadByNombreIgnoreCase(uniStr);
         Carrera carrera = carreraRepo.findCarreraByNombreAndUniversidad_Id(carreraStr, universidad.getId());
@@ -77,8 +75,9 @@ public class SaveController {
 
         String [] tag = tags.split(",");
         
-        Apunte apunteSinId = new Apunte(nombre, asignatura, carrera, universidad, filePath.toFile(), autor, LocalDateTime.now(), esExamen);
-        for(String s : tag) {
+        Apunte apunteSinId = new Apunte(nombre, asignatura, carrera, universidad, filePath.toFile(),
+                autor, LocalDateTime.now(), esExamen);
+        for (String s : tag) {
         	apunteSinId.getTags().add(new Tag(s.trim()));
         }
         
@@ -90,7 +89,7 @@ public class SaveController {
     }
 
     @GetMapping("/subirApunte")
-    public String subirApunte(Model model, HttpSession userSession) {
+    public String subirApunte(Model model) {
         List<Universidad> universidades = universidadRepo.findAll();
 
         model.addAttribute("universidades", universidades);
@@ -127,13 +126,11 @@ public class SaveController {
     
     @GetMapping("/anadirUniversidad")
     public String anadirUniversidad() {
-        
         return "anadir_universidad";
     }
     
     @GetMapping("/anadirCarrera")
     public String anadirCarrera(Model model) {
-    	
     	List<Universidad> universidades = universidadRepo.findAll();
     	
     	model.addAttribute("universidades", universidades);
@@ -143,7 +140,6 @@ public class SaveController {
     
     @GetMapping("/anadirAsignatura")
     public String anadirAsignatura(Model model) {
-    	
 		List<Universidad> universidades = universidadRepo.findAll();
     	
     	model.addAttribute("universidades", universidades);
@@ -165,9 +161,9 @@ public class SaveController {
     @PostMapping("/anadida_universidad")
     public String anadirUniversidad(Model model, @RequestParam String uniStr) {
 		Universidad comprobar = universidadRepo.findUniversidadByNombreIgnoreCase(uniStr);
-		if(comprobar != null) {
+		if (comprobar != null) {
 			model.addAttribute("error", "error");
-		}else {
+		} else {
 			Universidad universidad = new Universidad(uniStr);
 	    	universidadRepo.save(universidad);
 	    	model.addAttribute("exito", "exito");
@@ -203,10 +199,12 @@ public class SaveController {
     }
     
     @PostMapping("/anadida_asignatura/{uniStr}")
-    public String anadirAsignatura(Model model, @RequestParam String asigStr, @PathVariable String uniStr, @RequestParam String carreraStr, @RequestParam String profesores) {
+    public String anadirAsignatura(Model model, @RequestParam String asigStr, @PathVariable String uniStr,
+                                   @RequestParam String carreraStr, @RequestParam String profesores) {
 		Universidad universidad = universidadRepo.findUniversidadByNombreIgnoreCase(uniStr);
 		Carrera carrera = carreraRepo.findCarreraByNombreAndUniversidad_Id(carreraStr, universidad.getId());
-		List<Asignatura> comprobar = asignaturaRepo.findAsignaturaByCarrera_IdAndUniversidad_Id(carrera.getId(), universidad.getId());
+		List<Asignatura> comprobar = asignaturaRepo.findAsignaturaByCarrera_IdAndUniversidad_Id(
+		        carrera.getId(), universidad.getId());
 		boolean found = false;
 		for (Asignatura a : comprobar) {
             if (a.getNombre().equals(asigStr)) {
@@ -224,7 +222,7 @@ public class SaveController {
 		}
     	model.addAttribute("nombre", asigStr);
     	model.addAttribute("tipo", "Asignatura");
-      
+
         return "anadir";
     }
 

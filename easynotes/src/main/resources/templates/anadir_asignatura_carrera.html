@@ -31,9 +31,9 @@ button {
 		<form action="/">
 			<button type="submit" class="btn btn-danger">Volver</button>
 			<input type="hidden" name="_csrf" value="{{token}}"/>
-
 		</form>
-		<form method="get" action="/anadida_asignatura/{{universidad.nombre}}" enctype="multipart/form-data">
+
+		<form method="post" action="/anadida_asignatura/{{universidad.nombre}}" enctype="multipart/form-data">
 			<div class="col">
 				<div class="row">
 					<h4>Universidad: {{universidad.nombre}}</h4>
