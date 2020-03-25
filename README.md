@@ -62,6 +62,9 @@ Se pueden añadir tags si lo desea.
 ## Diagrama Entidad/Relación
 ![E/R](resREADME/diagramaER.png)
 
+## Diagrama de clases
+![](resREADME/diagramaClases.png)
+
 ## Intrucciones para desplegar la aplicación
 1. Ejecutamos 'mvn -Dmaven.test.skip=true package' para generar tanto
 el jar de la aplicación web como del servicio interno.
