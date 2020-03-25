@@ -62,6 +62,18 @@ Se pueden añadir tags si lo desea.
 ## Diagrama Entidad/Relación
 ![E/R](resREADME/diagramaER.png)
 
+## Intrucciones para desplegar la aplicación
+1. Ejecutamos 'mvn -Dmaven.test.skip=true package' para generar tanto
+el jar de la aplicación web como del servicio interno.
+2. Copiamos los dos jars en una máquina virtual Ubuntu 18.04 (Bionic) mediante
+la compartición de carpetas de Virtualbox.
+3. En la máquina virtual instalamos los paquetes necesarios para ejecutar los dos jars:
+    * 'sudo apt update' para actualizar los índices del repositorio de Ubuntu
+    * 'sudo apt install openjdk-8-jre' para instalar la máquina virtual de Java 8
+    * 'sudo apt install mysql-server-5.7' para instalar el servidor de mysql 5.7
+4. Ejecutamos la aplicación web con 'java -jar easyNotes.jar'.
+5. Cambiamos a otro tty y ejecutamos el servicio interno con 'java -jar mailRest.jar'.
+
 ## Integrantes
 * Guillermo De Azcarate Acosta
     * Correo electrónico: g.deazcarate.2016@alumnos.urjc.es
