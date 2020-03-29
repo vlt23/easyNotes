@@ -64,6 +64,16 @@ Se pueden añadir tags si lo desea.
 
 ## Diagrama de clases
 ![](resREADME/diagramaClases.png)
+Debido a problemas de espacio, la relación entre templates y Controller no figura en la gráfica,
+sino que se describe a continuación:
+* SearchController: buscar_asignatura.html, buscar_carrera.html, buscar_universidad.html, index.html,
+resultado_busqueda.html
+* SaveController: anadir.html, anadir_asignatura.html, anadir_asignatura_carrera.html, anadir_carrera.html,
+anadir_universidad.html, index.html, resultado_guardar,html, subir_asignatura.html, subir_carrera.html,
+subir_universidad.html
+* DownloaderController: resultado_busqueda.html, resultado_guardar.html
+* LoginController: index.html, login_template.html, login_error.html, registro.html
+* DeleteController: borrar_apuntes.html, borrar_ok.html
 
 ## Intrucciones para desplegar la aplicación
 1. Ejecutamos 'mvn -Dmaven.test.skip=true package' para generar tanto
