@@ -53,6 +53,16 @@ Los otros dos páginas (Buscar por Carrera y Buscar por Universidad) tienen la m
 Página para subir los apuntes. Se selecciona la universidad, la titulación y la asignatura.
 Se pueden añadir tags si lo desea.
 
+![](resREADME/pag_borrar_apuntes.png)
+Página para borrar los apuntes. Cada autor solo puede borrar sus apuntes,
+salvo el admin, que puede borrar todos los apuntes.
+
+![](resREADME/pag_login.png)
+Página para hacer login.
+
+![](resREADME/pag_registrar.png)
+Página para registrar.
+
 ## Diagrama de navegación fase 2
 ![](resREADME/diagrama_navegacion_fase2.png)
 
