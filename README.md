@@ -53,8 +53,11 @@ Los otros dos páginas (Buscar por Carrera y Buscar por Universidad) tienen la m
 Página para subir los apuntes. Se selecciona la universidad, la titulación y la asignatura.
 Se pueden añadir tags si lo desea.
 
-## Diagrama de navegación
-![](resREADME/diagrama_navegacion.png)
+## Diagrama de navegación fase 2
+![](resREADME/diagrama_navegacion_fase2.png)
+
+## Diagrama de navegación fase 3
+![](resREADME/diagrama_navegacion_fase3.png)
 
 ## Modelo de datos
 ![](resREADME/modeloDatos.png)
