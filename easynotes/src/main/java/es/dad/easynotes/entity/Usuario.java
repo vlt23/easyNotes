@@ -73,7 +73,7 @@ public class Usuario {
 			this.creditos = Integer.MAX_VALUE / 2;
 		} else {
 			this.roles.add("ROLE_USER");
-			this.creditos = 20;
+			this.creditos = 50;
 		}
 		this.numeroDescargas = 0;
 	}
