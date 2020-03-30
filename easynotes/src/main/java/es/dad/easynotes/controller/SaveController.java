@@ -1,5 +1,7 @@
 package es.dad.easynotes.controller;
 
+import es.dad.easynotes.entity.Email;
+import es.dad.easynotes.entity.Usuario;
 import es.dad.easynotes.entity.*;
 import es.dad.easynotes.repository.ApunteRepository;
 import es.dad.easynotes.repository.AsignaturaRepository;

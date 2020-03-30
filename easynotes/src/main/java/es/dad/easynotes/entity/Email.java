@@ -4,7 +4,8 @@ public class Email {
 
     public enum Topic {
         WELCOME,
-        DOWNLOAD
+        DOWNLOAD,
+        ADD
     }
 
     private String username;
