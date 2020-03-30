@@ -87,16 +87,12 @@ Página para registrar.
 1. Disponer de una maquina de Ubuntu 18.04
 2. Instalar JRE y JDK "apt-get install default-jre" y  "apt-get install default-jdk"
 3. Instalar y configurar MySQL. "apt-get install mysql-server" y configurar: "mysql_secure_installation utility"
-4. Instalar mvn "sudo apt install maven"
-5. Configurar la direccion IP del SO
+4. Configurar la direccion IP del SO
 
 ## Intrucciones para desplegar la aplicación
-1. Clonar el repositorio "git clone https://github.com/vlt23/easyNotes"
-2. Crear schema en MySQL 'CREATE SCHEMA easynotes'
-3. Construir el proyecto mvn:
-    * Entrar en easyNotes/easynotes y ejecutar "mvn clean install" copiar el archivo *.jar en una carpeta en la que se incluya el directorio 'Files'
-    * Entrar en easyNotes/mailRest y ejecutar "mvn clean install" 
-4. Ejecutar mediante java -jar ambos *.jar
+1. Crear schema en MySQL 'CREATE SCHEMA easynotes'
+2. Compartir archivos *.jar desde SO host asi como el directorio Files
+3. Ejecutar mediante java -jar ambos *.jar
 
 
 ## Integrantes
