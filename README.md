@@ -53,14 +53,52 @@ Los otros dos páginas (Buscar por Carrera y Buscar por Universidad) tienen la m
 Página para subir los apuntes. Se selecciona la universidad, la titulación y la asignatura.
 Se pueden añadir tags si lo desea.
 
-## Diagrama de navegación
-![](resREADME/diagrama_navegacion.png)
+![](resREADME/pag_borrar_apuntes.png)
+Página para borrar los apuntes. Cada autor solo puede borrar sus apuntes,
+salvo el admin, que puede borrar todos los apuntes.
+
+![](resREADME/pag_login.png)
+Página para hacer login.
+
+![](resREADME/pag_registrar.png)
+Página para registrar.
+
+## Diagrama de navegación fase 2
+![](resREADME/diagrama_navegacion_fase2.png)
+
+## Diagrama de navegación fase 3
+![](resREADME/diagrama_navegacion_fase3.png)
 
 ## Modelo de datos
 ![](resREADME/modeloDatos.png)
 
 ## Diagrama Entidad/Relación
 ![E/R](resREADME/diagramaER.png)
+
+## Diagrama de clases
+![](resREADME/diagramaClases.png)
+Debido a problemas de espacio, la relación entre templates y Controller no figura en la gráfica,
+sino que se describe a continuación:
+* SearchController: buscar_asignatura.html, buscar_carrera.html, buscar_universidad.html, index.html,
+resultado_busqueda.html
+* SaveController: anadir.html, anadir_asignatura.html, anadir_asignatura_carrera.html, anadir_carrera.html,
+anadir_universidad.html, index.html, resultado_guardar,html, subir_asignatura.html, subir_carrera.html,
+subir_universidad.html
+* DownloaderController: resultado_busqueda.html, resultado_guardar.html
+* LoginController: index.html, login_template.html, login_error.html, registro.html
+* DeleteController: borrar_apuntes.html, borrar_ok.html
+
+## Intrucciones para desplegar la aplicación
+1. Ejecutamos 'mvn -Dmaven.test.skip=true package' para generar tanto
+el jar de la aplicación web como del servicio interno.
+2. Copiamos los dos jars en una máquina virtual Ubuntu 18.04 (Bionic) mediante
+la compartición de carpetas de Virtualbox.
+3. En la máquina virtual instalamos los paquetes necesarios para ejecutar los dos jars:
+    * 'sudo apt update' para actualizar los índices del repositorio de Ubuntu
+    * 'sudo apt install openjdk-8-jre' para instalar la máquina virtual de Java 8
+    * 'sudo apt install mysql-server-5.7' para instalar el servidor de mysql 5.7
+4. Ejecutamos la aplicación web con 'java -jar easyNotes.jar'.
+5. Cambiamos a otro tty y ejecutamos el servicio interno con 'java -jar mailRest.jar'.
 
 ## Integrantes
 * Guillermo De Azcarate Acosta
