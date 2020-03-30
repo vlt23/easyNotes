@@ -85,7 +85,7 @@ Página para registrar.
 
 ## Requisitos para desplegar la aplicación
 1. Disponer de una maquina de Ubuntu 18.04
-2. Instalar JRE y JDK "apt-get install default-jre" y  "apt-get install default-jdk"
+2. Instalar JRE con "apt-get install default-jre"
 3. Instalar y configurar MySQL. "apt-get install mysql-server" y configurar: "mysql_secure_installation utility"
 4. Configurar la direccion IP del SO
 
