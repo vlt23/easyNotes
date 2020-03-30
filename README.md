@@ -36,7 +36,7 @@ número de descargas
 ## Servicio interino
 * Mandar de forma automática un email cuando se registre un nuevo usuario. 
 * Mandar de forma automática un email cuando el documento de ha descargado más de (5) veces
-
+* Mandar un correo para confirmar que el apunte ha sido bien subido
 
 ## Capturas de pantalla
 ![](resREADME/pag_inicio.png)
