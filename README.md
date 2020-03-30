@@ -34,7 +34,7 @@ número de descargas
 * Tag: nombre, apuntes
 
 ## Servicio interino
-* Mandar de forma automática un email cuando se actualice una asignatura
+* Mandar de forma automática un email cuando se registre un nuevo usuario. 
 * Mandar de forma automática un email cuando el documento de ha descargado más de (5) veces
 
 
@@ -75,18 +75,13 @@ Página para registrar.
 ## Diagrama Entidad/Relación
 ![E/R](resREADME/diagramaER.png)
 
-## Diagrama de clases
+## Diagrama de clases y templates
+![](resREADME/diagramaclasesPablo.png)
+
+
+## Diagrama de clases completo
 ![](resREADME/diagramaClases.png)
-Debido a problemas de espacio, la relación entre templates y Controller no figura en la gráfica,
-sino que se describe a continuación:
-* SearchController: buscar_asignatura.html, buscar_carrera.html, buscar_universidad.html, index.html,
-resultado_busqueda.html
-* SaveController: anadir.html, anadir_asignatura.html, anadir_asignatura_carrera.html, anadir_carrera.html,
-anadir_universidad.html, index.html, resultado_guardar,html, subir_asignatura.html, subir_carrera.html,
-subir_universidad.html
-* DownloaderController: resultado_busqueda.html, resultado_guardar.html
-* LoginController: index.html, login_template.html, login_error.html, registro.html
-* DeleteController: borrar_apuntes.html, borrar_ok.html
+
 
 ## Requisitos para desplegar la aplicación
 1. Disponer de una maquina de Ubuntu 18.04
