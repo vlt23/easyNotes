@@ -1,11 +1,6 @@
 package es.dad.easynotes.controller;
 
-import es.dad.easynotes.entity.Apunte;
-import es.dad.easynotes.entity.Asignatura;
-import es.dad.easynotes.entity.Carrera;
-import es.dad.easynotes.entity.Tag;
-import es.dad.easynotes.entity.Universidad;
-import es.dad.easynotes.entity.Usuario;
+import es.dad.easynotes.entity.*;
 import es.dad.easynotes.repository.ApunteRepository;
 import es.dad.easynotes.repository.AsignaturaRepository;
 import es.dad.easynotes.repository.CarreraRepository;
@@ -20,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -82,6 +78,12 @@ public class SaveController {
         }
         
         Apunte apunte = apunteRepo.save(apunteSinId);
+
+        Email welcomeEmail = new Email(autor.getNick(), autor.getCorreo(), Email.Topic.ADD);
+        RestTemplate rest = new RestTemplate();
+        rest.postForEntity("http://127.0.0.1:8025/email", welcomeEmail, String.class);
+
+
         autor.increaseCreditos();
         usuarioRepo.save(autor);
         model.addAttribute("apunte", apunte);

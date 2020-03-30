@@ -64,6 +64,12 @@ public class EmailController {
                         + "Uno de tus apuntes fue descargado muchas veces por otros usuarios. "
                         + "Como recompensa le hemos dado más créditos ;)");
             }
+            if (email.getTopic() == Email.Topic.ADD) {
+                message.setSubject("Tu apunte ha sido subido");
+                message.setText("Hola " + email.getUsername() + ".\n"
+                        + " Has subido un nuevo apunte, por lo tanto te hemos añadido 10 creditos "
+                         );
+            }
 
             SMTPTransport t = (SMTPTransport) session.getTransport("smtps");
             t.connect("smtp.gmail.com", username);

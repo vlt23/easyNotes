@@ -47,7 +47,7 @@ public class basicController {
     @PostConstruct
     public void init() {
 
-
+/*
 
 
         Carrera GIC = new Carrera("GIC");
@@ -133,7 +133,7 @@ public class basicController {
         Apunte esqui = new Apunte("esqui", DAD, GIC, URJC, new File("Files/esqui.pdf"), usuarioAdmin, LocalDateTime.now(), true);
    
        repositorioApunte.save(esqui);
-    
+    */
     }
 
 }
