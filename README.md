@@ -88,6 +88,20 @@ subir_universidad.html
 * LoginController: index.html, login_template.html, login_error.html, registro.html
 * DeleteController: borrar_apuntes.html, borrar_ok.html
 
+## Requisitos para desplegar la aplicación
+1. Disponer de una maquina de Ubuntu 18.04
+2. Instalar JRE y JDK "apt-get install default-jre" y  "apt-get install default-jdk"
+3. Instalar y configurar MySQL. "apt-get install mysql-server" y configurar: "mysql_secure_installation utility"
+4. Instalar mvn "sudo apt install maven"
+5. Configurar la direccion IP del SO
+
+## Intrucciones para desplegar la aplicación
+1. Clonar el repositorio "git clone https://github.com/vlt23/easyNotes"
+2. Construir el proyecto mvn:
+    * Entrar en easyNotes/easynotes y ejecutar "mvn clean install" copiar el archivo *.jar en una carpeta en la que se incluya el directorio 'Files'
+    * Entrar en easyNotes/mailRest y ejecutar "mvn clean install" 
+3. Ejecutar mediante java -jar ambos *.jar
+
 ## Intrucciones para desplegar la aplicación
 1. Ejecutamos 'mvn -Dmaven.test.skip=true package' para generar tanto
 el jar de la aplicación web como del servicio interno.
