@@ -20,9 +20,9 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-@Controller
+//@Controller
 public class basicController {
-    private final String pathLocal = ("src" + File.separator + "main" + File.separator
+    /*private final String pathLocal = ("src" + File.separator + "main" + File.separator
             + "resources" + File.separator + "files" + File.separator);
 
     @Autowired
@@ -46,11 +46,7 @@ public class basicController {
 
     @PostConstruct
     public void init() {
-
-/*
-
-
-       /* Carrera GIC = new Carrera("GIC");
+        Carrera GIC = new Carrera("GIC");
     	
     	Carrera GII = new Carrera("GII");
     	
@@ -108,10 +104,6 @@ public class basicController {
                 "easynotes.dad.2020@gmail.com", true);
         Usuario usuarioAdmin = usuarioRepo.save(usuario);
 
-        Usuario usuario1 = new Usuario("user", "1234", "user","user",
-                "easynotes.dad.2020@gmail.com", false);
-        usuarioRepo.save(usuario1);
-
         Apunte manualPortatil = new Apunte("manualPortatil", DAD, GIC, URJC, new File("Files/pruebaPablo.pdf"), usuarioAdmin, LocalDateTime.now(), false);
         repositorioApunte.save(manualPortatil);
 
@@ -132,13 +124,7 @@ public class basicController {
 
         Apunte esqui = new Apunte("esqui", DAD, GIC, URJC, new File("Files/esqui.pdf"), usuarioAdmin, LocalDateTime.now(), true);
    
-<<<<<<< HEAD
        repositorioApunte.save(esqui);
-    */
-=======
-       repositorioApunte.save(esqui);*/
-    
->>>>>>> Añadida la solicitud de nueva asignatura
-    }
+    }*/
 
 }
