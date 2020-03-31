@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Easy Notes</title>
+<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+<script type="text/javascript" href="/js/bootstrap.min.js"></script>
+<script type="text/javascript" href="/js/jquery-3.4.1.min.js"></script>
+
+<style>
+	button {
+		margin-top: 10px;
+		margin-bottom: 10px;
+	}
+
+	.container {
+		margin: 20px;
+	}
+
+	.form-control, #file {
+		margin-bottom: 15px;
+	}
+
+	.siguiente {
+		float: right;
+	}
+</style>
+</head>
+
+<body>
+	<div class="container">
+		<h1 align="center">Solicitar Asignatura</h1>
+		<form action="/">
+			<button type="submit" class="btn btn-danger">Volver</button>
+			<input type="hidden" name="_csrf" value="{{token}}"/>
+
+		</form>
+		<form method="post" action="/asignaturaSolicitada"
+			  enctype="multipart/form-data">
+			<div class="col">
+				<div class="row">
+					<label for="Universidad">Universidad:</label>
+					<input type="text" class="form-control" id="Universidad" name="Universidad"
+							   placeholder="Introduzca la Universidad a la que pertenece la nueva asignatura" required>
+				</div>
+				<div class="row">
+					<label for="Carrera">Carrera:</label>
+						<input type="text" class="form-control" id="Carrera" name="Carrera"
+							   placeholder="Introduzca la carrera a la que pertenece la nueva asignatura" required>
+				</div>
+				<div class="row">
+					<label for="Asignatura">Asignatura:</label>
+						<input type="text" class="form-control" id="Asignatura" name="Asignatura"
+							   placeholder="Introduzca el nombre de la nueva asignatura" required>
+				</div>
+				<div class="row">
+					<label for="Profesores">Profesores:</label>
+						<input type="text" class="form-control" id="Profesores" name="Profesores"
+							   placeholder="Introduzca los profesores que imparten la asignatura separados por ','">
+				</div>
+			</div>
+			<div class="siguiente">
+				<button type="submit" class="btn btn-success">Solicitar Asignatura</button>
+			</div>
+			<input type="hidden" name="_csrf" value="{{token}}"/>
+
+		</form>
+	</div>
+	
+</body>
+</html>

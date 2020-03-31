@@ -50,7 +50,7 @@ public class basicController {
 /*
 
 
-        Carrera GIC = new Carrera("GIC");
+       /* Carrera GIC = new Carrera("GIC");
     	
     	Carrera GII = new Carrera("GII");
     	
@@ -132,8 +132,13 @@ public class basicController {
 
         Apunte esqui = new Apunte("esqui", DAD, GIC, URJC, new File("Files/esqui.pdf"), usuarioAdmin, LocalDateTime.now(), true);
    
+<<<<<<< HEAD
        repositorioApunte.save(esqui);
     */
+=======
+       repositorioApunte.save(esqui);*/
+    
+>>>>>>> Añadida la solicitud de nueva asignatura
     }
 
 }

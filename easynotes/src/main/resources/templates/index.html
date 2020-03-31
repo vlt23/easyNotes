@@ -138,6 +138,16 @@ button{
 				</form>
 			</div>
 			{{/isAdmin}}
+			
+			{{#isUser}}
+			<div class="col">
+				<form method="get" action="/solicitarAsignatura">
+					<button type="submit" class="btn btn-link">Solicitar Asignatura</button>
+					<input type="hidden" name="_csrf" value="{{token}}"/>
+				</form>
+			</div>
+			{{/isUser}}
+			
 		</div>
 	</div>
 	<script>

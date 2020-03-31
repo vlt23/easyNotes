@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -236,5 +237,36 @@ public class SaveController {
 
         return "anadir";
     }
+    
+    @GetMapping("/solicitarAsignatura")
+    public String solicitarAsignatura() {
+
+        return "solicitar_asignatura";
+    }
+    
+    @PostMapping("/asignaturaSolicitada")
+    public String asignaturaSolicitada(Model model, @RequestParam String Universidad, @RequestParam String Carrera, 
+    		@RequestParam String Asignatura, @RequestParam String Profesores) {
+    	
+    	List<Usuario> users = usuarioRepo.findAll();
+    	
+    	String uniCarAsig = "";
+    	if (Profesores.equals("")) {
+    		uniCarAsig = Universidad + "-" + Carrera + "-" + Asignatura;
+    	} else {
+    		uniCarAsig = Universidad + "-" + Carrera + "-" + Asignatura + "-" + Profesores;
+    	}
+    	
+    	for (Usuario user : users) {
+    		if (user.isAdmin()) {
+    			Email newAsignEmail = new Email(user.getNick(), user.getCorreo(), Email.Topic.NEW_ASIGN, uniCarAsig);
+    	        RestTemplate rest = new RestTemplate();
+    	        rest.postForEntity("http://127.0.0.1:8025/email", newAsignEmail, String.class);
+    		}
+    	}
+    	
+        return "asignatura_solicitada";
+    }
+    
 
 }

@@ -17,6 +17,8 @@ import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+
+import java.util.List;
 import java.util.Properties;
 
 @RestController
@@ -69,6 +71,19 @@ public class EmailController {
                 message.setText("Hola " + email.getUsername() + ".\n"
                         + " Has subido un nuevo apunte, por lo tanto te hemos añadido 10 creditos "
                          );
+            }
+            if (email.getTopic() == Email.Topic.NEW_ASIGN) {
+            	String [] datos = email.getUniversidadCarreraAsignatura().split("-");
+            	String text = "Hola" + email.getUsername() + "\nUn usuario ha solicitado la creación de una nueva asignatura. "
+            			+ "Estos son los datos necesarios: "
+            			+ "\nNombre de la Universidad: " + datos[0]
+            			+ "\nNombre de la Carrera: " + datos[1]
+            			+ "\nNombre de la Asignatura: " + datos[2];
+            	if (datos.length > 3) {
+            		text += "\nProfesores que imparten la Asignatura: " + datos[3];
+            	}
+                message.setSubject("Solicitud de una nueva Asignatura");
+                message.setText(text);
             }
 
             SMTPTransport t = (SMTPTransport) session.getTransport("smtps");

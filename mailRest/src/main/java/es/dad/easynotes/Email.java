@@ -5,17 +5,27 @@ public class Email {
     public enum Topic {
         WELCOME,
         DOWNLOAD,
-        ADD
+        ADD, 
+        NEW_ASIGN
     }
 
     private String username;
     private String userMail;
     private Topic topic;
+    private String universidadCarreraAsignatura;
 
     public Email(String username, String userMail, Topic topic) {
         this.username = username;
         this.userMail = userMail;
         this.topic = topic;
+        this.universidadCarreraAsignatura = "";
+    }
+    
+    public Email(String username, String userMail, Topic topic, String UCA) {
+        this.username = username;
+        this.userMail = userMail;
+        this.topic = topic;
+        this.universidadCarreraAsignatura = UCA;
     }
 
     public String getUserMail() {
@@ -28,6 +38,10 @@ public class Email {
 
     public Topic getTopic() {
         return topic;
+    }
+    
+    public String getUniversidadCarreraAsignatura() {
+        return universidadCarreraAsignatura;
     }
 
     @Override

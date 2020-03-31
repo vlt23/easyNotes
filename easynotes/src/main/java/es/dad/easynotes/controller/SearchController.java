@@ -54,6 +54,8 @@ public class SearchController {
 
             if (usuario.isAdmin()) {
                 model.addAttribute("isAdmin", true);
+            } else {
+            	model.addAttribute("isUser", true);
             }
             model.addAttribute("borrar", true);
             model.addAttribute("nombreUsuario", auth.getName());

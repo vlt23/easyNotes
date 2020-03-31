@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Easy Notes</title>
+<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+<script type="text/javascript" href="/js/bootstrap.min.js"></script>
+<script type="text/javascript" href="/js/jquery-3.4.1.min.js"></script>
+
+<style>
+	button {
+		margin-top: 10px;
+		margin-bottom: 10px;
+	}
+
+	.container {
+		margin: 20px;
+	}
+</style>
+</head>
+
+<body>
+	<div class="container">
+		<h4 align="center">Asignatura solicitada con éxito. Se ha enviado un email a los administradores</h4>
+		<form action="/">
+			<button type="submit" class="btn btn-danger">Volver</button>
+			<input type="hidden" name="_csrf" value="{{token}}"/>
+
+		</form>
+	</div>
+	
+</body>
+</html>
