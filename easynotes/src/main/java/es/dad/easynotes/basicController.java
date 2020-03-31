@@ -20,9 +20,9 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-//@Controller
+@Controller
 public class basicController {
-    /*private final String pathLocal = ("src" + File.separator + "main" + File.separator
+    private final String pathLocal = ("src" + File.separator + "main" + File.separator
             + "resources" + File.separator + "files" + File.separator);
 
     @Autowired
@@ -44,7 +44,7 @@ public class basicController {
     private UsuarioRepository usuarioRepo;
 
 
-    @PostConstruct
+    /*@PostConstruct
     public void init() {
         Carrera GIC = new Carrera("GIC");
     	
@@ -96,9 +96,6 @@ public class basicController {
         GIC.getAsignaturas().add(DAD);
         GIC.getAsignaturas().add(ED);
         carreraRepo.save(GIC);
-
-        //userRepository.save(new Usuario("user", "1234", "ROLE_USER"));
-        //userRepository.save(new Usuario("admin", "1234", "ROLE_USER", "ROLE_ADMIN"));
 
         Usuario usuario = new Usuario("admin", "1234", "user", "admin",
                 "easynotes.dad.2020@gmail.com", true);

@@ -24,7 +24,7 @@ public class Email {
         this.topic = topic;
         this.universidadCarreraAsignatura = "";
     }
-    
+
     public Email(String username, String userMail, Topic topic, String UCA) {
         this.username = username;
         this.userMail = userMail;
@@ -47,8 +47,6 @@ public class Email {
     public String getUniversidadCarreraAsignatura() {
         return universidadCarreraAsignatura;
     }
-    
-    
 
     @Override
     public String toString() {

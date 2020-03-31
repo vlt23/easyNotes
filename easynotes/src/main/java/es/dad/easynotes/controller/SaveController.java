@@ -250,21 +250,23 @@ public class SaveController {
     	
     	List<Usuario> users = usuarioRepo.findAll();
     	
-    	String uniCarAsig = "";
+    	String uniCarAsig;
     	if (Profesores.equals("")) {
     		uniCarAsig = Universidad + "-" + Carrera + "-" + Asignatura;
     	} else {
     		uniCarAsig = Universidad + "-" + Carrera + "-" + Asignatura + "-" + Profesores;
     	}
-    	
+
     	for (Usuario user : users) {
     		if (user.isAdmin()) {
     			Email newAsignEmail = new Email(user.getNick(), user.getCorreo(), Email.Topic.NEW_ASIGN, uniCarAsig);
-    	        RestTemplate rest = new RestTemplate();
-    	        rest.postForEntity("http://127.0.0.1:8025/email", newAsignEmail, String.class);
+    			Thread emailThread = new Thread(() ->
+                        WebClient.create().post().uri(URI.create("http://127.0.0.1:8025/email"))
+                                .body(BodyInserters.fromValue(newAsignEmail)).exchange().block());
+    	        emailThread.start();
     		}
     	}
-    	
+
         return "asignatura_solicitada";
     }
     

@@ -17,8 +17,6 @@ import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-
-import java.util.List;
 import java.util.Properties;
 
 @RestController
@@ -66,15 +64,17 @@ public class EmailController {
                         + "Uno de tus apuntes fue descargado muchas veces por otros usuarios. "
                         + "Como recompensa le hemos dado más créditos ;)");
             }
+
             if (email.getTopic() == Email.Topic.ADD) {
                 message.setSubject("Tu apunte ha sido subido");
                 message.setText("Hola " + email.getUsername() + ".\n"
                         + " Has subido un nuevo apunte, por lo tanto te hemos añadido 10 creditos "
                          );
             }
+
             if (email.getTopic() == Email.Topic.NEW_ASIGN) {
             	String [] datos = email.getUniversidadCarreraAsignatura().split("-");
-            	String text = "Hola" + email.getUsername() + "\nUn usuario ha solicitado la creación de una nueva asignatura. "
+            	String text = "Hola " + email.getUsername() + "\nUn usuario ha solicitado la creación de una nueva asignatura. "
             			+ "Estos son los datos necesarios: "
             			+ "\nNombre de la Universidad: " + datos[0]
             			+ "\nNombre de la Carrera: " + datos[1]

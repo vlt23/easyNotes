@@ -14,6 +14,10 @@ public class Email {
     private Topic topic;
     private String universidadCarreraAsignatura;
 
+    public Email() {
+        // Default constructor
+    }
+
     public Email(String username, String userMail, Topic topic) {
         this.username = username;
         this.userMail = userMail;
