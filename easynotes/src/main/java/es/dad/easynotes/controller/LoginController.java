@@ -9,7 +9,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.web.reactive.function.BodyInserters;
+import org.springframework.web.reactive.function.client.WebClient;
+
+import java.net.URI;
 
 @Controller
 public class LoginController {
@@ -50,15 +53,14 @@ public class LoginController {
 	        model.addAttribute("emailDup", true);
 	        return "loginerror";
         }
-	    //userSession.setAttribute("nick", username);
-	    //userSession.setAttribute("password", password);
-	    //userSession.setAttribute("email", email);
-	    //userSession.setAttribute("registered", true);
+
         usuarioRepo.save(new Usuario(username, password, name, surname, email, false));
 
         Email welcomeEmail = new Email(username, email, Email.Topic.WELCOME);
-        RestTemplate rest = new RestTemplate();
-        rest.postForEntity("http://127.0.0.1:8025/email", welcomeEmail, String.class);
+        Thread emailThread = new Thread(() ->
+                WebClient.create().post().uri(URI.create("http://127.0.0.1:8025/email"))
+                .body(BodyInserters.fromValue(welcomeEmail)).exchange().block());
+        emailThread.start();
 
 	    return "login_template";
     }

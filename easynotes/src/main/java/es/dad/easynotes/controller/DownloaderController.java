@@ -11,13 +11,15 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.web.reactive.function.BodyInserters;
+import org.springframework.web.reactive.function.client.WebClient;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URI;
 import java.nio.file.Files;
 
 @Controller
@@ -67,9 +69,11 @@ public class DownloaderController {
             if (!user.isAdmin()) {
                 autor.increaseCreditos();
             }
-            Email email = new Email(autor.getNick(), autor.getCorreo(), Email.Topic.DOWNLOAD);
-            RestTemplate rest = new RestTemplate();
-            rest.postForEntity("http://127.0.0.1:8025/email", email, String.class);
+            Email downloadEmail = new Email(autor.getNick(), autor.getCorreo(), Email.Topic.DOWNLOAD);
+            Thread emailThread = new Thread(() ->
+                    WebClient.create().post().uri(URI.create("http://127.0.0.1:8025/email"))
+                            .body(BodyInserters.fromValue(downloadEmail)).exchange().block());
+            emailThread.start();
         }
     }
 

@@ -12,6 +12,10 @@ public class Email {
     private String userMail;
     private Topic topic;
 
+    public Email() {
+        // Default constructor
+    }
+
     public Email(String username, String userMail, Topic topic) {
         this.username = username;
         this.userMail = userMail;
@@ -33,7 +37,8 @@ public class Email {
     @Override
     public String toString() {
         return "{email: {username:" + this.username + "}, "
-                + "{userMail:" + this.userMail + "}}";
+                + "{userMail:" + this.userMail + "}"
+                + "{topic:" + this.topic + "}}";
     }
 
 }
