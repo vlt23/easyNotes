@@ -47,7 +47,6 @@ button{
 				<div class="logout">
 					<form action="/logout" method="post">
 						<input type="submit" value="Sign Out" class="btn btn-danger"/>
-						<input type="hidden" name="_csrf" value="{{token}}"/>
 					</form>
 				</div>
 			</div>
@@ -63,7 +62,6 @@ button{
 					<input type="text" id="buscar-input" class="form-control" name="buscarAp"
 									   placeholder="Buscar Apuntes por TAGS">
 					<button type="submit" id="buscar-btn" class="btn btn-primary" disabled="true">Buscar</button>
-					<input type="hidden" name="_csrf" value="{{token}}"/>
 				</form>
 			</div>
 			{{#borrar}}
@@ -71,7 +69,6 @@ button{
 				<div class="borrarAp">
 					<form method="post" action="/borrarApuntes">
 						<button type="submit" id="buscar-btn" class="btn btn-secondary" class="borrarAp">Borrar Apuntes</button>
-						<input type="hidden" name="_csrf" value="{{token}}"/>
 					</form>
 				</div>
 			</div>
@@ -82,7 +79,7 @@ button{
 				<form method="get" action="/searchAsignatura">
 					<div class="form-group">
 						<button type="submit" class="btn btn-outline-secondary">Buscar por Asignatura</button>
-						<input type="hidden" name="_csrf" value="{{token}}"/>
+
 					</div>
 				</form>
 			</div>
@@ -90,7 +87,7 @@ button{
 				<form method="get" action="/searchCarrera">
 					<div class="form-group">
 						<button type="submit" class="btn btn-outline-secondary">Buscar por Carrera</button>
-						<input type="hidden" name="_csrf" value="{{token}}"/>
+
 
 					</div>
 				</form>
@@ -100,7 +97,7 @@ button{
 					<div class="form-group">
 						<button type="submit" class="btn btn-outline-secondary">Buscar por Universidad</button>
 					</div>
-					<input type="hidden" name="_csrf" value="{{token}}"/>
+
 				</form>
 			</div>
 		</div>
@@ -110,7 +107,7 @@ button{
 					<div class="form-group">
 						<button type="submit" class="btn btn-success">Subir Apuntes</button>
 					</div>
-					<input type="hidden" name="_csrf" value="{{token}}"/>
+
 
 				</form>
 			</div>
@@ -119,21 +116,21 @@ button{
 			<div class="col">
 				<form method="get" action="/anadirUniversidad">
 					<button type="submit" class="btn btn-link">Añadir Universidad</button>
-					<input type="hidden" name="_csrf" value="{{token}}"/>
+
 
 				</form>
 			</div>
 			<div class="col">
 				<form method="get" action="/anadirCarrera">
 					<button type="submit" class="btn btn-link">Añadir Carrera</button>
-					<input type="hidden" name="_csrf" value="{{token}}"/>
+
 
 				</form>
 			</div>
 			<div class="col">
 				<form method="get" action="/anadirAsignatura">
 					<button type="submit" class="btn btn-link">Añadir Asignatura</button>
-					<input type="hidden" name="_csrf" value="{{token}}"/>
+
 
 				</form>
 			</div>
@@ -143,7 +140,7 @@ button{
 			<div class="col">
 				<form method="get" action="/solicitarAsignatura">
 					<button type="submit" class="btn btn-link">Solicitar Asignatura</button>
-					<input type="hidden" name="_csrf" value="{{token}}"/>
+
 				</form>
 			</div>
 			{{/isUser}}
