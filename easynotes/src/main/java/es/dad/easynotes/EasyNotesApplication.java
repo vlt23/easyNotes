@@ -4,10 +4,12 @@ import com.hazelcast.config.Config;
 import com.hazelcast.config.JoinConfig;
 import com.hazelcast.core.HazelcastInstance;
 import com.hazelcast.instance.HazelcastInstanceFactory;
+import com.hazelcast.spring.cache.HazelcastCacheManager;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.session.hazelcast.config.annotation.web.http.EnableHazelcastHttpSession;
@@ -39,8 +41,13 @@ public class EasyNotesApplication {
 	// https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#boot-features-hazelcast
 	@Bean
 	public HazelcastInstance hazelcastInstance() {
-		logger.info("Activating hazelcast cache");
 		return HazelcastInstanceFactory.newHazelcastInstance(config());
+	}
+
+	@Bean
+	public CacheManager cacheManager() {
+		logger.info("Activating hazelcast cache");
+		return new HazelcastCacheManager(hazelcastInstance());
 	}
 
 }

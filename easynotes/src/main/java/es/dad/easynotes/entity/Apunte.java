@@ -1,16 +1,20 @@
 package es.dad.easynotes.entity;
 
+import com.hazelcast.nio.ObjectDataInput;
+import com.hazelcast.nio.ObjectDataOutput;
+import com.hazelcast.nio.serialization.DataSerializable;
+
+import javax.persistence.*;
 import java.io.File;
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import javax.persistence.*;
-
 @Entity
-public class Apunte {
-	
+public class Apunte implements DataSerializable {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
@@ -183,4 +187,13 @@ public class Apunte {
 				tamanyo, esExamen, filePath, autor);
 	}
 
+	@Override
+	public void writeData(ObjectDataOutput objectDataOutput) throws IOException {
+
+	}
+
+	@Override
+	public void readData(ObjectDataInput objectDataInput) throws IOException {
+
+	}
 }
