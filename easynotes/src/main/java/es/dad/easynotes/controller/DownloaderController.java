@@ -6,6 +6,7 @@ import es.dad.easynotes.entity.Usuario;
 import es.dad.easynotes.repository.ApunteRepository;
 import es.dad.easynotes.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -43,6 +44,8 @@ public class DownloaderController {
         }
     }
 
+    @Value("${valor.mail.ip}")
+    private String hostIp;
     @GetMapping("/download/{idApunte}")
     public void downloadResource(HttpServletResponse response, @PathVariable long idApunte) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -71,7 +74,7 @@ public class DownloaderController {
             }
             Email downloadEmail = new Email(autor.getNick(), autor.getCorreo(), Email.Topic.DOWNLOAD);
             Thread emailThread = new Thread(() ->
-                    WebClient.create().post().uri(URI.create("http://127.0.0.1:8025/email"))
+                    WebClient.create().post().uri(URI.create(hostIp+"8025/email"))
                             .body(BodyInserters.fromValue(downloadEmail)).exchange().block());
             emailThread.start();
         }

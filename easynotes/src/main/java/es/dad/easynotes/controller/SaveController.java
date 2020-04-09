@@ -13,6 +13,7 @@ import es.dad.easynotes.repository.CarreraRepository;
 import es.dad.easynotes.repository.UniversidadRepository;
 import es.dad.easynotes.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -54,6 +55,8 @@ public class SaveController {
     @Autowired
     private UsuarioRepository usuarioRepo;
 
+    @Value("${valor.mail.ip}")
+    private String hostIp;
     @PostMapping("/saveApunte/{uniStr}/{carreraStr}")
     public String saveApunte(Model model, @PathVariable String uniStr, @PathVariable String carreraStr,
                              @RequestParam String asigStr, @RequestParam String tags,
@@ -90,7 +93,7 @@ public class SaveController {
 
         Email saveEmail = new Email(autor.getNick(), autor.getCorreo(), Email.Topic.ADD);
         Thread emailThread = new Thread(() ->
-                WebClient.create().post().uri(URI.create("http://127.0.0.1:8025/email"))
+                WebClient.create().post().uri(URI.create(hostIp+":8025/email"))
                         .body(BodyInserters.fromValue(saveEmail)).exchange().block());
         emailThread.start();
 
@@ -261,7 +264,7 @@ public class SaveController {
     		if (user.isAdmin()) {
     			Email newAsignEmail = new Email(user.getNick(), user.getCorreo(), Email.Topic.NEW_ASIGN, uniCarAsig);
     			Thread emailThread = new Thread(() ->
-                        WebClient.create().post().uri(URI.create("http://127.0.0.1:8025/email"))
+                        WebClient.create().post().uri(URI.create(hostIp+":8025/email"))
                                 .body(BodyInserters.fromValue(newAsignEmail)).exchange().block());
     	        emailThread.start();
     		}
