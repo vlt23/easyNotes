@@ -1,15 +1,20 @@
 package es.dad.easynotes.entity;
 
+import com.hazelcast.nio.ObjectDataInput;
+import com.hazelcast.nio.ObjectDataOutput;
+import com.hazelcast.nio.serialization.DataSerializable;
+
+import javax.persistence.*;
 import java.io.File;
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
-public class Apunte {
-	
+public class Apunte implements DataSerializable {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
@@ -25,8 +30,7 @@ public class Apunte {
 	@ManyToOne
 	private Universidad universidad;
 	private LocalDateTime fechaSubida;
-	
-	
+
 	@ManyToMany(cascade=CascadeType.PERSIST)
 	private List<Tag> tags = new ArrayList<>();;
 	private long tamanyo;
@@ -35,10 +39,7 @@ public class Apunte {
 
 	@ManyToOne
 	private Usuario autor;
-	
-	
-	//@OneToMany
-	//private List<Integer> valoraciones;
+
 	private int numeroDescargas;
 	
 	public Apunte() {
@@ -47,19 +48,17 @@ public class Apunte {
 	
 	public Apunte(String nombre, Asignatura asignatura, Carrera carrera, Universidad universidad,
 			 File filePath, Usuario autor, LocalDateTime fechaSubida, boolean esExamen) {
-		this.nombre=nombre;
-		this.asignatura=asignatura;
-		this.carrera=carrera;
+		this.nombre = nombre;
+		this.asignatura = asignatura;
+		this.carrera = carrera;
 		this.universidad = universidad;
-		//this.fechaSubida = fechaSubida;
-		
+
 		//anyadimos los tags 
 		tags.add(new Tag(this.nombre));
 		tags.add(new Tag(this.asignatura.getNombre()));
 		tags.add(new Tag(this.carrera.getNombre()));
 		tags.add(new Tag(this.universidad.getNombre()));
 
-		
 		this.tamanyo = filePath.length();
 		this.numeroDescargas = 0;
 		this.filePath = filePath;
@@ -68,7 +67,6 @@ public class Apunte {
 		this.esExamen = esExamen;
 	}
 
-	
 	public Carrera getCarrera() {
 		return carrera;
 	}
@@ -165,4 +163,37 @@ public class Apunte {
 		this.esExamen = esExamen;
 	}
 
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		Apunte apunte = (Apunte) o;
+		return id == apunte.id &&
+				tamanyo == apunte.tamanyo &&
+				esExamen == apunte.esExamen &&
+				nombre.equals(apunte.nombre) &&
+				asignatura.equals(apunte.asignatura) &&
+				carrera.equals(apunte.carrera) &&
+				universidad.equals(apunte.universidad) &&
+				fechaSubida.equals(apunte.fechaSubida) &&
+				tags.equals(apunte.tags) &&
+				filePath.equals(apunte.filePath) &&
+				autor.equals(apunte.autor);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id, nombre, asignatura, carrera, universidad, fechaSubida, tags,
+				tamanyo, esExamen, filePath, autor);
+	}
+
+	@Override
+	public void writeData(ObjectDataOutput objectDataOutput) throws IOException {
+
+	}
+
+	@Override
+	public void readData(ObjectDataInput objectDataInput) throws IOException {
+
+	}
 }
