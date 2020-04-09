@@ -1,0 +1,42 @@
+
+ docker run -p 0.0.0.0:3306:3306  --name mysql -d  -e MYSQL_ROOT_PASSWORD=1234 -e MYSQL_DATABASE=easynotes -e MYSQL_ROOT_HOST=%  -e MYSQL_USER=easynotes -e MYSQL_PASSWORD=1234 mysql/mysql-server
+
+
+
+arranque easynotes:
+
+sudo docker run -p 0.0.0.0:8081:8081 -p 0.0.0.0:5701:5701 --network="host" --rm --name web1  easynotes/easynotes
+sudo docker run -p 8082:8081 --network="host" --rm --name web2  easynotes/easynotes
+
+parar contenedores y borrar:
+docker stop $(docker ps -a -q)&&docker rm $(docker ps -a -q)
+para borrar todo:
+docker system prune -a
+
+
+
+ haproxy:
+   build: ./ServicioHaproxy
+   ports:
+     - '8000:80'
+   environment:
+     - WEB_SERVICE_IP1=web1
+     - WEB_SERVICE_IP2=web2
+     - WEB_SERVICE_PORT1=8081
+     - WEB_SERVICE_PORT2=8081
+
+   	 server web01 ${WEB_SERVICE_IP1}:${WEB_SERVICE_PORT1} check
+   	 server web02 ${WEB_SERVICE_IP2}:${WEB_SERVICE_PORT2} check
+
+	stats enable
+	 stats auth admin:admin
+	 stats uri /haproxy?stats
+
+
+DOCKER FILE ANTIGUO
+FROM openjdk:alpine
+WORKDIR /root
+
+COPY EASYNOTES.jar /root
+
+ENTRYPOINT java -jar EASYNOTES.jar

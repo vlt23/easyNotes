@@ -1,0 +1,25 @@
+
+ docker run -p 0.0.0.0:3306:3306  --name mysql -d  -e MYSQL_ROOT_PASSWORD=1234 -e MYSQL_DATABASE=easynotes -e MYSQL_ROOT_HOST=%  -e MYSQL_USER=easynotes -e MYSQL_PASSWORD=1234 mysql/mysql-server
+
+
+docker stop mysql-db; docker rm mysql-db
+
+arranque easynotes:
+
+sudo docker run -p 8081:8081 -p 0.0.0.0:5701:5701 -d --rm --name web1  easynotes/easynotes
+sudo docker run -p 0.0.0.0:8082:8081  --rm --name web2  easynotes/easynotes
+
+parar contenedores y borrar:
+docker stop $(docker ps -a -q)
+docker rm $(docker ps -a -q)
+
+
+
+
+DOCKER FILE ANTIGUO
+FROM openjdk:alpine
+WORKDIR /root
+
+COPY EASYNOTES.jar /root
+
+ENTRYPOINT java -jar EASYNOTES.jar
