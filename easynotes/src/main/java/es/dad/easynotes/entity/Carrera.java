@@ -1,5 +1,10 @@
 package es.dad.easynotes.entity;
 
+import com.hazelcast.nio.ObjectDataInput;
+import com.hazelcast.nio.ObjectDataOutput;
+import com.hazelcast.nio.serialization.DataSerializable;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +16,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Carrera {
+public class Carrera implements DataSerializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -28,15 +33,16 @@ public class Carrera {
 	private List<Apunte> apuntes = new ArrayList<>();
 	
 	public Carrera() {}
+
 	public Carrera(String nombre) {
 		this.nombre = nombre;
 	}
+
 	public Carrera(String nombre, Universidad universidad) {
 		this.nombre = nombre;
 		this.universidad = universidad;
 	}
-	
-	
+
 	public long getId() {
 		return id;
 	}
@@ -69,5 +75,16 @@ public class Carrera {
 		this.apuntes = apuntes;
 	}
 
-	
+	@Override
+	public void writeData(ObjectDataOutput objectDataOutput) throws IOException {
+		objectDataOutput.writeLong(id);
+		objectDataOutput.writeUTF(nombre);
+	}
+
+	@Override
+	public void readData(ObjectDataInput objectDataInput) throws IOException {
+		id = objectDataInput.readLong();
+		nombre = objectDataInput.readUTF();
+	}
+
 }
