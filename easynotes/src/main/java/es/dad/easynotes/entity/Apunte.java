@@ -189,11 +189,39 @@ public class Apunte implements DataSerializable {
 
 	@Override
 	public void writeData(ObjectDataOutput objectDataOutput) throws IOException {
-
+		objectDataOutput.writeLong(this.id);
+		objectDataOutput.writeUTF(this.nombre);
+		objectDataOutput.writeObject(asignatura);
+		objectDataOutput.writeObject(carrera);
+		objectDataOutput.writeObject(universidad);
+		objectDataOutput.writeObject(fechaSubida);
+		int nTags = tags.size();
+		objectDataOutput.writeInt(nTags);
+		for (Tag tag : tags) {
+			objectDataOutput.writeObject(tag);
+		}
+		objectDataOutput.writeLong(tamanyo);
+		objectDataOutput.writeBoolean(esExamen);
+		objectDataOutput.writeObject(filePath);
+		objectDataOutput.writeObject(autor);
 	}
 
 	@Override
 	public void readData(ObjectDataInput objectDataInput) throws IOException {
-
+		id = objectDataInput.readLong();
+		nombre = objectDataInput.readUTF();
+		asignatura = objectDataInput.readObject();
+		carrera = objectDataInput.readObject();
+		universidad = objectDataInput.readObject();
+		fechaSubida = objectDataInput.readObject();
+		int nTags = objectDataInput.readInt();
+		for (int i = 0; i < nTags; i++) {
+			tags.add(objectDataInput.readObject());
+		}
+		tamanyo = objectDataInput.readLong();
+		esExamen = objectDataInput.readBoolean();
+		filePath = objectDataInput.readObject();
+		autor = objectDataInput.readObject();
 	}
+
 }

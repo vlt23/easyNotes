@@ -39,18 +39,28 @@ public class Asignatura implements DataSerializable {
 		this.profesores = profesores;
 	}
 
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
 	public String getNombre() {
 		return nombre;
 	}
 
 	@Override
 	public void writeData(ObjectDataOutput objectDataOutput) throws IOException {
-
+		objectDataOutput.writeLong(id);
+		objectDataOutput.writeUTF(nombre);
 	}
 
 	@Override
 	public void readData(ObjectDataInput objectDataInput) throws IOException {
-
+		id = objectDataInput.readLong();
+		nombre = objectDataInput.readUTF();
 	}
 
 }

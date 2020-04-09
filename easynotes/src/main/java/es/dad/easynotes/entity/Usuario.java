@@ -1,15 +1,19 @@
 package es.dad.easynotes.entity;
 
+import com.hazelcast.nio.ObjectDataInput;
+import com.hazelcast.nio.ObjectDataOutput;
+import com.hazelcast.nio.serialization.DataSerializable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.persistence.*;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 @Entity
-public class Usuario {
+public class Usuario implements DataSerializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -196,6 +200,22 @@ public class Usuario {
 		}
 		Usuario usuario = (Usuario) o;
 		return this.id == usuario.id;
+	}
+
+	@Override
+	public void writeData(ObjectDataOutput objectDataOutput) throws IOException {
+		objectDataOutput.writeLong(id);
+		objectDataOutput.writeUTF(nick);
+		objectDataOutput.writeUTF(nombre);
+		objectDataOutput.writeUTF(apellidos);
+	}
+
+	@Override
+	public void readData(ObjectDataInput objectDataInput) throws IOException {
+		id = objectDataInput.readLong();
+		nick = objectDataInput.readUTF();
+		nombre = objectDataInput.readUTF();
+		apellidos = objectDataInput.readUTF();
 	}
 
 }

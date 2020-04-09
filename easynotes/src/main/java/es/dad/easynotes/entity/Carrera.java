@@ -77,12 +77,14 @@ public class Carrera implements DataSerializable {
 
 	@Override
 	public void writeData(ObjectDataOutput objectDataOutput) throws IOException {
-
+		objectDataOutput.writeLong(id);
+		objectDataOutput.writeUTF(nombre);
 	}
 
 	@Override
 	public void readData(ObjectDataInput objectDataInput) throws IOException {
-
+		id = objectDataInput.readLong();
+		nombre = objectDataInput.readUTF();
 	}
 
 }
