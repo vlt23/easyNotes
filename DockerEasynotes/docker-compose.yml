@@ -1,8 +1,9 @@
 version: '3'
 services:
 
- haproxy:
-   build: ./ServicioHaproxy
+#Balanceador web
+ haproxy_web:
+   build: ./ServicioHaproxyWeb
    ports:
      - '80:80'
    environment:
@@ -11,17 +12,26 @@ services:
      - WEB_SERVICE_PORT1=8081
      - WEB_SERVICE_PORT2=8081
 
+#Balanceador mail
+ haproxymail:
+   build: ./ServicioHaproxyMail
+   ports:
+     - '8025:8025'
+   environment:
+     - WEB_SERVICE_IP1=mail1
+     - WEB_SERVICE_IP2=mail2
+     - WEB_SERVICE_PORT1=8025
+     - WEB_SERVICE_PORT2=8025
 
+#Creamos los servidores web
  web1:
   build: ./ServicioWeb
-#links to de BBDD
-
-#ADD VOLUME FROM FILES SYSTEM
+   #Mount VOLUME FROM FILES SYSTEM
   volumes:
     - ./Files:/app/Files
   environment:
     - SPRING_DATASOURCE_URL=jdbc:mysql://db/easynotes
-    - VALOR_MAIL_IP=mail
+    - VALOR_MAIL_IP=haproxymail
  web2:
   build: ./ServicioWeb
   volumes:
@@ -29,16 +39,21 @@ services:
   
   environment:
     - SPRING_DATASOURCE_URL=jdbc:mysql://db/easynotes
-    - VALOR_MAIL_IP=mail
- mail:
+    - VALOR_MAIL_IP=haproxymail
+
+#Creamos los dos servicios de mail
+ mail1:
+   build: ./ServicioMail
+ mail2:
    build: ./ServicioMail
 
+#Load de DB 
  db:
   image: mysql:5.7
   ports:
      - '3306:3306'
   restart: always
-#ADD VOLUME FOR SQL PERSISTENCY
+   #ADD VOLUME FOR SQL PERSISTENCY
   volumes:
     - "./mysql:/var/lib/mysql"
   environment:
