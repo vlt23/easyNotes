@@ -4,6 +4,7 @@ import es.dad.easynotes.entity.Email;
 import es.dad.easynotes.entity.Usuario;
 import es.dad.easynotes.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,6 +38,8 @@ public class LoginController {
         return "registro";
     }
 
+    @Value("${valor.mail.ip}")
+    private String hostIp;
     @PostMapping("/signup")
     public String signup(Model model, @RequestParam String username, @RequestParam String password,
                          @RequestParam String password_repeat, @RequestParam String name,
@@ -58,7 +61,7 @@ public class LoginController {
 
         Email welcomeEmail = new Email(username, email, Email.Topic.WELCOME);
         Thread emailThread = new Thread(() ->
-                WebClient.create().post().uri(URI.create("http://127.0.0.1:8025/email"))
+                WebClient.create().post().uri(URI.create(hostIp+":8025/email"))
                 .body(BodyInserters.fromValue(welcomeEmail)).exchange().block());
         emailThread.start();
 
