@@ -1,0 +1,39 @@
+version: '3'
+services:
+
+ mysql-master:
+  build:
+    context: ./
+    dockerfile: mysql-master/DockerFile
+  ports:
+     - '3307:3306'
+  restart: always
+#ADD VOLUME FOR SQL PERSISTENCY
+  volumes:
+    - "./mysql:/var/lib/mysql"
+  environment:
+    MYSQL_USER: 'easynotes'
+    MYSQL_PASSWORD: '1234'
+    MYSQL_ROOT_PASSWORD: '1234'
+    MYSQL_DATABASE: 'easynotes'
+    MYSQL_ROOT_HOST: '%'
+  links:
+    - mysql-slave
+  hostname: mysql-master
+
+ mysql-slave:
+  build:
+    context: ./
+    dockerfile: mysql-slave/DockerFile
+  ports:
+     - '3308:3306'
+  restart: always
+  volumes:
+    - "./mysql:/var/lib/mysql_slave"
+  environment:
+    MYSQL_USER: 'easynotes'
+    MYSQL_PASSWORD: '1234'
+    MYSQL_ROOT_PASSWORD: '1234'
+    MYSQL_DATABASE: 'easynotes'
+    MYSQL_ROOT_HOST: '%'
+  hostname: mysql-slave

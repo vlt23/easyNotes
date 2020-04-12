@@ -1,0 +1,5 @@
+FROM mysql:5.7
+
+ADD ./mysql-slave/my.cnf /etc/mysql/my.cnf
+
+COPY ./mysql-slave/replic-slave.sql /docker-entrypoint-initdb.d/
