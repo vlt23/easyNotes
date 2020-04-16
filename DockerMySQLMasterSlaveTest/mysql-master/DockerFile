@@ -1,5 +1,0 @@
-FROM mysql:5.7
-
-ADD ./mysql-master/my.cnf /etc/mysql/my.cnf
-
-COPY ./mysql-master/replic-master.sql /docker-entrypoint-initdb.d/
