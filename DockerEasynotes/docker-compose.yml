@@ -11,8 +11,6 @@ services:
      - WEB_SERVICE_IP2=web2
      - WEB_SERVICE_PORT1=8081
      - WEB_SERVICE_PORT2=8081
-   networks:
-     - overlay
 
 #Balanceador mail
  haproxymail:
@@ -24,8 +22,6 @@ services:
      - WEB_SERVICE_IP2=mail2
      - WEB_SERVICE_PORT1=8025
      - WEB_SERVICE_PORT2=8025
-   networks:
-     - overlay
 
 #Creamos los servidores web
  web1:
@@ -36,8 +32,6 @@ services:
   environment:
     - SPRING_DATASOURCE_URL=jdbc:mysql:replication://mysql-master,mysql-slave/easynotes
     - VALOR_MAIL_IP=haproxymail
-  networks:
-    - overlay
 
  web2:
   build: ./ServicioWeb
@@ -46,25 +40,18 @@ services:
   environment:
     - SPRING_DATASOURCE_URL=jdbc:mysql:replication://mysql-master,mysql-slave/easynotes
     - VALOR_MAIL_IP=haproxymail
-  networks:
-    - overlay
 
 #Creamos los dos servicios de mail
  mail1:
    build: ./ServicioMail
-   networks:
-     - overlay
  mail2:
    build: ./ServicioMail
-   networks:
-     - overlay
 
  # Load de DB 
  mysql-master:
   build:
     context: ./
     dockerfile: ./mysql/master/DockerFile
-  container_name: "mysql-master"
   ports:
      - 3306:3306
   restart: always
@@ -78,15 +65,11 @@ services:
     MYSQL_ROOT_PASSWORD: '1234'
     MYSQL_DATABASE: 'easynotes'
     MYSQL_ROOT_HOST: '%'
-  hostname: mysql-master
-  networks:
-    - overlay
 
  mysql-slave:
   build:
     context: ./
     dockerfile: ./mysql/slave/DockerFile
-  container_name: "mysql-slave"
   ports:
      - 3307:3306
   restart: always
@@ -101,9 +84,3 @@ services:
     MYSQL_ROOT_PASSWORD: '1234'
     MYSQL_DATABASE: 'easynotes'
     MYSQL_ROOT_HOST: '%'
-  hostname: mysql-slave
-  networks:
-    - overlay
-
-networks:
-  overlay:
