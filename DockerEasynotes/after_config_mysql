@@ -1,0 +1,4 @@
+docker exec mysql-master sh -c 'export MYSQL_PWD=1234; mysql -u root -e "SHOW MASTER STATUS"'
+
+change_master='CHANGE MASTER TO MASTER_HOST="mysql-master", MASTER_USER="easynotes_replic", MASTER_PASSWORD="1234", MASTER_LOG_FILE="mysql-bin.000003", MASTER_LOG_POS=154;'
+docker exec mysql-slave sh -c "export MYSQL_PWD=1234; mysql -u root -e '$change_master'"

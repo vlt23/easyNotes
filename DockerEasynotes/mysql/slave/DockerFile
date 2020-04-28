@@ -1,1 +1,3 @@
 FROM mysql:5.7
+
+COPY ./mysql/slave/replic-slave.sql /docker-entrypoint-initdb.d/

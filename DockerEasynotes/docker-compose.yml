@@ -34,7 +34,7 @@ services:
   volumes:
     - ./Files:/app/Files
   environment:
-    - SPRING_DATASOURCE_URL=jdbc:mysql://mysql-master/easynotes
+    - SPRING_DATASOURCE_URL=jdbc:mysql:replication://mysql-master,mysql-slave/easynotes
     - VALOR_MAIL_IP=haproxymail
   networks:
     - overlay
@@ -44,7 +44,7 @@ services:
   volumes:
     - ./Files:/app/Files
   environment:
-    - SPRING_DATASOURCE_URL=jdbc:mysql://mysql-master/easynotes
+    - SPRING_DATASOURCE_URL=jdbc:mysql:replication://mysql-master,mysql-slave/easynotes
     - VALOR_MAIL_IP=haproxymail
   networks:
     - overlay
