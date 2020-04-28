@@ -1,4 +1,0 @@
-CREATE USER 'easynotes_replic'@'%' IDENTIFIED BY '1234';
-GRANT REPLICATION SLAVE ON *.* TO 'easynotes_replic'@'%' IDENTIFIED BY '1234';
-FLUSH PRIVILEGES;
-CREATE DATABASE check_run;
