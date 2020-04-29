@@ -84,3 +84,6 @@ services:
     MYSQL_ROOT_PASSWORD: '1234'
     MYSQL_DATABASE: 'easynotes'
     MYSQL_ROOT_HOST: '%'
+
+ master-slave-config:
+  build: ./master_slave_config
