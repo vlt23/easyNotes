@@ -5,12 +5,12 @@ services:
  haproxy_web:
    build: ./ServicioHaproxyWeb
    ports:
-     - '80:80'
+     - '443:443'
    environment:
      - WEB_SERVICE_IP1=web1
      - WEB_SERVICE_IP2=web2
-     - WEB_SERVICE_PORT1=8081
-     - WEB_SERVICE_PORT2=8081
+     - WEB_SERVICE_PORT1=8443
+     - WEB_SERVICE_PORT2=8443
 
 #Balanceador mail
  haproxymail:
@@ -30,15 +30,15 @@ services:
   volumes:
     - ./Files:/app/Files
   environment:
-    - SPRING_DATASOURCE_URL=jdbc:mysql://db/easynotes
+    - SPRING_DATASOURCE_URL=jdbc:mysql:replication://mysql-master,mysql-slave/easynotes
     - VALOR_MAIL_IP=haproxymail
+
  web2:
   build: ./ServicioWeb
   volumes:
     - ./Files:/app/Files
-  
   environment:
-    - SPRING_DATASOURCE_URL=jdbc:mysql://db/easynotes
+    - SPRING_DATASOURCE_URL=jdbc:mysql:replication://mysql-master,mysql-slave/easynotes
     - VALOR_MAIL_IP=haproxymail
 
 #Creamos los dos servicios de mail
@@ -47,22 +47,43 @@ services:
  mail2:
    build: ./ServicioMail
 
-#Load de DB 
- db:
-  image: mysql:5.7
+ # Load de DB 
+ mysql-master:
+  build:
+    context: ./
+    dockerfile: ./mysql/master/DockerFile
   ports:
-     - '3306:3306'
+     - 3306:3306
   restart: always
-   #ADD VOLUME FOR SQL PERSISTENCY
+  # ADD VOLUME FOR SQL PERSISTENCY
   volumes:
-    - "./mysql:/var/lib/mysql"
+    - ./mysql/master/my.cnf:/etc/mysql/conf.d/mysql.conf.cnf
+    - ./mysql/master/data:/var/lib/mysql
   environment:
     MYSQL_USER: 'easynotes'
     MYSQL_PASSWORD: '1234'
     MYSQL_ROOT_PASSWORD: '1234'
     MYSQL_DATABASE: 'easynotes'
     MYSQL_ROOT_HOST: '%'
- 
 
- 
-  
+ mysql-slave:
+  build:
+    context: ./
+    dockerfile: ./mysql/slave/DockerFile
+  ports:
+     - 3307:3306
+  restart: always
+  depends_on:
+    - mysql-master
+  volumes:
+    - ./mysql/slave/my.cnf:/etc/mysql/conf.d/mysql.conf.cnf
+    - ./mysql/slave/data:/var/lib/mysql
+  environment:
+    MYSQL_USER: 'easynotes_replic'
+    MYSQL_PASSWORD: '1234'
+    MYSQL_ROOT_PASSWORD: '1234'
+    MYSQL_DATABASE: 'easynotes'
+    MYSQL_ROOT_HOST: '%'
+
+ master-slave-config:
+  build: ./master_slave_config
