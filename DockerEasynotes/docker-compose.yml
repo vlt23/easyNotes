@@ -5,7 +5,9 @@ services:
  haproxy_web:
    build: ./ServicioHaproxyWeb
    ports:
-     - '443:443'
+     - "80:80"
+     - "443:443"
+     - "8404:8404"
    environment:
      - WEB_SERVICE_IP1=web1
      - WEB_SERVICE_IP2=web2
