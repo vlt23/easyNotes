@@ -1,4 +1,5 @@
 # easyNotes
+[![Watch the video](https://img.youtube.com/vi/Eh6zTvXpSnc/maxresdefault.jpg)](https://youtu.be/Eh6zTvXpSnc)
 
  Este repositorio contiene una aplicación web que trata sobre un repositorio de apuntes y exámenes.
  Los usuarios guest (invitados), es decir, los que no están logueados, pueden mirar un preview de los apuntes.
@@ -94,6 +95,8 @@ Página para registrar.
 2. Compartir archivos *.jar desde SO host asi como el directorio Files
 3. Ejecutar mediante java -jar ambos *.jar
 
+## Estructura Docker-Compose
+![](resREADME/diagramaDocker.png)
 
 ## Integrantes
 * Guillermo De Azcarate Acosta
